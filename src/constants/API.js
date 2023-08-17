@@ -4,7 +4,7 @@ export const API = {
   USER_DA_XOA: '/api/nguoi-dung/daxoa',
   USER_DA_XOA_ID: '/api/nguoi-dung/daxoa/{0}',
   USER_ID: '/api/nguoi-dung/{0}',
-  MY_INFO: '/v1/user/myInfo',
+  MY_INFO: '/api/v1/user/myInfo',
   UPDATE_MY_INFO: '/api/nguoi-dung/info',
 
   DASHBOARD: '/api/dashboard',

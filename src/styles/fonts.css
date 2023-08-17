@@ -13,3 +13,12 @@
   font-family: NotoSans-Regular;
   src: url('../assets/fonts/Noto_Sans/NotoSans-Regular.ttf') format('truetype');
 }
+@font-face {
+  font-family: Montserrat-Bold;
+  src: url('../assets/fonts/Montserrat/Montserrat-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: Montserrat-Regular;
+  src: url('../assets/fonts/Montserrat/Montserrat-Regular.ttf') format('truetype');
+}

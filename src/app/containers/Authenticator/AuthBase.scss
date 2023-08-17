@@ -1,5 +1,5 @@
 #login {
-  background-image: url("../../../assets/images/bg-01.jpg");
+  background-color: white;
   background-size: cover;
   //background-color: #00199F;
   position: relative;
@@ -8,15 +8,15 @@
 
   .login-form {
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
+    width: 90%;
+    height: 80%;
     //height: 320px;
     padding: 36px;
-    box-shadow: 0 0 100px rgba(0, 0, 0, 0.08);
-    background-color: #fff;
     border-radius: 10px;
+    box-shadow: 0px 4px 30px 10px rgba(0, 0, 0, 0.1);
 
     button {
       width: 100%;
@@ -34,7 +34,8 @@
     }
   }
 
-  .ant-form-item-explain, .ant-form-item-extra {
+  .ant-form-item-explain,
+  .ant-form-item-extra {
     height: 22px;
     font-size: 15px;
   }
@@ -43,5 +44,5 @@
     height: 30px;
     font-size: 15px;
   }
-
 }
+
