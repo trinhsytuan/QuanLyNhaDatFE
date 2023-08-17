@@ -183,7 +183,7 @@ export function toast(type, label = '', requiredId = false) {
   if (!type) return;
 
   const toastifyOptions = {
-    position: 'bottom-right',
+    position: 'top-right',
     autoClose: 3000,
     hideProgressBar: false,
     closeOnClick: true,

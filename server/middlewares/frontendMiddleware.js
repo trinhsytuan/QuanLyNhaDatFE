@@ -8,17 +8,20 @@ module.exports = (app, options) => {
     const addProdMiddlewares = require('./addProdMiddlewares');
     addProdMiddlewares(app, options);
   } else {
-    app.use('/api',
+    app.use(
+      "/api",
       createProxyMiddleware({
-        target: 'http://127.0.0.1:3000',
+        target: "http://localhost:3000",
+        changeOrigin: true,
         secure: false,
-      }));
-    app.use('/socket',
-      createProxyMiddleware({
-        target: 'http://localhost:3000/',
-        secure: false,
-        ws: true,
-      }));
+      })
+    );
+    // app.use('/socket',
+    //   createProxyMiddleware({
+    //     target: 'http://localhost:3000/',
+    //     secure: false,
+    //     ws: true,
+    //   }));
     const webpackConfig = require('../../webpack/webpack.dev.babel');
     const addDevMiddlewares = require('./addDevMiddlewares');
     addDevMiddlewares(app, webpackConfig);
@@ -26,3 +29,5 @@ module.exports = (app, options) => {
 
   return app;
 };
+
+
