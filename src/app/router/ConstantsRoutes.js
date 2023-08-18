@@ -42,7 +42,7 @@ const MY_INFO_ROUTE = {
   path: URL.THONG_TIN_CA_NHAN,
   breadcrumbName: "Thông tin cá nhân",
   component: MyInfo,
-  permission: [],
+  permission: "all",
 };
 
 export const ADMIN_ROUTES = [
@@ -118,4 +118,5 @@ export const ADMIN_ROUTES = [
 export function ConstantsRoutes() {
   return ADMIN_ROUTES;
 }
+
 

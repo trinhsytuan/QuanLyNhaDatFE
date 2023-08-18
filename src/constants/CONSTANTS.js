@@ -194,7 +194,7 @@ export const RULES = {
   },
   PASSWORD_FORMAT: {
     pattern: new RegExp("^(?=.*[a-z])(?=.*[0-9])(?!.* )(?=.{6,14})"),
-    message: "Mật khẩu phải có ít nhất một chữ cái và một chữ số, độ dài 6 đến 14 ký tự và không có khoảng trắng",
+    message: "Mật khẩu phải có ít nhất một chữ cái và một chữ số, độ dài 6 ký tự trở lên và không có khoảng trắng",
   },
   USERNAME_RANGER: {
     pattern: new RegExp("^([a-zA-Z0-9_-]){6,32}$"),
