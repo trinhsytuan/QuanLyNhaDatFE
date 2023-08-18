@@ -1,6 +1,7 @@
-@import '~antd/lib/style/themes/default.less';
+@import "~antd/lib/style/themes/default.less";
 
-.toggle-menu, .toggle-drawer-menu {
+.toggle-menu,
+.toggle-drawer-menu {
   height: @layout-header-height;
   width: @layout-header-height;
   padding: 10px 16px;
@@ -12,7 +13,11 @@
     cursor: pointer;
   }
 }
-
+.name-user-header {
+  font-family: "Montserrat-Bold";
+  color: #5673D6;
+  font-size: 12px;
+}
 .toggle-menu {
   @media screen and(max-width: 991.98px) {
     display: none;
@@ -30,12 +35,13 @@
   height: 100%;
   float: right;
 
-  .notification-container, .my-info-container {
+  .notification-container,
+  .my-info-container {
     float: right;
 
     .ant-avatar {
       display: flex;
-      background-color: #E4E6EB !important;
+      background-color: #e4e6eb !important;
 
       .anticon {
         color: #050505;
@@ -60,7 +66,7 @@
 
     &:hover {
       .notification-bg {
-        background-color: #f2f2f2
+        background-color: #f2f2f2;
       }
     }
 
@@ -104,7 +110,7 @@
       padding: 0 6px;
 
       &:hover {
-        background-color: #f2f2f2
+        background-color: #f2f2f2;
       }
 
       img {
@@ -117,7 +123,7 @@
         align-self: center;
         font-size: 15px;
         font-weight: 500;
-        color: #000F9F;
+        color: #000f9f;
         user-select: none;
       }
     }
@@ -137,7 +143,7 @@
       padding: 0 6px;
 
       &:hover {
-        background-color: #f2f2f2
+        background-color: #f2f2f2;
       }
 
       img {
@@ -148,13 +154,14 @@
       }
 
       .my-info__name {
-        color: #4E587B;
+        color: #5673D6;
+        font-family: "Montserrat-Bold";
         align-self: center;
         font-size: 15px;
         font-weight: 500;
         padding-right: 2px;
 
-        @media screen  and (max-width: 575.98px) {
+        @media screen and (max-width: 575.98px) {
           display: none;
         }
       }
@@ -163,7 +170,6 @@
 }
 
 .notification-menu {
-
 }
 
 .notification-list {
@@ -172,14 +178,13 @@
 
   .notification__header {
     cursor: default;
-    color: #4D6FDD;
+    color: #4d6fdd;
     padding: 10px 14px;
     font-size: 14px;
     font-weight: 700;
     position: relative;
 
     .notification__header-text {
-
     }
 
     .notification__header-menu {
@@ -195,12 +200,11 @@
       cursor: pointer;
 
       &:hover {
-        background-color: #F2F2F2;
+        background-color: #f2f2f2;
       }
 
       text-align: center;
       vertical-align: middle;
-
 
       > .fas {
         font-size: 16px;
@@ -230,7 +234,7 @@
         color: #000000;
       }
 
-      color: #A0A1A3;
+      color: #a0a1a3;
       float: left;
       width: 260px;
       white-space: pre-wrap;
@@ -247,3 +251,4 @@
     right: 11px;
   }
 }
+

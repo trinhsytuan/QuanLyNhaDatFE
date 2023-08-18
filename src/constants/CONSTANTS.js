@@ -164,6 +164,7 @@ export const ERR_FILTER = [
 export const TOAST_MESSAGE = {
   SUCCESS: {
     DEFAULT: "Thành công",
+    UPDATE_MY_INFO: "Cập nhật thông tin thành công",
   },
   ERROR: {
     DEFAULT: "Có lỗi xảy ra. Vui lòng liên hệ quản trị viên",
@@ -515,3 +516,4 @@ export const ROLE_SYSTEM = {
   DEPARTMENT: "department",
   RECEIVER: "receiver",
 };
+
