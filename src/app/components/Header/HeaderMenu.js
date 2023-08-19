@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { Dropdown, Layout, Menu } from "antd";
@@ -18,6 +18,7 @@ import USER from "@assets/images/icon/user.svg";
 
 function HeaderMenu({ token, history, myInfo, isBroken, siderCollapsed, ...props }) {
   if (!token) return null;
+  const [name, setName] = useState("");
   const [isAvatarLoader, setAvatarLoader] = useState(false);
 
   const { pathname } = history.location;
@@ -31,7 +32,15 @@ function HeaderMenu({ token, history, myInfo, isBroken, siderCollapsed, ...props
       <Menu.Item onClick={() => props.clearToken()}>Đăng xuất</Menu.Item>
     </Menu>
   );
-
+  useEffect(() => {
+    if (myInfo?.name || myInfo?.username) {
+      var name = myInfo?.name || myInfo?.username;
+      var arrName = name.split(" ");
+      const initials = arrName?.slice(0, 4).map((name) => name.charAt(0).toUpperCase());
+      const abbreviation = initials.join("");
+      setName(abbreviation);
+    }
+  }, [myInfo]);
   return (
     <Layout.Header
       className="site-layout-background position-relative"
@@ -53,11 +62,23 @@ function HeaderMenu({ token, history, myInfo, isBroken, siderCollapsed, ...props
                 <img
                   onLoad={() => setAvatarLoader(true)}
                   src={API.PREVIEW_ID.format(myInfo.avatar)}
-                  style={{ borderRadius: "12px", display: isAvatarLoader ? "block" : "none" }}
+                  className="div_parrent"
+                  style={{
+                    borderRadius: "28px",
+                    display: isAvatarLoader ? "block" : "none",
+                    width: "40px",
+                    height: "40px",
+                  }}
                   alt=""
                 />
               )}
-              {(!isAvatarLoader || !myInfo?.avatar) && <img src={USER} alt="" />}
+              {(!isAvatarLoader || !myInfo?.avatar) && (
+                <div className="div_parrent">
+                  <div className="my-info__nameAvatar">
+                    <span>{name}</span>
+                  </div>
+                </div>
+              )}
               <span className="my-info__name">{myInfo?.name}</span>
             </div>
           </div>
@@ -76,4 +97,5 @@ function mapStateToProps(store) {
 }
 
 export default connect(mapStateToProps, { ...app.actions, ...user.actions })(withRouter(HeaderMenu));
+
 

@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { ConstantsRoutes } from "@app/router/ConstantsRoutes";
 import { checkPermission } from "@app/rbac/checkPermission";
 import { checkLoaded, formatUnique } from "@app/common/functionCommons";
-import EVN_TEXT from "@assets/images/logo/EVN-TEXT.svg";
+import LOGO from "@assets/images/icon/logo.svg";
 
 import * as app from "@app/store/ducks/app.duck";
 
@@ -147,7 +147,7 @@ function CustomMenu({ siderCollapsed, isBroken, myInfo, locationPathCode, ...pro
     <div style={{ height: "100%", overflow: "hidden" }}>
       <div className={`sider-logo ${siderCollapsed && !isBroken ? "collapsed" : ""}`}>
         <div className="logo">
-          <img src={EVN_TEXT} alt="" />
+          <img src={LOGO} alt="" />
         </div>
 
         {/*<div className="toggle-menu">
@@ -184,5 +184,6 @@ function mapStateToProps(store) {
 }
 
 export default connect(mapStateToProps, app.actions)(CustomMenu);
+
 
 

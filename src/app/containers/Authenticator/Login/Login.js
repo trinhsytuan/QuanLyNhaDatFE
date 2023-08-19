@@ -7,7 +7,7 @@ import AuthBase from "@containers/Authenticator/AuthBase";
 
 import { RULES } from "@constants";
 import { URL } from "@url";
-import Logo from "@assets/images/icon/logo.svg";
+import Logo from "@assets/images/icon/logoLogin.svg";
 import * as app from "@app/store/ducks/app.duck";
 
 function Login({ history, isLoading, ...props }) {
