@@ -29,6 +29,7 @@ function MyInfo({ myInfo, isLoading, roleList, ...props }) {
       dataField.tenDonVi = dataField?.donViId?.tenDonVi;
       formInfo.setFieldsValue(dataField);
       if (avatarTemp) setAvatarTemp(null);
+      
     }
   }, [myInfo]);
 
@@ -232,6 +233,9 @@ function MyInfo({ myInfo, isLoading, roleList, ...props }) {
                 </Col>
               </Row>
             </Form>
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="Chữ ký số" key="3">
+                  
           </Tabs.TabPane>
         </Tabs>
       </Loading>

@@ -114,15 +114,11 @@ function App({ isLoading, siderCollapsed, token, history, myInfo, ...props }) {
             <div className="power-by">
               <span className="power-by__text">Phát triển bởi</span>
               <span className="power-by__text">&nbsp;</span>
-              <span className="power-by__text logo__think">Think</span>
-              <span className="power-by__text logo__labs">LABs</span>
+              <span className="power-by__text logo__think">Nhóm</span>
+              <span className="power-by__text logo__labs">1</span>
               {/*<span className="power-by__text">&nbsp;</span>*/}
               {/*<img src={THINKLABS_LOGO} alt="THINKLABS_LOGO" className="power-by__logo"/>*/}
               <span className="power-by__text">&nbsp;</span>
-              <span className="power-by__text">vận hành bởi</span>
-              <span className="power-by__text">&nbsp;</span>
-              <span className="power-by__text logo__evn">EVN</span>
-              <span className="power-by__text logo__npt">NPT</span>
               {/*<span className="power-by__text">&nbsp;</span>*/}
               {/*<img src={EVNNPT_LOGO} alt="EVNNPT_LOGO" className="power-by__logo"/>*/}
             </div>
