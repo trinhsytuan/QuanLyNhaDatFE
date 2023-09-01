@@ -166,6 +166,9 @@ export const TOAST_MESSAGE = {
     DEFAULT: "Thành công",
     UPDATE_MY_INFO: "Cập nhật thông tin thành công",
   },
+  KEY: {
+    TITLE: "Cập nhật tiêu đề chữ ký thành công",
+  },
   ERROR: {
     DEFAULT: "Có lỗi xảy ra. Vui lòng liên hệ quản trị viên",
     LOGIN: "Có lỗi trong quá trình đăng nhập",

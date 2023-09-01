@@ -10,7 +10,7 @@ export function updateTitleKey(title) {
 export function createKeyBase(password) {
   return createBase(API.CREATE_KEY, password);
 }
-export function deleteKeyBase(id) {
+export function deleteKeyBase() {
   return deleteBase(API.DELETE_KEY);
 }
 
