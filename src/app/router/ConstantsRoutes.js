@@ -22,7 +22,7 @@ const TrangChu = lazy(() => import("@containers/TrangChu/TrangChu"));
 const Setting = lazy(() => import("@containers/Setting/Setting"));
 const DuLieuBoSung = lazy(() => import("@containers/DuLieuBoSung/DuLieuBoSung"));
 const User = lazy(() => import("@containers/User/User"));
-const DonVi = lazy(() => import("@containers/DonVi/DonVi"));
+const QuanLyDonVi = lazy(() => import("@containers/QuanLyDonVi/QuanLyDonVi"));
 const KhoiPhucTaiKhoan = lazy(() => import("@containers/User/KhoiPhucTaiKhoan"));
 const Role = lazy(() => import("@containers/Role/Role"));
 
@@ -87,9 +87,9 @@ export const ADMIN_ROUTES = [
     permission: "all",
     children: [
       {
-        path: URL.MENU.DON_VI,
-        menuName: "Đơn vị",
-        component: DonVi,
+        path: URL.MENU.QUAN_LY_TO_CHUC,
+        menuName: "Quản lý đơn vị",
+        component: QuanLyDonVi,
         permission: "all",
       },
     ],

@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './TrangChu.scss';
+import BaseContent from '@components/BaseContent';
 
 function TrangChu({ isLoading, ...props }) {
 
-  return <div className="homepage">
-    d
-  </div>;
+  return <BaseContent>d</BaseContent>;
 }
 
 function mapStateToProps(store) {
@@ -15,3 +14,4 @@ function mapStateToProps(store) {
 }
 
 export default connect(mapStateToProps)(TrangChu);
+
