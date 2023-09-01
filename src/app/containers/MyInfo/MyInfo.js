@@ -15,6 +15,7 @@ import { requestChangePassword } from "@app/services/User";
 import * as user from "@app/store/ducks/user.duck";
 import * as app from "@app/store/ducks/app.duck";
 import Loading from "@components/Loading";
+import GetInfoKey from "./GetInfoKey";
 
 function MyInfo({ myInfo, isLoading, roleList, ...props }) {
   const [formInfo] = Form.useForm();
@@ -29,7 +30,6 @@ function MyInfo({ myInfo, isLoading, roleList, ...props }) {
       dataField.tenDonVi = dataField?.donViId?.tenDonVi;
       formInfo.setFieldsValue(dataField);
       if (avatarTemp) setAvatarTemp(null);
-      
     }
   }, [myInfo]);
 
@@ -235,7 +235,7 @@ function MyInfo({ myInfo, isLoading, roleList, ...props }) {
             </Form>
           </Tabs.TabPane>
           <Tabs.TabPane tab="Chữ ký số" key="3">
-                  
+            <GetInfoKey />
           </Tabs.TabPane>
         </Tabs>
       </Loading>
@@ -250,7 +250,4 @@ function mapStateToProps(store) {
 }
 
 export default connect(mapStateToProps, { ...app.actions, ...user.actions })(MyInfo);
-
-
-
 

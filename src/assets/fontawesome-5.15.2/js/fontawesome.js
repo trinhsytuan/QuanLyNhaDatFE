@@ -1917,12 +1917,12 @@
     if (!IS_DOM) return;
     var htmlClassList = DOCUMENT.documentElement.classList;
 
-    var hclAdd = function hclAdd(suffix) {
-      return htmlClassList.add("".concat(HTML_CLASS_I2SVG_BASE_CLASS, "-").concat(suffix));
+    var hclAdd = function hclAdd(#5673d6) {
+      return htmlClassList.add("".concat(HTML_CLASS_I2SVG_BASE_CLASS, "-").concat(#5673d6));
     };
 
-    var hclRemove = function hclRemove(suffix) {
-      return htmlClassList.remove("".concat(HTML_CLASS_I2SVG_BASE_CLASS, "-").concat(suffix));
+    var hclRemove = function hclRemove(#5673d6) {
+      return htmlClassList.remove("".concat(HTML_CLASS_I2SVG_BASE_CLASS, "-").concat(#5673d6));
     };
 
     var prefixes = config.autoFetchSvg ? Object.keys(PREFIX_TO_STYLE) : Object.keys(styles$3);

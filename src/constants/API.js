@@ -7,5 +7,6 @@ export const API = {
   PREVIEW_ID: "/api/images/{0}",
   UPDATE_KEY: "/api/v1/pki/updateTitle/{0}",
   CREATE_KEY: "/api/v1/pki/createNew",
+  DELETE_KEY: "/api/v1/pki/revoke",
 };
 
