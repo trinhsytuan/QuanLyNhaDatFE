@@ -1,10 +1,11 @@
-.QuanLyDonVi-container{
-    .QuanLyDonVi-header{
-        display: flex;
-        flex-direction: column;
-    }
-    .QuanLyDonVi-title{
-        font-family: "NotoSans-Bold";
-        color: #6b87e6;
-    }
+.QuanLyDonVi-container {
+  .QuanLyDonVi-header {
+    display: flex;
+    flex-direction: column;
+  }
+  .QuanLyDonVi-title {
+    font-family: "NotoSans-Bold";
+    text-transform: uppercase;
+    color: #6b87e6;
+  }
 }

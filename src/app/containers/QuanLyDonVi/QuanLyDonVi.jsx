@@ -4,6 +4,7 @@ import './QuanLyDonVi.scss';
 import BaseContent from '@components/BaseContent';
 import { connect } from 'react-redux';
 import Loading from '@components/Loading';
+import SearchBar from '@containers/SearchBar';
 QuanLyDonVi.propTypes = {
     
 };
@@ -18,6 +19,7 @@ function QuanLyDonVi({isLoading}) {
                         Danh sách các đơn vị
                     </div>
                 </div>
+                <SearchBar/>
             </div>
         </Loading>
         </BaseContent>
