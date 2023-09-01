@@ -18,14 +18,15 @@ QuanLyDonVi.propTypes = {};
 
 function QuanLyDonVi({ isLoading, ...props }) {
   const history = useHistory();
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
+  const [totalDocs, setTotalDocs] = useState(0);
   const [data, setData] = useState(null);
   const [visibleDialog, setVisibleDialog] = useState(false);
   const [dataDialog, setDataDialog] = useState(null);
   const [visibleXoa, setVisibleXoa] = useState(false);
   const [dataXoa, setDataXoa] = useState(null);
-  const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(1);
-  const [totalDocs, setTotalDocs] = useState(0);
+
   useEffect(() => {
     getDataFilter();
   }, [location.search]);
@@ -33,9 +34,7 @@ function QuanLyDonVi({ isLoading, ...props }) {
     handleRefresh({}, true);
   }, [page, limit]);
   const getDataFilter = async () => {
-    const search = queryString.parse(props.location.search);
-    const page = parseInt(search.page ? search.page : page);
-    const limit = parseInt(search.limit ? search.limit : limit);
+    const search = queryString.parse(location.search);
     let queryStr = "";
     queryStr += `${search.name ? "&name[like]={0}".format(search.name) : ""}`;
     queryStr += `${search.type ? "&type={0}".format(search.type) : ""}`;
@@ -56,9 +55,6 @@ function QuanLyDonVi({ isLoading, ...props }) {
       newQuery = queryString.parse(location.search);
       delete newQuery.page;
       delete newQuery.limit;
-    }
-    if (getChangeFormSearch(newQuery, queryString.parse(location.search))) {
-      objFilterTable.page = 1;
     }
     newQuery = Object.assign(objFilterTable, newQuery);
     history.push({ pathname, search: stringify({ ...newQuery }, { arrayFormat: "repeat" }) });
