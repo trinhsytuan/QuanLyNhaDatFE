@@ -12,7 +12,7 @@ module.exports = (app, options) => {
     app.use(
       "/api",
       createProxyMiddleware({
-        target: "https://apind.sytuan.net:3000",
+        target: "https://quanlynhadat.sytuan.net",
         changeOrigin: true,
         secure: false,
       })
