@@ -12,5 +12,6 @@ export const API = {
   CREATE_ORG: "/api/v1/org/deleteOrg/{0}",
   EDIT_ORG: "/api/v1/org/editOrg/{0}",
   CREATE_ORG: "/api/v1/org/createNewOrg",
+  DELETE_ORG: "/api/v1/org/deleteOrg/{0}",
 };
 

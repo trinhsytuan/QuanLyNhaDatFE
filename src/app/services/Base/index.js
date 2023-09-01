@@ -286,7 +286,7 @@ export function getSimple(api, page, limit, query = "") {
   return axios
     .get(`${api.format(page, limit, query)}`)
     .then((res) => {
-      return convertCamelCaseToSnakeCase(res?.data);
+      return convertSnakeCaseToCamelCase(res?.data);
     })
     .catch((error) => {
       return null;

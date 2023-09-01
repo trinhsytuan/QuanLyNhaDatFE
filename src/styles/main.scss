@@ -235,8 +235,7 @@ button:focus {
 
 .ant-form-item-label > label {
   &.ant-form-item-required:not(.ant-form-item-required-mark-optional):before {
-    content: "";
-    margin: 0;
+    margin-right: 6px;
   }
 }
 
@@ -833,7 +832,7 @@ $radioColorsHover: (
   }
 
   .ant-select-selector {
-    background-color: #E5EBFF !important;
+    background-color: #e5ebff !important;
     color: #6b87e6;
     border: 0 !important;
   }
@@ -841,3 +840,4 @@ $radioColorsHover: (
     border: 0;
   }
 }
+
