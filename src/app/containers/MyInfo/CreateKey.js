@@ -11,7 +11,7 @@ import copy from "clipboard-copy";
 import { saveAs } from "file-saver";
 import { connect } from "react-redux";
 import Loading from "@app/components/Loading";
-import { createKeyBase, updateTitleKey } from "@app/services/Key";
+import { createKeyBase, deleteKeyBase, updateTitleKey } from "@app/services/Key";
 
 function CreateKey({ update, isLoading }) {
   const [FormEnterPassword] = Form.useForm();
@@ -27,12 +27,12 @@ function CreateKey({ update, isLoading }) {
     FormEnterPassword.resetFields();
   };
   const handleOpenSetTitle = async () => {
-    const response = await deleteKey();
+    const response = await deleteKeyBase();
     setOpenSetTitle(!openSetTitle);
   };
   const handleOpenShowKey = async () => {
     setOpenShowKey(!openShowKey);
-    const response = await deleteKey();
+    const response = await deleteKeyBase();
     update(new Date());
   };
   const handleEnterPassword = async (e) => {
@@ -57,7 +57,7 @@ function CreateKey({ update, isLoading }) {
     setOpenShowKey(false);
   };
   const handleDelete = async (e) => {
-    const response = await deleteKey(e);
+    const response = await deleteKeyBase(e);
     if (response) {
       toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.SUCCESS.DEFAULT);
     }
