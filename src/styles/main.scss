@@ -571,3 +571,230 @@ $radioColorsHover: ('assign': #FA8D6F, 'accept': #6DBDFF, 'reject': #FCB06A, 'no
     float: right;
   }
 }
+
+.modal-full-screen {
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  width: unset !important;
+  max-width: unset !important;
+
+  .ant-modal-content {
+    height: 100%;
+
+    .ant-modal-body {
+      height: 100%;
+      display: flex;
+      flex-flow: column;
+
+      .custom-modal-body {
+        flex: auto;
+        margin-right: -10px;
+        padding-right: 10px;
+        @extend .custom-scrollbar;
+        @extend .custom-scrollbar-show;
+      }
+    }
+  }
+}
+
+
+
+.modal-width-100 {
+  width: 100% !important;
+  padding: 0;
+  * {
+    font-size: 13px !important;
+  }
+}
+.modal-width-90 {
+  width: 91% !important;
+  padding: 0;
+  * {
+    font-size: 13px !important;
+  }
+}
+.modal-width-80 {
+  width: 81% !important;
+  padding: 0;
+  * {
+    font-size: 13px !important;
+  }
+}
+.modal-width-60 {
+  width: 61% !important;
+  padding: 0;
+  * {
+    font-size: 13px !important;
+  }
+}
+.modal-width-50 {
+  width: 50% !important;
+  padding: 0;
+  * {
+    font-size: 13px !important;
+  }
+}
+@media screen and(max-width: 772px) {
+  .modal-width-100 {
+    width: 100% !important;
+  }
+  .modal-width-90 {
+    width: 100% !important;
+  }
+  .modal-width-80 {
+    width: 100% !important;
+  }
+  .modal-width-60 {
+    width: 100% !important;
+  }
+  .modal-width-50 {
+    width: 100% !important;
+  }
+}
+.invisible {
+  visibility: hidden;
+}
+
+.custom-form {
+  font-family: "NotoSans-Regular";
+  font-weight: 400;
+  .form-item-remark {
+    display: inline-block;
+    margin-right: 4px;
+    color: #ff4d4f;
+    font-size: 14px;
+    font-family: "NotoSans-Bold";
+    line-height: 1;
+  }
+  .form-item-container {
+    .ant-form-item-explain-error {
+      // margin-left: 124px;
+    }
+    .form-item__input {
+      // margin-left: 124px;
+      // width: calc(100% - 124px);
+      box-sizing: border-box;
+
+      height: 40px;
+
+      background: #ffffff;
+      border: 1px solid #e3e3e3;
+      border-radius: 5px;
+      font-size: 14px;
+      max-width: 560px;
+    }
+    //   @media screen and(max-width: 772px) {
+    //     .form-item__input{
+    //         margin-left: 0px;
+    //         width: 100%;
+    //     }
+
+    //     .ant-form-item-explain-error{
+    //         margin-left: 0px;
+    //     }
+    //   }
+  }
+  .form-footer {
+    margin-top: 30px;
+    text-align: center;
+    .btn-footer {
+      font-family: "NotoSans-Bold";
+      height: 32px;
+      padding: 8px;
+      border-radius: 5px;
+      margin-right: 12px;
+      margin-left: 12px;
+      line-height: 16px;
+      border: none;
+    }
+    .btn-cancel {
+      color: #ff811e !important;
+      background: #ffe9d8 !important;
+    }
+    .btn-submit {
+      color: #ffffff !important;
+      background: #6b87e6 !important;
+    }
+  }
+}
+.col-table-parent {
+  // padding: 10px !important;
+  width: 300px;
+}
+.cell-row-mutil {
+  margin: -16px;
+  .cell-row-mutil__item {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 20px;
+    height: 60px;
+    line-height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: inherit;
+  }
+  .cell-item-300 {
+    width: 300px;
+  }
+}
+.cell-row-mutil :last-child {
+  border-bottom: none !important;
+}
+.status {
+  font-size: 14px;
+  line-height: 21px;
+  padding: 1.5px 8px;
+}
+
+.status-creating {
+  color: #ffbd13;
+  background: #fff3d3;
+}
+.status-browsing {
+  color: white;
+  background: #01baef;
+}
+.status-sending {
+  color: #1890ff;
+  background: #cee7ff;
+}
+.status-endorsing {
+  color: #ffbd13;
+  background: #fff3d3;
+}
+.status-endorsed {
+  color: #6b87e6;
+  background: #f0fcf8;
+}
+.status-accepted {
+  color: #ff811e;
+  background: #ffe9d8;
+}
+.status-reject {
+  color: #a7a7a7;
+  background: #f3f3f3;
+}
+.status-denied {
+  color: #a7a7a7;
+  background: #f3f3f3;
+}
+.btn_delete {
+  background-color: #ffefef !important;
+  color: #ff0000 !important;
+  border: 0 !important;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.title-image {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
