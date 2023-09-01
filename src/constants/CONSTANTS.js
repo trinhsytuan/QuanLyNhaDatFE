@@ -519,4 +519,9 @@ export const ROLE_SYSTEM = {
   DEPARTMENT: "department",
   RECEIVER: "receiver",
 };
+export const SEARCH_ROLE_SYSTEM = [
+  { name: "Quản trị hệ thống", value: "system" },
+  { name: "Đơn vị tiếp nhận", value: "receiver" },
+  { name: "Sở nông nghiệp / UBND", value: "department" },
 
+];

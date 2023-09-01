@@ -7,7 +7,7 @@ function ChungNhanIcon(props) {
   return (
     <div>
       <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect y="0.5" width="32" height="32" rx="10" fill="#F0FCF8" />
+        <rect y="0.5" width="32" height="32" rx="10" fill="#E5EBFF" />
         <g clipPath="url(#clip0_714_7476)">
           <g mask="url(#mask0_714_7476)">
             <path

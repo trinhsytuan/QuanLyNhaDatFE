@@ -142,9 +142,8 @@ export function getAllPaginationBaseByIDNotConvertParamsString(
       return null;
     });
 }
-export function getAllPaginationBaseParamsString(api, currentPage = 1, totalDocs = 0, params, loading = true) {
+export function getAllPaginationBaseParamsString(api, currentPage = 1, totalDocs = 0, params = "", loading = true) {
   const config = { loading };
-  if (params && params[0] != "&") params = "&" + params;
   return axios
     .get(`${api}?page=${currentPage}&limit=${totalDocs}${params}`, config)
     .then((response) => {
@@ -283,4 +282,13 @@ export function createBaseSnackCase(api, data, loading = true) {
       return null;
     });
 }
-
+export function getSimple(api, page, limit, query = "") {
+  return axios
+    .get(`${api.format(page, limit, query)}`)
+    .then((res) => {
+      return convertCamelCaseToSnakeCase(res?.data);
+    })
+    .catch((error) => {
+      return null;
+    });
+}
