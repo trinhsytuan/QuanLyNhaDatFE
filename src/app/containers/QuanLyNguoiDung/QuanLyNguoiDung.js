@@ -202,7 +202,7 @@ function QuanLyNguoiDung({ isLoading, ...props }) {
                 dataSearch={dataSearch}
                 onFilterChange={handleRefresh}
                 buttonHeader={true}
-                labelButtonHeader={"Thêm mới người dùng"}
+                labelButtonHeader={"Thêm người dùng"}
                 handleBtnHeader={handleThemMoiNguoiDung}
               />
             </div>
