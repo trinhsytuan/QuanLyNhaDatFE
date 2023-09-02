@@ -7,7 +7,7 @@ import moment from "moment";
 import CustomSkeleton from "@components/CustomSkeleton";
 import DropzoneImage from "@components/DropzoneImage";
 
-import { CONSTANTS, GENDER_OPTIONS, LOAI_TAI_KHOAN, RULES, TOAST_MESSAGE } from "@constants";
+import { CONSTANTS, GENDER_OPTIONS, LOAI_TAI_KHOAN, ROLE_SYSTEM, RULES, TOAST_MESSAGE } from "@constants";
 import { cloneObj, toast } from "@app/common/functionCommons";
 import { convertObjectToSnakeCase } from "@app/common/dataConverter";
 import { requestChangePassword } from "@app/services/User";
@@ -26,9 +26,11 @@ function MyInfo({ myInfo, isLoading, roleList, ...props }) {
   React.useEffect(() => {
     if (myInfo) {
       const dataField = cloneObj(myInfo);
-      dataField.vaiTroId = dataField?.vaiTroId?.map((roleItem) => roleItem?.name);
-      dataField.birthday = dataField?.birthday ? moment(dataField.birthday) : "";
-      dataField.tenDonVi = dataField?.donViId?.tenDonVi;
+      dataField.org = myInfo.org.name;
+      if (myInfo.org.type == ROLE_SYSTEM.SYSTEM) dataField.type = "Quản trị hệ thống";
+      else if (myInfo.org.type == ROLE_SYSTEM.RECEIVER) dataField.type = "Đơn vị tiếp nhận";
+      else if (myInfo.org.type == ROLE_SYSTEM.DEPARTMENT) dataField.type = "Sở nông nghiệp / UBND";
+      else dataField.type = myInfo.org.type;
       formInfo.setFieldsValue(dataField);
       if (avatarTemp) setAvatarTemp(null);
     }
@@ -253,5 +255,11 @@ function mapStateToProps(store) {
 }
 
 export default connect(mapStateToProps, { ...app.actions, ...user.actions })(MyInfo);
+
+
+
+
+
+
 
 
