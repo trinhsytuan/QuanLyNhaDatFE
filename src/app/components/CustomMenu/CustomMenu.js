@@ -17,7 +17,7 @@ function CustomMenu({ siderCollapsed, isBroken, myInfo, locationPathCode, ...pro
   const [openKeys, setOpenKeys] = useState([]);
   const [pathnameFormat, setPathnameFormat] = useState(null);
 
-  const { type } = myInfo;
+  const { org } = myInfo;
 
   const CONSTANTS_ROUTES = ConstantsRoutes();
 
@@ -56,7 +56,7 @@ function CustomMenu({ siderCollapsed, isBroken, myInfo, locationPathCode, ...pro
   }, [pathnameFormat]);
 
   function handleCheckPermission(permissionGranted, path) {
-    return checkPermission(type, path);
+    return checkPermission(org, path);
   }
 
   function handleActiveMenuForComponentDetail(menu) {
@@ -76,9 +76,10 @@ function CustomMenu({ siderCollapsed, isBroken, myInfo, locationPathCode, ...pro
   }
 
   function renderItem(menu) {
+    
     handleActiveMenuForComponentDetail(menu);
     if (menu.hide || !menu.menuName) return;
-    let hasPermission = checkPermission(type, menu.permission);
+    let hasPermission = checkPermission(org, menu.permission);
     if (!hasPermission) return;
     return (
       <Menu.Item key={menu.path} icon={menu.icon}>
@@ -98,12 +99,12 @@ function CustomMenu({ siderCollapsed, isBroken, myInfo, locationPathCode, ...pro
 
   function renderSubItem(menu) {
     if (menu.hide) return;
-    let hasPermission = checkPermission(type, menu.permission);
+    let hasPermission = checkPermission(org, menu.permission);
     if (menu.key) {
       hasPermission = false;
       let subMenuHasPermission = 0;
       menu.children.forEach((sub) => {
-        if (!sub.hide && checkPermission(type, menu.permission)) {
+        if (!sub.hide && checkPermission(org, menu.permission)) {
           subMenuHasPermission += 1;
         }
       });

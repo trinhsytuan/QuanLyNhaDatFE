@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import "./QuanLyDonVi.scss";
+import "./QuanLyNguoiDung.scss";
 import BaseContent from "@components/BaseContent";
 import { connect } from "react-redux";
 import Loading from "@components/Loading";
@@ -11,12 +11,11 @@ import { deleteOrg, getAllDonVi } from "@app/services/DonVi";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { CONSTANTS, PAGINATION_CONFIG, ROLE_SYSTEM, SEARCH_ROLE_SYSTEM, TOAST_MESSAGE } from "@constants";
 import { Button, Table, Tooltip } from "antd";
-import ThemMoiDonVi from "./ThemMoiDonVi";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import DialogDeleteConfim from "@components/DialogDeleteConfim/DialogDeleteConfim";
-QuanLyDonVi.propTypes = {};
+QuanLyNguoiDung.propTypes = {};
 
-function QuanLyDonVi({ isLoading, ...props }) {
+function QuanLyNguoiDung({ isLoading, ...props }) {
   const history = useHistory();
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
@@ -169,9 +168,9 @@ function QuanLyDonVi({ isLoading, ...props }) {
     <>
       <BaseContent>
         <Loading active={isLoading}>
-          <div className="QuanLyDonVi-container">
-            <div className="QuanLyDonVi-header">
-              <div className="QuanLyDonVi-title">Danh sách các đơn vị</div>
+          <div className="QuanLyNguoiDung-container">
+            <div className="QuanLyNguoiDung-header">
+              <div className="QuanLyNguoiDung-title">Danh sách các đơn vị</div>
               <SearchBar
                 dataSearch={dataSearch}
                 onFilterChange={handleRefresh}
@@ -180,7 +179,7 @@ function QuanLyDonVi({ isLoading, ...props }) {
                 handleBtnHeader={handleThemMoiDonVi}
               />
             </div>
-            <div className="QuanLyDonVi-body">
+            <div className="QuanLyNguoiDung-body">
               {data && !isLoading && (
                 <Table
                   bordered
@@ -202,7 +201,6 @@ function QuanLyDonVi({ isLoading, ...props }) {
           </div>
         </Loading>
       </BaseContent>
-      <ThemMoiDonVi visible={visibleDialog} onCancel={showDialog} data={dataDialog} reloadAPI={getDataFilter} />
       <DialogDeleteConfim visible={visibleXoa} onCancel={cancelXoa} onOK={handleRemove} />
     </>
   );
@@ -211,7 +209,5 @@ function mapStatetoProps(store) {
   const { isLoading } = store.app;
   return { isLoading };
 }
-export default connect(mapStatetoProps)(QuanLyDonVi);
-
-
+export default connect(mapStatetoProps)(QuanLyNguoiDung);
 

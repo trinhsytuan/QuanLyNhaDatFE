@@ -135,7 +135,9 @@ function ThemMoiDonVi({ visible, onCancel, reloadAPI, data, isLoading }) {
               </Select>
             </Form.Item>
             <div className="btn-handle">
-              <Button className="btn-cancel-custom btn-cl">Huỷ thao tác</Button>
+              <Button className="btn-cancel-custom btn-cl" onClick={onCancel}>
+                Huỷ thao tác
+              </Button>
               <Button type="primary" htmlType="submit">
                 {data ? "Lưu thông tin" : "Thêm mới"}
               </Button>
@@ -151,5 +153,6 @@ function mapStatetoProps(store) {
   return { isLoading };
 }
 export default connect(mapStatetoProps)(ThemMoiDonVi);
+
 
 
