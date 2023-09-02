@@ -21,6 +21,7 @@ function ThemMoiNguoiDung({ visible, onCancel, reloadAPI, data, isLoading, orgTy
       const response = await createUser(e);
       if (response) {
         toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.USER.CREATE_NEW);
+        toast(CONSTANTS.INFO, TOAST_MESSAGE.USER.EMAIL_PASSWORD);
         cancelForm();
         form.resetFields();
         reloadAPI();
@@ -29,6 +30,7 @@ function ThemMoiNguoiDung({ visible, onCancel, reloadAPI, data, isLoading, orgTy
       const response = await updateUser(e);
       if (response) {
         toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.USER.EDIT);
+
         cancelForm();
         form.resetFields();
         reloadAPI();

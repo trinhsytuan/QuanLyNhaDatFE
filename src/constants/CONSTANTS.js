@@ -171,6 +171,7 @@ export const TOAST_MESSAGE = {
   },
   USER: {
     CREATE_NEW: "Thêm mới người dùng thành công",
+    EMAIL_PASSWORD: "Để đảm bảo an toàn, mật khẩu của người dùng được gửi đến email của người dùng",
     EDIT: "Sửa người dùng thành công",
     REMOVE: "Xoá người dùng thành công",
   },
@@ -199,7 +200,10 @@ export const TOAST_MESSAGE = {
 export const RULES = {
   REQUIRED: { required: true, message: "Không được để trống" },
   NUMBER: { pattern: "^[0-9]+$", message: "Không phải là số" },
-  PHONE: { pattern: "^[0-9]+$", len: 10, message: "Số điện thoại không hợp lệ" },
+  PHONE: {
+    pattern: /^(0[35789]\d{8}|02\d{9}|\+84[35789]\d{8}|(\+842)\d{9})$/,
+    message: "Số điện thoại bạn vừa nhập không hợp lệ",
+  },
   CMND: { required: true, pattern: "^[0-9]+$", message: "Số CMND/CCCD không hợp lệ" },
   EMAIL: { type: "email", message: "Email không hợp lệ" },
   NUMBER_FLOAT: {
