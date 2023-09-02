@@ -40,7 +40,7 @@ function QuanLyNguoiDung({ isLoading, ...props }) {
     queryStr += `${search.username ? "&username[like]={0}".format(search.username) : ""}`;
     queryStr += `${search.name ? "&name[like]={0}".format(search.name) : ""}`;
     queryStr += `${search.phone ? "&phone[like]={0}".format(search.phone) : ""}`;
-    queryStr += `${search.org ? "&org[like]={0}".format(search.org) : ""}`;
+    queryStr += `${search.org ? "&org={0}".format(search.org) : ""}`;
     // queryStr += `${search.active ? "&active={0}".format(search.active) : ""}`;
     const getOrg = await getAllDonVi(1, 0, "");
     if (getOrg) {
