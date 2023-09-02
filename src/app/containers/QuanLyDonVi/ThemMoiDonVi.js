@@ -11,13 +11,17 @@ ThemMoiDonVi.propTypes = {};
 
 function ThemMoiDonVi({ visible, onCancel, reloadAPI, data, isLoading }) {
   const [form] = Form.useForm();
+  const cancelForm = () => {
+    form.resetFields();
+    onCancel();
+  }
   const submitForm = async (e) => {
     if (!e.id) {
       delete e.id;
       const response = await createOrg(e);
       if (response) {
         toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.ORG.CREATE_NEW);
-        onCancel();
+        cancelForm();
         form.resetFields();
         reloadAPI();
       }
@@ -25,7 +29,7 @@ function ThemMoiDonVi({ visible, onCancel, reloadAPI, data, isLoading }) {
       const response = await editOrg(e);
       if (response) {
         toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.ORG.EDIT);
-        onCancel();
+        cancelForm();
         form.resetFields();
         reloadAPI();
       }
@@ -41,7 +45,7 @@ function ThemMoiDonVi({ visible, onCancel, reloadAPI, data, isLoading }) {
       <Modal
         visible={visible}
         className="ThemMoiDonVi-container"
-        onCancel={onCancel}
+        onCancel={cancelForm}
         footer={null}
         title={data ? "Chỉnh sửa đơn vị" : "Thêm mới đơn vị"}
         width={700}
@@ -135,7 +139,7 @@ function ThemMoiDonVi({ visible, onCancel, reloadAPI, data, isLoading }) {
               </Select>
             </Form.Item>
             <div className="btn-handle">
-              <Button className="btn-cancel-custom btn-cl" onClick={onCancel}>
+              <Button className="btn-cancel-custom btn-cl" onClick={cancelForm}>
                 Huỷ thao tác
               </Button>
               <Button type="primary" htmlType="submit">
@@ -153,6 +157,10 @@ function mapStatetoProps(store) {
   return { isLoading };
 }
 export default connect(mapStatetoProps)(ThemMoiDonVi);
+
+
+
+
 
 
 
