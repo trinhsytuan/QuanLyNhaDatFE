@@ -3,7 +3,7 @@ import React from "react";
 export default function MenuKDIcon() {
   return (
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="32" height="32" rx="10" fill="#F0FCF8" />
+      <rect width="32" height="32" rx="10" fill="#E5EBFF" />
       <g clipPath="url(#clip0_1454_4)">
         <g mask="url(#mask0_1454_4)">
           <path

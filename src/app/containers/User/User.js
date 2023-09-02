@@ -10,7 +10,7 @@ import Filter from '@components/Filter';
 import AddNewButton from '@AddNewButton';
 import CreateOrModifyUser from '@containers/User/CreateOrModifyUser';
 
-import { createUser, deleteUserById, getAllUser, updateUserById } from '@app/services/User';
+import { createUser, deleteUserById, updateUserById } from '@app/services/User';
 import { CONSTANTS, EXTRA_FIELD, GENDER_OPTIONS, LOAI_TAI_KHOAN } from '@constants';
 import {
   calPageNumberAfterDelete,
@@ -61,7 +61,6 @@ function User({ permission, isLoading, userExtraData, orgUnitList, orgUnitTree, 
     query = userData.query,
   ) {
     handleReplaceUrlSearch(props.history, currentPage, pageSize, query);
-    const apiResponse = await getAllUser(currentPage, pageSize, query);
     if (apiResponse) {
       setUserData({
         docs: apiResponse.docs,

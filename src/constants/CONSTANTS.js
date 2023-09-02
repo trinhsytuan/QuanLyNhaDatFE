@@ -169,6 +169,16 @@ export const TOAST_MESSAGE = {
   KEY: {
     TITLE: "Cập nhật tiêu đề chữ ký thành công",
   },
+  USER: {
+    CREATE_NEW: "Thêm mới người dùng thành công",
+    EDIT: "Sửa người dùng thành công",
+    REMOVE: "Xoá người dùng thành công",
+  },
+  ORG: {
+    CREATE_NEW: "Thêm mới đơn vị thành công",
+    EDIT: "Sửa đơn vị thành công",
+    REMOVE: "Xoá đơn vị thành công",
+  },
   ERROR: {
     DEFAULT: "Có lỗi xảy ra. Vui lòng liên hệ quản trị viên",
     LOGIN: "Có lỗi trong quá trình đăng nhập",
@@ -421,7 +431,10 @@ export const CONSTANTS_MODULE = {
   TON_TAI_CONG_TRINH: { code: "TON_TAI_CONG_TRINH", label: "Tồn tại công trình xây dựng" },
   TON_TAI_THIET_BI: { code: "TON_TAI_THIET_BI", label: "Tồn tại thiết bị" },
 };
-
+export const CONSTANT_MESSAGE = {
+  REMOVE: "Nếu bạn thao tác xoá dẫn đến các thông tin không còn hiển thị. Bạn có chắc chắn muốn xoá thông tin này?",
+  CONFIM: "Bạn có chắc chắn muốn xác nhận {0} không ?",
+};
 export const YEU_CAU_TACH_VAN_HANH = {
   CO: { code: "CO", label: "Có" },
   KHONG: { code: "KHONG", label: "Không" },
@@ -519,4 +532,9 @@ export const ROLE_SYSTEM = {
   DEPARTMENT: "department",
   RECEIVER: "receiver",
 };
+export const SEARCH_ROLE_SYSTEM = [
+  { name: "Quản trị hệ thống", value: "system" },
+  { name: "Đơn vị tiếp nhận", value: "receiver" },
+  { name: "Sở nông nghiệp / UBND", value: "department" },
+];
 

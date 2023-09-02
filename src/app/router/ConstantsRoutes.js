@@ -16,16 +16,17 @@ import { URL } from "@url";
 import { create } from "@app/rbac/permissionHelper";
 import resources from "@app/rbac/resources";
 import actions from "@app/rbac/actions";
+import { ROLE_SYSTEM } from "@constants";
 
 const MyInfo = lazy(() => import("@containers/MyInfo/MyInfo"));
 const TrangChu = lazy(() => import("@containers/TrangChu/TrangChu"));
 const Setting = lazy(() => import("@containers/Setting/Setting"));
 const DuLieuBoSung = lazy(() => import("@containers/DuLieuBoSung/DuLieuBoSung"));
 const User = lazy(() => import("@containers/User/User"));
-const DonVi = lazy(() => import("@containers/DonVi/DonVi"));
+const QuanLyDonVi = lazy(() => import("@containers/QuanLyDonVi/QuanLyDonVi"));
 const KhoiPhucTaiKhoan = lazy(() => import("@containers/User/KhoiPhucTaiKhoan"));
 const Role = lazy(() => import("@containers/Role/Role"));
-
+const QuanLyNguoiDung = lazy(() => import("@containers/QuanLyNguoiDung/QuanLyNguoiDung"));
 function renderIcon(icon) {
   return (
     <span role="img" className="main-menu__icon">
@@ -58,13 +59,13 @@ export const ADMIN_ROUTES = [
     key: URL.MENU.QUAN_LY_NGUOI_DUNG,
     menuName: "Người dùng",
     icon: renderIcon(<UserIcon />),
-    permission: "test",
+    permission: [ROLE_SYSTEM.SYSTEM],
     children: [
       {
         path: URL.MENU.USER,
-        menuName: "Danh sách người dùng",
-        component: User,
-        permission: [],
+        menuName: "Quản lý người dùng",
+        component: QuanLyNguoiDung,
+        permission: [ROLE_SYSTEM.SYSTEM],
       },
       {
         path: URL.MENU.KHOI_PHUC_TAI_KHOAN,
@@ -84,13 +85,13 @@ export const ADMIN_ROUTES = [
     key: URL.MENU.DANH_MUC,
     menuName: "Danh mục",
     icon: renderIcon(<ListIcon />),
-    permission: "all",
+    permission: ROLE_SYSTEM.SYSTEM,
     children: [
       {
-        path: URL.MENU.DON_VI,
-        menuName: "Đơn vị",
-        component: DonVi,
-        permission: "all",
+        path: URL.MENU.QUAN_LY_TO_CHUC,
+        menuName: "Quản lý đơn vị",
+        component: QuanLyDonVi,
+        permission: ROLE_SYSTEM.SYSTEM,
       },
     ],
   },
@@ -118,5 +119,8 @@ export const ADMIN_ROUTES = [
 export function ConstantsRoutes() {
   return ADMIN_ROUTES;
 }
+
+
+
 
 
