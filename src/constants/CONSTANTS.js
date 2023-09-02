@@ -169,6 +169,11 @@ export const TOAST_MESSAGE = {
   KEY: {
     TITLE: "Cập nhật tiêu đề chữ ký thành công",
   },
+  USER: {
+    CREATE_NEW: "Thêm mới người dùng thành công",
+    EDIT: "Sửa người dùng thành công",
+    REMOVE: "Xoá người dùng thành công",
+  },
   ORG: {
     CREATE_NEW: "Thêm mới đơn vị thành công",
     EDIT: "Sửa đơn vị thành công",

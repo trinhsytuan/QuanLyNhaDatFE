@@ -9,9 +9,13 @@ export const API = {
   CREATE_KEY: "/api/v1/pki/createNew",
   DELETE_KEY: "/api/v1/pki/revoke",
   GET_ALL_ORG: "/api/v1/org/getOrg?page={0}&limit={1}{2}",
+  GET_ALL_USER: "/api/v1/user/getUserPagination?page={0}&limit={1}{2}",
   CREATE_ORG: "/api/v1/org/deleteOrg/{0}",
   EDIT_ORG: "/api/v1/org/editOrg/{0}",
   CREATE_ORG: "/api/v1/org/createNewOrg",
   DELETE_ORG: "/api/v1/org/deleteOrg/{0}",
+  CREATE_USER: "/api/v1/user/register",
+  UPDATE_USER: "/api/v1/user/updateUser/{0}",
+  DELETE_USER: "/api/v1/user/deleteUser/{0}",
 };
 

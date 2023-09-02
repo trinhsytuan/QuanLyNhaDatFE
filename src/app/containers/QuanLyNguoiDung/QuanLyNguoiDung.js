@@ -13,6 +13,8 @@ import { CONSTANTS, PAGINATION_CONFIG, ROLE_SYSTEM, SEARCH_ROLE_SYSTEM, TOAST_ME
 import { Button, Table, Tooltip } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import DialogDeleteConfim from "@components/DialogDeleteConfim/DialogDeleteConfim";
+import ThemMoiNguoiDung from "./ThemMoiNguoiDung";
+import { deleteUser, getAllUser } from "@app/services/NguoiDung";
 QuanLyNguoiDung.propTypes = {};
 
 function QuanLyNguoiDung({ isLoading, ...props }) {
@@ -25,7 +27,7 @@ function QuanLyNguoiDung({ isLoading, ...props }) {
   const [dataDialog, setDataDialog] = useState(null);
   const [visibleXoa, setVisibleXoa] = useState(false);
   const [dataXoa, setDataXoa] = useState(null);
-
+  const [dataOrg, setDataOrg] = useState([]);
   useEffect(() => {
     getDataFilter();
   }, [location.search]);
@@ -35,10 +37,22 @@ function QuanLyNguoiDung({ isLoading, ...props }) {
   const getDataFilter = async () => {
     const search = queryString.parse(location.search);
     let queryStr = "";
+    queryStr += `${search.username ? "&username[like]={0}".format(search.username) : ""}`;
     queryStr += `${search.name ? "&name[like]={0}".format(search.name) : ""}`;
-    queryStr += `${search.type ? "&type={0}".format(search.type) : ""}`;
+    queryStr += `${search.phone ? "&phone[like]={0}".format(search.phone) : ""}`;
+    queryStr += `${search.org ? "&org[like]={0}".format(search.org) : ""}`;
     // queryStr += `${search.active ? "&active={0}".format(search.active) : ""}`;
-    const apiResponse = await getAllDonVi(page, limit, queryStr);
+    const getOrg = await getAllDonVi(0, 1, "");
+    if (getOrg) {
+      const options = getOrg?.docs?.map((value) => {
+        return {
+          value: value._id,
+          label: value.name,
+        };
+      });
+      setDataOrg(options);
+    }
+    const apiResponse = await getAllUser(page, limit, queryStr);
     if (apiResponse) {
       const dataRes = apiResponse.docs;
       setData(dataRes);
@@ -55,6 +69,9 @@ function QuanLyNguoiDung({ isLoading, ...props }) {
       delete newQuery.page;
       delete newQuery.limit;
     }
+    if (getChangeFormSearch(newQuery, queryString.parse(location.search))) {
+      objFilterTable.page = 1;
+    }
     newQuery = Object.assign(objFilterTable, newQuery);
     history.push({ pathname, search: stringify({ ...newQuery }, { arrayFormat: "repeat" }) });
   };
@@ -63,25 +80,35 @@ function QuanLyNguoiDung({ isLoading, ...props }) {
   };
   const dataSearch = [
     {
-      name: "name",
-      label: "Tên đơn vị",
+      name: "username",
+      label: "Tên tài khoản",
       type: "text",
-      operation: "like",
+    },
+    {
+      name: "name",
+      label: "Tên người dùng",
+      type: "text",
+      operate: "like",
+    },
+    {
+      name: "phone",
+      label: "Số điện thoại",
+      type: "text",
     },
     {
       type: "select",
-      name: "type",
-      label: "Loại đơn vị",
-      options: SEARCH_ROLE_SYSTEM,
+      name: "org",
+      label: "Tên tổ chức",
+      options: dataOrg,
       key: "value",
-      value: "name",
+      value: "label",
     },
   ];
   const onChangeTable = (page) => {
     setLimit(page.pageSize);
     setPage(page.current);
   };
-  const ColumnDonVi = [
+  const ColumnNguoiDung = [
     {
       title: "STT",
       render: (v1, v2, value) => formatSTT(limit, page, value),
@@ -89,20 +116,16 @@ function QuanLyNguoiDung({ isLoading, ...props }) {
       align: "center",
       width: 60,
     },
-    { title: "Tên đơn vị", dataIndex: "name", key: "name" },
+    { title: "Tên tài khoản", dataIndex: "username", key: "username" },
+    { title: "Tên người dùng", dataIndex: "name", key: "name" },
     { title: "Email", dataIndex: "email", key: "email" },
-    { title: "Địa chỉ", dataIndex: "address", key: "address" },
     { title: "Điện thoại", dataIndex: "phone", key: "phone" },
     {
-      title: "Loại đơn vị",
+      title: "Tổ chức",
       key: "type",
       align: "center",
       render: (_, value) => {
-        let type = "";
-        if (value.type == ROLE_SYSTEM.SYSTEM) type = "Quản trị hệ thống";
-        if (value.type == ROLE_SYSTEM.RECEIVER) type = "Đơn vị tiếp nhận";
-        if (value.type == ROLE_SYSTEM.DEPARTMENT) type = "Sở nông nghiệp / UBND";
-        return <span>{type}</span>;
+        return <span>{value?.org?.name}</span>;
       },
     },
     {
@@ -113,17 +136,17 @@ function QuanLyNguoiDung({ isLoading, ...props }) {
       render: (_, value) => {
         return (
           <div className="action-dv">
-            <Tooltip placement="left" title="Chỉnh sửa đơn vị" color="#FF811E">
+            <Tooltip placement="left" title="Chỉnh sửa người dùng" color="#FF811E">
               <Button
                 icon={<EditOutlined />}
                 size="small"
                 type="primary"
                 className="mr-1"
                 style={{ backgroundColor: "#FF811E", borderColor: "#FF811E" }}
-                onClick={() => handleEditDonVi(value)}
+                onClick={() => handleEditNguoiDung(value)}
               ></Button>
             </Tooltip>
-            <Tooltip placement="right" title="Xóa đơn vị" color="#FF0000">
+            <Tooltip placement="right" title="Xóa Người dùng" color="#FF0000">
               <Button
                 icon={<DeleteOutlined />}
                 type="danger"
@@ -138,11 +161,11 @@ function QuanLyNguoiDung({ isLoading, ...props }) {
       },
     },
   ];
-  const handleThemMoiDonVi = () => {
+  const handleThemMoiNguoiDung = () => {
     setDataDialog(null);
     showDialog();
   };
-  const handleEditDonVi = (data) => {
+  const handleEditNguoiDung = (data) => {
     setDataDialog(data);
     showDialog();
   };
@@ -156,9 +179,9 @@ function QuanLyNguoiDung({ isLoading, ...props }) {
   };
   const handleRemove = async () => {
     if (dataXoa) {
-      const response = await deleteOrg(dataXoa._id);
+      const response = await deleteUser(dataXoa._id);
       if (response) {
-        toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.ORG.REMOVE);
+        toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.USER.REMOVE);
         cancelXoa();
         getDataFilter();
       }
@@ -170,13 +193,13 @@ function QuanLyNguoiDung({ isLoading, ...props }) {
         <Loading active={isLoading}>
           <div className="QuanLyNguoiDung-container">
             <div className="QuanLyNguoiDung-header">
-              <div className="QuanLyNguoiDung-title">Danh sách các đơn vị</div>
+              <div className="QuanLyNguoiDung-title">Danh sách người dùng</div>
               <SearchBar
                 dataSearch={dataSearch}
                 onFilterChange={handleRefresh}
                 buttonHeader={true}
-                labelButtonHeader={"Thêm đơn vị"}
-                handleBtnHeader={handleThemMoiDonVi}
+                labelButtonHeader={"Thêm mới người dùng"}
+                handleBtnHeader={handleThemMoiNguoiDung}
               />
             </div>
             <div className="QuanLyNguoiDung-body">
@@ -185,7 +208,7 @@ function QuanLyNguoiDung({ isLoading, ...props }) {
                   bordered
                   className="table"
                   showHeader={true}
-                  columns={ColumnDonVi}
+                  columns={ColumnNguoiDung}
                   dataSource={data}
                   scroll={{ x: 900 }}
                   pagination={{
@@ -201,6 +224,7 @@ function QuanLyNguoiDung({ isLoading, ...props }) {
           </div>
         </Loading>
       </BaseContent>
+      <ThemMoiNguoiDung visible={visibleDialog} onCancel={showDialog} data={dataDialog} reloadAPI={getDataFilter} orgType={dataOrg} />
       <DialogDeleteConfim visible={visibleXoa} onCancel={cancelXoa} onOK={handleRemove} />
     </>
   );
@@ -210,4 +234,18 @@ function mapStatetoProps(store) {
   return { isLoading };
 }
 export default connect(mapStatetoProps)(QuanLyNguoiDung);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

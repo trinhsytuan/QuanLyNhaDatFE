@@ -16,7 +16,7 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import DialogDeleteConfim from "@components/DialogDeleteConfim/DialogDeleteConfim";
 QuanLyDonVi.propTypes = {};
 
-function QuanLyDonVi({ isLoading, ...props }) {
+function QuanLyDonVi({ isLoading, myInfo, ...props }) {
   const history = useHistory();
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
@@ -55,6 +55,9 @@ function QuanLyDonVi({ isLoading, ...props }) {
       newQuery = queryString.parse(location.search);
       delete newQuery.page;
       delete newQuery.limit;
+    }
+    if (getChangeFormSearch(newQuery, queryString.parse(location.search))) {
+      objFilterTable.page = 1;
     }
     newQuery = Object.assign(objFilterTable, newQuery);
     history.push({ pathname, search: stringify({ ...newQuery }, { arrayFormat: "repeat" }) });
@@ -124,16 +127,18 @@ function QuanLyDonVi({ isLoading, ...props }) {
                 onClick={() => handleEditDonVi(value)}
               ></Button>
             </Tooltip>
-            <Tooltip placement="right" title="Xóa đơn vị" color="#FF0000">
-              <Button
-                icon={<DeleteOutlined />}
-                type="danger"
-                style={{ backgroundColor: "#FF0000" }}
-                size="small"
-                className="mr-1"
-                onClick={() => showDialogXoa(value)}
-              />
-            </Tooltip>
+            {myInfo?.org?.name != value?.name && (
+              <Tooltip placement="right" title="Xóa đơn vị" color="#FF0000">
+                <Button
+                  icon={<DeleteOutlined />}
+                  type="danger"
+                  style={{ backgroundColor: "#FF0000" }}
+                  size="small"
+                  className="mr-1"
+                  onClick={() => showDialogXoa(value)}
+                />
+              </Tooltip>
+            )}
           </div>
         );
       },
@@ -209,9 +214,8 @@ function QuanLyDonVi({ isLoading, ...props }) {
 }
 function mapStatetoProps(store) {
   const { isLoading } = store.app;
-  return { isLoading };
+  const { myInfo } = store.user;
+  return { isLoading, myInfo };
 }
 export default connect(mapStatetoProps)(QuanLyDonVi);
-
-
 
