@@ -76,8 +76,12 @@ function QuanLyNguoiDung({ isLoading, ...props }) {
     history.push({ pathname, search: stringify({ ...newQuery }, { arrayFormat: "repeat" }) });
   };
   const showDialog = () => {
-    setVisibleDialog(!visibleDialog);
+    setVisibleDialog(true);
   };
+  const closeDialog = () => {
+    setDataDialog(null);
+    setVisibleDialog(false);
+  }
   const dataSearch = [
     {
       name: "username",
@@ -224,7 +228,13 @@ function QuanLyNguoiDung({ isLoading, ...props }) {
           </div>
         </Loading>
       </BaseContent>
-      <ThemMoiNguoiDung visible={visibleDialog} onCancel={showDialog} data={dataDialog} reloadAPI={getDataFilter} orgType={dataOrg} />
+      <ThemMoiNguoiDung
+        visible={visibleDialog}
+        onCancel={closeDialog}
+        data={dataDialog}
+        reloadAPI={getDataFilter}
+        orgType={dataOrg}
+      />
       <DialogDeleteConfim visible={visibleXoa} onCancel={cancelXoa} onOK={handleRemove} />
     </>
   );
@@ -234,6 +244,8 @@ function mapStatetoProps(store) {
   return { isLoading };
 }
 export default connect(mapStatetoProps)(QuanLyNguoiDung);
+
+
 
 
 

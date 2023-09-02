@@ -63,8 +63,12 @@ function QuanLyDonVi({ isLoading, myInfo, ...props }) {
     history.push({ pathname, search: stringify({ ...newQuery }, { arrayFormat: "repeat" }) });
   };
   const showDialog = () => {
-    setVisibleDialog(!visibleDialog);
+    setVisibleDialog(true);
   };
+  const closeDialog = () => {
+    setDataDialog(null);
+    setVisibleDialog(false);
+  }
   const dataSearch = [
     {
       name: "name",
@@ -207,7 +211,7 @@ function QuanLyDonVi({ isLoading, myInfo, ...props }) {
           </div>
         </Loading>
       </BaseContent>
-      <ThemMoiDonVi visible={visibleDialog} onCancel={showDialog} data={dataDialog} reloadAPI={getDataFilter} />
+      <ThemMoiDonVi visible={visibleDialog} onCancel={closeDialog} data={dataDialog} reloadAPI={getDataFilter} />
       <DialogDeleteConfim visible={visibleXoa} onCancel={cancelXoa} onOK={handleRemove} />
     </>
   );
@@ -218,4 +222,5 @@ function mapStatetoProps(store) {
   return { isLoading, myInfo };
 }
 export default connect(mapStatetoProps)(QuanLyDonVi);
+
 
