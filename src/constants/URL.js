@@ -11,7 +11,10 @@ export const URL = {
     DU_LIEU_BO_SUNG: "/du-lieu-bo-sung",
     SETTING: "/cai-dat",
     QUAN_LY_TO_CHUC: "/quan-ly-don-vi",
+    QUAN_LY_THEM_MOI: "/quan-ly-them-moi"
   },
+  THEM_MOI_GIAY_TO_ID: "/them-moi-giay-to/{0}",
+  THEM_MOI_GIAY_TO: "/them-moi-giay-to",
   THONG_TIN_CA_NHAN: "/thong-tin-ca-nhan",
   RESET_PASSWORD: "/reset-password",
   FORGET_PASSWORD: "/forget-password",

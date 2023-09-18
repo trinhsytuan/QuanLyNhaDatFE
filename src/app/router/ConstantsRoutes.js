@@ -17,6 +17,7 @@ import { create } from "@app/rbac/permissionHelper";
 import resources from "@app/rbac/resources";
 import actions from "@app/rbac/actions";
 import { ROLE_SYSTEM } from "@constants";
+import { ROLE } from "@components/Notification/NotificationPayLoadType";
 
 const MyInfo = lazy(() => import("@containers/MyInfo/MyInfo"));
 const TrangChu = lazy(() => import("@containers/TrangChu/TrangChu"));
@@ -27,6 +28,8 @@ const QuanLyDonVi = lazy(() => import("@containers/QuanLyDonVi/QuanLyDonVi"));
 const KhoiPhucTaiKhoan = lazy(() => import("@containers/User/KhoiPhucTaiKhoan"));
 const Role = lazy(() => import("@containers/Role/Role"));
 const QuanLyNguoiDung = lazy(() => import("@containers/QuanLyNguoiDung/QuanLyNguoiDung"));
+const PortalThemMoiGiayTo = lazy(() => import("@containers/QuanLyGiayTo/TrangChu/QuanLyGiayToPortal"));
+const ThemMoiThemMoiGiayTo = lazy(() => import("@containers/QuanLyGiayTo/ThemMoi/ThemMoiThemMoiGiayTo"))
 function renderIcon(icon) {
   return (
     <span role="img" className="main-menu__icon">
@@ -85,13 +88,19 @@ export const ADMIN_ROUTES = [
     key: URL.MENU.DANH_MUC,
     menuName: "Danh mục",
     icon: renderIcon(<ListIcon />),
-    permission: ROLE_SYSTEM.SYSTEM,
+    permission: [ROLE_SYSTEM.SYSTEM, ROLE_SYSTEM.RECEIVER],
     children: [
       {
         path: URL.MENU.QUAN_LY_TO_CHUC,
         menuName: "Quản lý đơn vị",
         component: QuanLyDonVi,
         permission: ROLE_SYSTEM.SYSTEM,
+      },
+      {
+        path: URL.MENU.QUAN_LY_THEM_MOI,
+        menuName: "Quản lý giấy tờ cấp mới",
+        component: PortalThemMoiGiayTo,
+        permission: ROLE_SYSTEM.RECEIVER,
       },
     ],
   },
@@ -114,6 +123,12 @@ export const ADMIN_ROUTES = [
 
   // not render in menu
   MY_INFO_ROUTE,
+  {
+    path: URL.THEM_MOI_GIAY_TO,
+    breadcrumbName: "Thêm mới giấy tờ",
+    component: ThemMoiThemMoiGiayTo,
+    permission: [ROLE_SYSTEM.RECEIVER],
+  },
 ];
 
 export function ConstantsRoutes() {
