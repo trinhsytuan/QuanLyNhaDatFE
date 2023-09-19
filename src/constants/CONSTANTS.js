@@ -541,5 +541,11 @@ export const SEARCH_ROLE_SYSTEM = [
   { name: "Đơn vị tiếp nhận", value: "receiver" },
   { name: "Sở nông nghiệp / UBND", value: "department" },
 ];
-
+export const TYPE_IMAGE_CAP_MOI = {
+  ANH_KHU_DAT: "anh-khu-dat",
+  DON_DANG_KY: "don-dang-ky",
+  CHUNG_TU_NGHIA_VU_TAI_CHINH: "chung-tu-nghia-vu-tai-chinh",
+  HOP_DONG: "hop-dong",
+  OTHER: "other",
+};
 
