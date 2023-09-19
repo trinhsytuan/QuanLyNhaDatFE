@@ -11,6 +11,7 @@ import { RULES, TYPE_IMAGE_CAP_MOI } from "@constants";
 import { connect } from "react-redux";
 import UploadImage from "@components/UploadImage/UploadImage";
 import CustomInfo from "@components/CustomInfo/CustomInfo";
+import { createNewCapMoi } from "@app/services/CapMoiGiayTo";
 ThemMoiThemMoiGiayTo.propTypes = {};
 
 function ThemMoiThemMoiGiayTo({ isLoading }) {
@@ -29,9 +30,24 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
   const [messageCheckBox, setMessageCheckBox] = useState(null);
   const [messageKhuDat, setMessageKhuDat] = useState(null);
   const [messageDonDangKy, setMessageDonDangKy] = useState(null);
-  const onSubmit = (e) => {
-    console.log(e);
-  }
+  const onSubmit = async (e) => {
+    let error = false;
+    if (anhKhuDat.length == 0) {
+      setMessageKhuDat("Cần có ít nhất 1 ảnh");
+      error = true;
+    }
+    if (anhDonDangKy.length == 0) {
+      setMessageDonDangKy("Ảnh đơn đăng ký không thể để trống");
+      error = true;
+    }
+    if (!e.dangkyquyensdd && !e.capgcndoivoidat && !e.dangkyquyenqldat && !e.capgcnvoitaisan) {
+      setMessageCheckBox("Vui lòng chọn 1 đề nghị");
+      error = true;
+    }
+    if (error) return;
+    const response = await createNewCapMoi(e);
+    console.log(response);
+  };
   return (
     <div>
       <BaseContent>
@@ -114,6 +130,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                     <Checkbox>Cấp GCN với tài sản có trên đất</Checkbox>
                   </Form.Item>
                 </Col>
+                {messageCheckBox && <span className="require">{messageCheckBox}</span>}
               </Row>
               <div className="content-title">
                 Thửa đất
@@ -159,8 +176,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                     <Input placeholder="Tờ bản đồ số"></Input>
                   </Form.Item>
                 </Col>
-              </Row>
-              <Row gutter={{ xs: 8, sm: 12, md: 20, lg: 20 }}>
+
                 <Col className="gutter-row" xs={24} sm={12} md={12} lg={8} xl={8}>
                   <Form.Item
                     label={
@@ -211,8 +227,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                     <Input placeholder="Nhập diện tích sử dụng riêng"></Input>
                   </Form.Item>
                 </Col>
-              </Row>
-              <Row gutter={{ xs: 8, sm: 12, md: 20, lg: 20 }}>
+
                 <Col className="gutter-row" xs={24} sm={12} md={12} lg={12} xl={12}>
                   <Form.Item
                     label="Sử dụng vào mục đích"
@@ -236,8 +251,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                     />
                   </Form.Item>
                 </Col>
-              </Row>
-              <Row gutter={{ xs: 8, sm: 12, md: 20, lg: 20 }}>
+
                 <Col className="gutter-row" xs={24} sm={12} md={12} lg={12} xl={12}>
                   <Form.Item
                     label="Thời hạn đề nghị được sử dụng đất"
@@ -302,8 +316,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                     <Input placeholder="Nhập diện tích sàn"></Input>
                   </Form.Item>
                 </Col>
-              </Row>
-              <Row gutter={{ xs: 8, sm: 12, md: 20, lg: 20 }}>
+              
                 <Col className="gutter-row" xs={24} sm={12} md={12} lg={8} xl={8}>
                   <Form.Item
                     label={
@@ -314,7 +327,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                     name="Sohuuchung"
                     rules={[RULES.NUMBER_FLOAT]}
                   >
-                    <Input placeholder="Nhập số mét sở hữu chung" type="number"></Input>
+                    <Input placeholder="Nhập số mét sở hữu chung"></Input>
                   </Form.Item>
                 </Col>
                 <Col className="gutter-row" xs={24} sm={12} md={12} lg={8} xl={8}>
@@ -335,8 +348,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                     <Input placeholder="Nhập kết cấu"></Input>
                   </Form.Item>
                 </Col>
-              </Row>
-              <Row gutter={{ xs: 8, sm: 12, md: 20, lg: 20 }}>
+              
                 <Col className="gutter-row" xs={24} sm={12} md={12} lg={12} xl={12}>
                   <Form.Item label="Số tầng" name="Sotang">
                     <Input placeholder="Nhập số tầng" type="number"></Input>
@@ -344,7 +356,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                 </Col>
                 <Col className="gutter-row" xs={24} sm={12} md={12} lg={12} xl={12}>
                   <Form.Item label="Thời hạn sở hữu" name="Thoihansohuu">
-                    <Input placeholder="Nhập thời hạn sở hữu"></Input>
+                    <DatePicker placeholder="Nhập thời hạn sở hữu" picker="day" style={{ width: "100%" }}></DatePicker>
                   </Form.Item>
                 </Col>
               </Row>
@@ -364,6 +376,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                   onRemove={setRemoveAnhKhuDat}
                   type={TYPE_IMAGE_CAP_MOI.ANH_KHU_DAT}
                 />
+                {messageKhuDat && <span className="require">{messageKhuDat}</span>}
               </div>
               <div className="image-kd">
                 <CustomInfo
@@ -381,6 +394,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                   onRemove={setRemoveAnhDonDangKy}
                   type={TYPE_IMAGE_CAP_MOI.DON_DANG_KY}
                 />
+                {messageDonDangKy && <span className="require">{messageDonDangKy}</span>}
               </div>
               <div className="image-kd">
                 <CustomInfo
@@ -446,21 +460,4 @@ function mapStateToProps(store) {
   return { isLoading };
 }
 export default connect(mapStateToProps)(ThemMoiThemMoiGiayTo);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

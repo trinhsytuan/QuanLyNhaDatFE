@@ -17,5 +17,6 @@ export const API = {
   CREATE_USER: "/api/v1/user/register",
   UPDATE_USER: "/api/v1/user/updateUser/{0}",
   DELETE_USER: "/api/v1/user/deleteUser/{0}",
+  CREATE_NEW_CAP_MOI: "/api/v1/newcertificate/createNew",
 };
 
