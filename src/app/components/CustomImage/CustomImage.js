@@ -42,7 +42,7 @@ function CustomImage({ data, onRemove, disabled, idIndex }) {
       </div>
       <div className="border-out">
         <div className="image-in">
-          <Image src={typeUrl(data.url)} width={158} height={140} preview={false} onClick={handlePreview} />
+          <Image src={typeUrl(data.url)} width={152} height={140} preview={false} onClick={handlePreview} />
           <Modal visible={visible} onCancel={handleClose} footer={null} title={data.fileName} width={800}>
             <img src={typeUrl(data.url)} alt="Preview" style={{ width: "100%", height: "100%" }} />
           </Modal>

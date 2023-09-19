@@ -4,7 +4,7 @@
   height: 158px;
   display: flex;
   flex-direction: column;
-  background-color: #ddd;
+  background-color: #F9F9F9;
   .border-out {
     display: flex;
     flex-direction: column;
@@ -13,8 +13,10 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    
   }
   .header-action{
+    padding: 0 5px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -22,6 +24,9 @@
     width: 100%;
     cursor: pointer;
     flex-wrap: nowrap;
+  }
+  .image-in{
+    padding: 0 5px;
   }
 }
 
