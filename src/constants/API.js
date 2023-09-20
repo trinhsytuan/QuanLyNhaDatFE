@@ -18,5 +18,8 @@ export const API = {
   UPDATE_USER: "/api/v1/user/updateUser/{0}",
   DELETE_USER: "/api/v1/user/deleteUser/{0}",
   CREATE_NEW_CAP_MOI: "/api/v1/newcertificate/createNew",
+  UPLOAD_IMAGE: "/api/v1/media/create",
+  DELETE_IMAGE_FILENAME: "/api/v1/media/delete/{0}",
+  GET_GIAY_TO_CAP_MOI: "/api/v1/newcertificate/getCertificate/{0}",
 };
 

@@ -1,21 +1,22 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import "./ThemMoiThemMoiGiayTo.scss";
 import BaseContent from "@components/BaseContent";
 import { InfoCircleFilled, InfoCircleOutlined, LeftOutlined } from "@ant-design/icons";
 import { URL } from "@url";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { Button, Checkbox, Col, DatePicker, Form, Input, Row, Tooltip } from "antd";
-import { validateSpaceNull } from "@app/common/functionCommons";
+import { formatDate, formatDateForm, formatDateTime, validateSpaceNull } from "@app/common/functionCommons";
 import { RULES, TYPE_IMAGE_CAP_MOI } from "@constants";
 import { connect } from "react-redux";
 import UploadImage from "@components/UploadImage/UploadImage";
 import CustomInfo from "@components/CustomInfo/CustomInfo";
-import { createNewCapMoi } from "@app/services/CapMoiGiayTo";
+import { createNewCapMoi, getCapMoi } from "@app/services/CapMoiGiayTo";
 ThemMoiThemMoiGiayTo.propTypes = {};
 
 function ThemMoiThemMoiGiayTo({ isLoading }) {
   const [form] = Form.useForm();
+  const history = useHistory();
   const formRef = useRef(null);
   const [anhKhuDat, setAnhKhuDat] = useState([]);
   const [removeAnhKhuDat, setRemoveAnhKhuDat] = useState([]);
@@ -30,6 +31,31 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
   const [messageCheckBox, setMessageCheckBox] = useState(null);
   const [messageKhuDat, setMessageKhuDat] = useState(null);
   const [messageDonDangKy, setMessageDonDangKy] = useState(null);
+  const [disabled, onChangeDisabled] = useState(false);
+  const { id } = useParams();
+  useEffect(() => {
+    if (id) {
+      onChangeDisabled(true);
+      getAPI();
+    }
+  }, [id]);
+  const getAPI = async () => {
+    const response = await getCapMoi(id);
+    form.setFieldsValue({
+      ...response,
+      tuthoidiem: formatDateForm(response?.tuthoidiem),
+      thoihandenghi: formatDateForm(response?.thoihandenghi),
+      thoihansohuu: formatDateForm(response?.thoihansohuu)
+    });
+    setHopDong(response.hopdong);
+    setAnhKhuDat(response.anhkhudat);
+    setAnhDonDangKy(response.dondangky);
+    setNghiaVuTaiChinh(response.taichinh);
+    setCacLoaiGiayTo(response.other);
+  };
+  const changeDisabled = () => {
+    onChangeDisabled(!disabled);
+  };
   const onSubmit = async (e) => {
     let error = false;
     if (anhKhuDat.length == 0) {
@@ -45,8 +71,11 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
       error = true;
     }
     if (error) return;
-    const response = await createNewCapMoi(e);
-    console.log(response);
+    if (!disabled && id) {
+    } else {
+      const response = await createNewCapMoi(e, anhDonDangKy, anhKhuDat, cacLoaiGiayTo, hopDong, nghiaVuTaiChinh);
+      history.push(URL.THEM_MOI_GIAY_TO_ID.format(response._id));
+    }
   };
   return (
     <div>
@@ -63,7 +92,15 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
           </div>
           <div className="div_hr"></div>
           <div className="content">
-            <Form layout={"vertical"} form={form} labelCol={4} wrapperCol={14} ref={formRef} onFinish={onSubmit}>
+            <Form
+              layout={"vertical"}
+              form={form}
+              labelCol={4}
+              wrapperCol={14}
+              ref={formRef}
+              onFinish={onSubmit}
+              disabled={disabled}
+            >
               <div className="content-title">
                 Phần kê khai của người đăng ký
                 <div className="content-title-icon">
@@ -112,22 +149,22 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
               <Row>
                 <Col xs={24} sm={12} md={12} lg={12}>
                   <Form.Item name="dangkyquyensdd" valuePropName="checked">
-                    <Checkbox> Đăng ký quyền sử dụng đất</Checkbox>
+                    <Checkbox disabled={disabled}> Đăng ký quyền sử dụng đất</Checkbox>
                   </Form.Item>
                 </Col>
                 <Col xs={24} sm={12} md={12} lg={12}>
                   <Form.Item name="capgcndoivoidat" valuePropName="checked">
-                    <Checkbox>Cấp giấy chứng nhận đối với đất</Checkbox>
+                    <Checkbox disabled={disabled}>Cấp giấy chứng nhận đối với đất</Checkbox>
                   </Form.Item>
                 </Col>
                 <Col xs={24} sm={12} md={12} lg={12}>
                   <Form.Item name="dangkyquyenqldat" valuePropName="checked">
-                    <Checkbox>Đăng ký quyền quản lý đất</Checkbox>
+                    <Checkbox disabled={disabled}>Đăng ký quyền quản lý đất</Checkbox>
                   </Form.Item>
                 </Col>
                 <Col xs={24} sm={12} md={12} lg={12}>
                   <Form.Item name="capgcnvoitaisan" valuePropName="checked">
-                    <Checkbox>Cấp GCN với tài sản có trên đất</Checkbox>
+                    <Checkbox disabled={disabled}>Cấp GCN với tài sản có trên đất</Checkbox>
                   </Form.Item>
                 </Col>
                 {messageCheckBox && <span className="require">{messageCheckBox}</span>}
@@ -144,7 +181,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                 <Col className="gutter-row" xs={24} sm={12} md={12} lg={8} xl={8}>
                   <Form.Item
                     label="Thửa đất đăng ký"
-                    name="Thuadatdangky"
+                    name="thuadatdangky"
                     rules={[{ required: true, message: "Thửa đất đăng ký không thể bỏ trống!" }]}
                   >
                     <Input placeholder="Nhập thửa đất đăng ký"></Input>
@@ -153,7 +190,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                 <Col className="gutter-row" xs={24} sm={12} md={12} lg={8} xl={8}>
                   <Form.Item
                     label="Số thửa đất"
-                    name="Sothuadat"
+                    name="sothuadat"
                     rules={[{ required: true, message: "Số thửa đất không thể bỏ trống!" }]}
                   >
                     <Input placeholder="Nhập số thửa đất"></Input>
@@ -170,7 +207,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                 >
                   <Form.Item
                     label="Tờ bản đồ số"
-                    name="Tobandoso"
+                    name="tobandoso"
                     rules={[{ required: true, message: "Tờ bản đồ số không thể bỏ trống!" }]}
                   >
                     <Input placeholder="Tờ bản đồ số"></Input>
@@ -184,7 +221,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                         Diện tích (m<sup>2</sup>)
                       </span>
                     }
-                    name="Dientich"
+                    name="dientich"
                     rules={[{ required: true, message: "Diện tích không thể bỏ trống!" }, RULES.NUMBER_FLOAT]}
                   >
                     <Input placeholder="Nhập diện tích đăng ký"></Input>
@@ -197,7 +234,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                         Sử dụng chung (m<sup>2</sup>)
                       </span>
                     }
-                    name="Sudungchung"
+                    name="sudungchung"
                     rules={[
                       { required: true, message: "Diện tích sử dụng chung không thể bỏ trống!" },
                       RULES.NUMBER_FLOAT,
@@ -221,7 +258,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                         Sử dụng riêng (m<sup>2</sup>)
                       </span>
                     }
-                    name="Sudungrieng"
+                    name="sudungrieng"
                     rules={[{ required: true, message: "Diện tích sử dụng riêng không thể bỏ trống!" }]}
                   >
                     <Input placeholder="Nhập diện tích sử dụng riêng"></Input>
@@ -231,7 +268,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                 <Col className="gutter-row" xs={24} sm={12} md={12} lg={12} xl={12}>
                   <Form.Item
                     label="Sử dụng vào mục đích"
-                    name="Mucdichsd"
+                    name="mucdichsd"
                     rules={[{ required: true, message: "Diện tích không thể bỏ trống!" }]}
                   >
                     <Input placeholder="Nhập mục đích sử dụng"></Input>
@@ -240,7 +277,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                 <Col className="gutter-row" xs={24} sm={12} md={12} lg={12} xl={12}>
                   <Form.Item
                     label="Từ thời điểm"
-                    name="Tuthoidiem"
+                    name="tuthoidiem"
                     rules={[{ required: true, message: "Diện tích sử dụng chung không thể bỏ trống!" }]}
                   >
                     <DatePicker
@@ -255,7 +292,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                 <Col className="gutter-row" xs={24} sm={12} md={12} lg={12} xl={12}>
                   <Form.Item
                     label="Thời hạn đề nghị được sử dụng đất"
-                    name="Thoihandenghi"
+                    name="thoihandenghi"
                     rules={[{ required: true, message: "Thời hạn sử dụng đất không thể bỏ trống!" }]}
                   >
                     <DatePicker
@@ -269,7 +306,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                 <Col className="gutter-row" xs={24} sm={12} md={12} lg={12} xl={12}>
                   <Form.Item
                     label="Nguồn gốc sử dụng"
-                    name="Nguongoc"
+                    name="nguongoc"
                     rules={[{ required: true, message: "Diện tích không thể bỏ trống!" }]}
                   >
                     <Input placeholder="Nhập nguồn gốc sử dụng"></Input>
@@ -286,7 +323,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
               </div>
               <Row gutter={{ xs: 8, sm: 12, md: 20, lg: 20 }}>
                 <Col className="gutter-row" xs={24} sm={12} md={12} lg={8} xl={8}>
-                  <Form.Item label="Loại nhà ở, công trình" name="Loainhao">
+                  <Form.Item label="Loại nhà ở, công trình" name="loainhao">
                     <Input placeholder="Nhập loại nhà ở"></Input>
                   </Form.Item>
                 </Col>
@@ -297,7 +334,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                         Diện tích xây dựng (m<sup>2</sup>)
                       </span>
                     }
-                    name="Dientichxaydung"
+                    name="dientichxaydung"
                     rules={[RULES.NUMBER_FLOAT]}
                   >
                     <Input placeholder="Nhập diện tích xây dựng"></Input>
@@ -312,11 +349,11 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                   xl={8}
                   rules={[{ required: true, message: "Tờ bản đồ số không thể bỏ trống!" }]}
                 >
-                  <Form.Item label="Diện tích sàn" name="Dientichsan">
+                  <Form.Item label="Diện tích sàn" name="dientichsan">
                     <Input placeholder="Nhập diện tích sàn"></Input>
                   </Form.Item>
                 </Col>
-              
+
                 <Col className="gutter-row" xs={24} sm={12} md={12} lg={8} xl={8}>
                   <Form.Item
                     label={
@@ -324,7 +361,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                         Sở hữu chung (m<sup>2</sup>)
                       </span>
                     }
-                    name="Sohuuchung"
+                    name="sohuuchung"
                     rules={[RULES.NUMBER_FLOAT]}
                   >
                     <Input placeholder="Nhập số mét sở hữu chung"></Input>
@@ -337,7 +374,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                         Sở hữu riêng (m<sup>2</sup>)
                       </span>
                     }
-                    name="Sohuurieng"
+                    name="sohuurieng"
                     rules={[RULES.NUMBER_FLOAT]}
                   >
                     <Input placeholder="Nhập diện tích sở hữu riêng"></Input>
@@ -348,18 +385,24 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                     <Input placeholder="Nhập kết cấu"></Input>
                   </Form.Item>
                 </Col>
-              
+
                 <Col className="gutter-row" xs={24} sm={12} md={12} lg={12} xl={12}>
-                  <Form.Item label="Số tầng" name="Sotang">
+                  <Form.Item label="Số tầng" name="sotang">
                     <Input placeholder="Nhập số tầng" type="number"></Input>
                   </Form.Item>
                 </Col>
                 <Col className="gutter-row" xs={24} sm={12} md={12} lg={12} xl={12}>
-                  <Form.Item label="Thời hạn sở hữu" name="Thoihansohuu">
-                    <DatePicker placeholder="Nhập thời hạn sở hữu" picker="day" style={{ width: "100%" }}></DatePicker>
+                  <Form.Item label="Thời hạn sở hữu" name="thoihansohuu">
+                    <DatePicker
+                      placeholder="Nhập thời hạn sở hữu"
+                      picker="day"
+                      style={{ width: "100%" }}
+                      format="DD/MM/YYYY"
+                    ></DatePicker>
                   </Form.Item>
                 </Col>
               </Row>
+
               <div className="image-kd">
                 <CustomInfo
                   text={
@@ -372,12 +415,14 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                 <UploadImage
                   data={anhKhuDat}
                   onChange={setAnhKhuDat}
+                  disabled={disabled}
                   remove={removeAnhKhuDat}
                   onRemove={setRemoveAnhKhuDat}
                   type={TYPE_IMAGE_CAP_MOI.ANH_KHU_DAT}
                 />
                 {messageKhuDat && <span className="require">{messageKhuDat}</span>}
               </div>
+
               <div className="image-kd">
                 <CustomInfo
                   text={
@@ -390,12 +435,14 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                 <UploadImage
                   data={anhDonDangKy}
                   onChange={setAnhDonDangKy}
+                  disabled={disabled}
                   remove={removeAnhDonDangKy}
                   onRemove={setRemoveAnhDonDangKy}
                   type={TYPE_IMAGE_CAP_MOI.DON_DANG_KY}
                 />
                 {messageDonDangKy && <span className="require">{messageDonDangKy}</span>}
               </div>
+
               <div className="image-kd">
                 <CustomInfo
                   text={"Chứng từ nghĩa vụ tài chính (nếu có) (bản sao)"}
@@ -404,11 +451,13 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                 <UploadImage
                   data={nghiaVuTaiChinh}
                   onChange={setNghiaVuTaiChinh}
+                  disabled={disabled}
                   remove={removeNghiaVuTaiChinh}
                   onRemove={setRemoveNghiaVuTaiChinh}
                   type={TYPE_IMAGE_CAP_MOI.CHUNG_TU_NGHIA_VU_TAI_CHINH}
                 />
               </div>
+
               <div className="image-kd">
                 <CustomInfo
                   text={"Các loại giấy tờ về quyền sử dụng đất"}
@@ -417,11 +466,13 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                 <UploadImage
                   data={cacLoaiGiayTo}
                   onChange={setCacLoaiGiayTo}
+                  disabled={disabled}
                   remove={removeCacLoaiGiayTo}
                   onRemove={setRemoveCacLoaiGiayTo}
                   type={TYPE_IMAGE_CAP_MOI.OTHER}
                 />
               </div>
+
               <div className="image-kd">
                 <CustomInfo
                   text={"Hợp đồng, văn bản(Trường hợp có đăng ký quyền sử dụng đất hạn chế đối với thửa đất liền kề)"}
@@ -432,6 +483,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                 <UploadImage
                   data={hopDong}
                   onChange={setHopDong}
+                  disabled={disabled}
                   remove={removeHopDong}
                   onRemove={setRemoveHopDong}
                   type={TYPE_IMAGE_CAP_MOI.HOP_DONG}
@@ -449,7 +501,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
           loading={isLoading}
           disabled={isLoading}
         >
-          Thêm mới
+          {id ? "Cập nhật thông tin" : "Thêm mới"}
         </Button>
       </div>
     </div>
@@ -460,4 +512,7 @@ function mapStateToProps(store) {
   return { isLoading };
 }
 export default connect(mapStateToProps)(ThemMoiThemMoiGiayTo);
+
+
+
 

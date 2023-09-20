@@ -1,6 +1,7 @@
 import axios from "axios";
 import { convertParam, renderMessageError } from "@app/common/functionCommons";
 import { convertCamelCaseToSnakeCase, convertSnakeCaseToCamelCase } from "@app/common/dataConverter";
+import { API } from "@api";
 
 export function createBase(api, data, loading = true) {
   const config = { loading };
@@ -292,3 +293,40 @@ export function getSimple(api, page, limit, query = "") {
       return null;
     });
 }
+export async function uploadImageArray(data, idForm) {
+  let uploadPromises = data
+    .filter((image) => image?.newUp === true)
+    .map((image) => {
+      let formData = new FormData();
+      formData.append("image", image.url);
+      formData.append("jsonData", JSON.stringify({
+        idForm,
+        type: image.type,
+      }));
+
+      return axios.post(API.UPLOAD_IMAGE, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+    });
+
+  const responses = await axios.all(uploadPromises);
+
+  const responseData = responses.reduce((result, response, index) => {
+    if (!response?.data) return;
+    result[index] = response.data;
+    return result;
+  }, {});
+  return responseData;
+}
+export function deleteImage(data) {
+  const arrFile = [];
+  for (let i = 0; i < data.length; i++) {
+    let fileDelete = data[i].fileName;
+    const itemFile = axios.delete(API.DELETE_IMAGE_FILENAME.format(fileDelete));
+    arrFile.push(itemFile);
+  }
+  axios.all(arrFile);
+}
+

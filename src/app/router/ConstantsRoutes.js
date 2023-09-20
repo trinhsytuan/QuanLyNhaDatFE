@@ -129,11 +129,18 @@ export const ADMIN_ROUTES = [
     component: ThemMoiThemMoiGiayTo,
     permission: [ROLE_SYSTEM.RECEIVER],
   },
+  {
+    path: URL.THEM_MOI_GIAY_TO_ID.format(":id"),
+    breadcrumbName: "Chi tiết giấy tờ",
+    component: ThemMoiThemMoiGiayTo,
+    permission: [ROLE_SYSTEM.RECEIVER],
+  },
 ];
 
 export function ConstantsRoutes() {
   return ADMIN_ROUTES;
 }
+
 
 
 

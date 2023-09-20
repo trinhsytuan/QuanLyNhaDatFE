@@ -241,6 +241,9 @@ export function formatDate(dateTime) {
     return null;
   }
 }
+export function formatDateForm(dateTime) {
+  return moment(dateTime, "YYYY-MM-DD");
+}
 
 export function formatDateTime(dateTime) {
   try {
@@ -525,4 +528,5 @@ export function checkTypeStringOrFile(image) {
     return false;
   }
 }
+
 
