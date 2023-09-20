@@ -242,6 +242,7 @@ export function formatDate(dateTime) {
   }
 }
 export function formatDateForm(dateTime) {
+  if(!dateTime) return null;
   return moment(dateTime, "YYYY-MM-DD");
 }
 

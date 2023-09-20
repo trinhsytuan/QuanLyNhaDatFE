@@ -169,6 +169,10 @@ export const TOAST_MESSAGE = {
   KEY: {
     TITLE: "Cập nhật tiêu đề chữ ký thành công",
   },
+  CAP_MOI: {
+    THEM_MOI: "Thêm mới đơn đăng ký thành công",
+    DELETE: "Xoá đơn đăng ký thành công",
+  },
   USER: {
     CREATE_NEW: "Thêm mới người dùng thành công",
     EMAIL_PASSWORD: "Để đảm bảo an toàn, mật khẩu của người dùng được gửi đến email của người dùng",
@@ -549,3 +553,13 @@ export const TYPE_IMAGE_CAP_MOI = {
   OTHER: "other",
 };
 
+export const SEARCH_STATUS_THAM_DINH = [
+  { name: "Đã được thẩm định", value: "accepted" },
+  { name: "Chờ thẩm định", value: "pending" },
+  { name: "Từ chối thẩm định", value: "reject" },
+];
+export const VI_STATUS_THAM_DINH = {
+  accepted: "Đã thẩm định",
+  pending: "Chờ thẩm định",
+  reject: "Từ chối thẩm định"
+}

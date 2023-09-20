@@ -21,5 +21,9 @@ export const API = {
   UPLOAD_IMAGE: "/api/v1/media/create",
   DELETE_IMAGE_FILENAME: "/api/v1/media/delete/{0}",
   GET_GIAY_TO_CAP_MOI: "/api/v1/newcertificate/getCertificate/{0}",
+  DELETE_GIAY_TO_CAP_MOI: "/api/v1/newcertificate/deleteCertificate/{0}",
+  GET_PAGINATION_GIAY_TO_CAP_MOI: "/api/v1/newcertificate/getAllPagination?page={0}&limit={1}{2}",
 };
+
+
 
