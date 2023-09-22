@@ -172,6 +172,7 @@ export const TOAST_MESSAGE = {
   CAP_MOI: {
     THEM_MOI: "Thêm mới đơn đăng ký thành công",
     DELETE: "Xoá đơn đăng ký thành công",
+    EDIT: "Chỉnh sửa thông tin giấy tờ thành công",
   },
   USER: {
     CREATE_NEW: "Thêm mới người dùng thành công",
@@ -561,5 +562,5 @@ export const SEARCH_STATUS_THAM_DINH = [
 export const VI_STATUS_THAM_DINH = {
   accepted: "Đã thẩm định",
   pending: "Chờ thẩm định",
-  reject: "Từ chối thẩm định"
-}
+  reject: "Từ chối thẩm định",
+};

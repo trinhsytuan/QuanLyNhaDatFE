@@ -11,7 +11,7 @@ import { CONSTANTS, RULES, TOAST_MESSAGE, TYPE_IMAGE_CAP_MOI } from "@constants"
 import { connect } from "react-redux";
 import UploadImage from "@components/UploadImage/UploadImage";
 import CustomInfo from "@components/CustomInfo/CustomInfo";
-import { createNewCapMoi, getCapMoi, removeGiayToCapMoi } from "@app/services/CapMoiGiayTo";
+import { createNewCapMoi, editGiayToCapMoi, getCapMoi, removeGiayToCapMoi } from "@app/services/CapMoiGiayTo";
 import Loading from "@components/Loading";
 import DialogDeleteConfim from "@components/DialogDeleteConfim/DialogDeleteConfim";
 ThemMoiThemMoiGiayTo.propTypes = {};
@@ -30,7 +30,6 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
   const [removeNghiaVuTaiChinh, setRemoveNghiaVuTaiChinh] = useState([]);
   const [messageCheckBox, setMessageCheckBox] = useState(null);
   const [messageKhuDat, setMessageKhuDat] = useState(null);
-  const [messageDonDangKy, setMessageDonDangKy] = useState(null);
   const [disabled, onChangeDisabled] = useState(false);
   const [visibleXoa, setVisibleXoa] = useState(false);
   const { id } = useParams();
@@ -75,9 +74,25 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
     }
     if (error) return;
     if (!disabled && id) {
-
+      const response = await editGiayToCapMoi(
+        id,
+        e,
+        anhKhuDat,
+        cacLoaiGiayTo,
+        hopDong,
+        nghiaVuTaiChinh,
+        removeAnhKhuDat,
+        removeHopDong,
+        removeCacLoaiGiayTo,
+        removeNghiaVuTaiChinh
+      );
+      if (response) {
+        toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CAP_MOI.EDIT);
+        getAPI();
+        onChangeDisabled(true);
+      }
     } else {
-      const response = await createNewCapMoi(e,  anhKhuDat, cacLoaiGiayTo, hopDong, nghiaVuTaiChinh);
+      const response = await createNewCapMoi(e, anhKhuDat, cacLoaiGiayTo, hopDong, nghiaVuTaiChinh);
       if (response) {
         history.push(URL.THEM_MOI_GIAY_TO_ID.format(response._id));
         toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CAP_MOI.THEM_MOI);
@@ -386,7 +401,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                     md={12}
                     lg={8}
                     xl={8}
-                    rules={[{ required: true, message: "Tờ bản đồ số không thể bỏ trống!" }]}
+                    rules={[{ required: true, message: "Tờ bản đồ số không thể bỏ trống!" }, RULES.NUMBER_FLOAT]}
                   >
                     <Form.Item label="Diện tích sàn" name="dientichsan">
                       <Input placeholder="Nhập diện tích sàn"></Input>
@@ -462,7 +477,6 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                   {messageKhuDat && <span className="require">{messageKhuDat}</span>}
                 </div>
 
-                
                 <div className="image-kd">
                   <CustomInfo
                     text={"Chứng từ nghĩa vụ tài chính (nếu có) (bản sao)"}

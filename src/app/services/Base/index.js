@@ -299,10 +299,13 @@ export async function uploadImageArray(data, idForm) {
     .map((image) => {
       let formData = new FormData();
       formData.append("image", image.url);
-      formData.append("jsonData", JSON.stringify({
-        idForm,
-        type: image.type,
-      }));
+      formData.append(
+        "jsonData",
+        JSON.stringify({
+          idForm,
+          type: image.type,
+        })
+      );
 
       return axios.post(API.UPLOAD_IMAGE, formData, {
         headers: {
