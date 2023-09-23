@@ -32,6 +32,7 @@ function QuanLyGiayToPortal({ isLoading }) {
     queryStr += `${search.tennguoisudung ? "&tennguoisudung[like]={0}".format(search.tennguoisudung) : ""}`;
     queryStr += `${search.diachithuongtru ? "&diachithuongtru[like]={0}".format(search.diachithuongtru) : ""}`;
     queryStr += `${search.status ? "&status={0}".format(search.status) : ""}`;
+    queryStr += `${search.magiayto ? "&magiayto={0}".format(search.magiayto) : ""}`;
     // queryStr += `${search.active ? "&active={0}".format(search.active) : ""}`;
     const apiResponse = await getAllGiayToCapMoi(page, limit, queryStr);
     if (apiResponse) {
@@ -57,6 +58,11 @@ function QuanLyGiayToPortal({ isLoading }) {
     history.push({ pathname, search: stringify({ ...newQuery }, { arrayFormat: "repeat" }) });
   };
   const dataSearch = [
+    {
+      name: "magiayto",
+      label: "Mã giấy tờ",
+      type: "text",
+    },
     {
       name: "tennguoisudung",
       label: "Tên người sử dụng",
@@ -93,6 +99,7 @@ function QuanLyGiayToPortal({ isLoading }) {
       align: "center",
       width: 60,
     },
+    { title: "Mã giấy tờ", dataIndex: "magiayto", key: "magiayto" },
     { title: "Tên người sử dụng đất", dataIndex: "tennguoisudung", key: "tennguoisudung" },
     { title: "Địa chỉ thường trú", dataIndex: "diachithuongtru", key: "diachithuongtru" },
     {
@@ -173,4 +180,6 @@ function mapStateToProps(store) {
   return { isLoading };
 }
 export default connect(mapStateToProps)(QuanLyGiayToPortal);
+
+
 

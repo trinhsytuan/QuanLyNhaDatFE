@@ -32,6 +32,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
   const [messageKhuDat, setMessageKhuDat] = useState(null);
   const [disabled, onChangeDisabled] = useState(false);
   const [visibleXoa, setVisibleXoa] = useState(false);
+  const [magiayto, setMagiayto] = useState(null);
   const { id } = useParams();
   useEffect(() => {
     if (id) {
@@ -47,6 +48,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
       thoihandenghi: formatDateForm(response?.thoihandenghi),
       thoihansohuu: formatDateForm(response?.thoihansohuu),
     });
+    setMagiayto(response.magiayto);
     setHopDong(response.hopdong);
     setAnhKhuDat(response.anhkhudat);
     setNghiaVuTaiChinh(response.taichinh);
@@ -142,6 +144,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
               <div className="header-right"></div>
             </div>
             <div className="div_hr"></div>
+
             <div className="content">
               <Form
                 layout={"vertical"}
@@ -152,6 +155,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                 onFinish={onSubmit}
                 disabled={disabled}
               >
+                {magiayto && <span style={{ marginTop: 30 }}>Mã giấy tờ: {magiayto}</span>}
                 <div className="content-title">
                   Phần kê khai của người đăng ký
                   <div className="content-title-icon">
