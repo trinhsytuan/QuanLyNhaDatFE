@@ -47,6 +47,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
       tuthoidiem: formatDateForm(response?.tuthoidiem),
       thoihandenghi: formatDateForm(response?.thoihandenghi),
       thoihansohuu: formatDateForm(response?.thoihansohuu),
+      ngaycapcccd: formatDateForm(response?.ngaycapcccd),
     });
     setMagiayto(response.magiayto);
     setHopDong(response.hopdong);
@@ -155,7 +156,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                 onFinish={onSubmit}
                 disabled={disabled}
               >
-                {magiayto && <span style={{ marginTop: 30 }}>Mã giấy tờ: {magiayto}</span>}
+                {magiayto && <span style={{ marginTop: 30 }}>Mã khu đất: {magiayto}</span>}
                 <div className="content-title">
                   Phần kê khai của người đăng ký
                   <div className="content-title-icon">
@@ -190,6 +191,58 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                       ]}
                     >
                       <Input placeholder="Nhập địa chỉ thường trú"></Input>
+                    </Form.Item>
+                  </Col>
+                  <Col className="gutter-row" xs={24} sm={12} md={12} lg={12}>
+                    <Form.Item
+                      label="Số CCCD / CMND"
+                      name="cccd"
+                      rules={[{ required: true, message: "Số CCCD không thể bỏ trống!" }, RULES.CMND]}
+                    >
+                      <Input placeholder="Nhập số CCCD"></Input>
+                    </Form.Item>
+                  </Col>
+                  <Col className="gutter-row" xs={24} sm={12} md={12} lg={12}>
+                    <Form.Item
+                      label="Nơi cấp CMND/CCCD"
+                      name="noicap"
+                      rules={[{ required: true, message: "Nơi cấp CMND/CCCD không thể bỏ trống!" }]}
+                    >
+                      <Input placeholder="Nhập nơi cấp CMND/CCCD"></Input>
+                    </Form.Item>
+                  </Col>
+                  <Col className="gutter-row" xs={24} sm={12} md={12} lg={12}>
+                    <Form.Item
+                      label="Ngày cấp CMND/CCCD"
+                      name="ngaycapcccd"
+                      rules={[
+                        { required: true, message: "Ngày cấp CMND/CCCD không thể bỏ trống!" },
+                        ({ getFieldValue }) => ({
+                          validator(_, value) {
+                            const fromDate = new Date();
+                            if (value < fromDate) {
+                              return Promise.resolve();
+                            }
+                            return Promise.reject(new Error("Ngày cấp ko thể lớn hơn ngày hôm nay"));
+                          },
+                        }),
+                      ]}
+                    >
+                      <DatePicker
+                        picker="day"
+                        placeholder="Vui lòng chọn thời điểm"
+                        style={{ width: "100%" }}
+                        format="DD/MM/YYYY"
+                      />
+                    </Form.Item>
+                  </Col>
+                  <Col className="gutter-row" xs={24} sm={12} md={12} lg={12}>
+                    <Form.Item
+                      label="Nghề nghiệp"
+                      name="nghenghiep"
+                      rules={[{ required: true, message: "Nghề nghiệp không thể bỏ trống!" }]}
+                    >
+                      <Input placeholder="Nhập nghề nghiệp"></Input>
                     </Form.Item>
                   </Col>
                 </Row>
@@ -554,4 +607,5 @@ function mapStateToProps(store) {
   return { isLoading };
 }
 export default connect(mapStateToProps)(ThemMoiThemMoiGiayTo);
+
 

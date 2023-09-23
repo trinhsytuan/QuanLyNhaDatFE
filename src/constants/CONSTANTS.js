@@ -173,6 +173,12 @@ export const TOAST_MESSAGE = {
     THEM_MOI: "Thêm mới đơn đăng ký thành công",
     DELETE: "Xoá đơn đăng ký thành công",
     EDIT: "Chỉnh sửa thông tin giấy tờ thành công",
+    NOT_FOUND: "Không tồn tại mã khu đất",
+  },
+  CHUYEN_NHUONG: {
+    THEM_MOI: "Thêm mới đơn chuyển nhượng thành công",
+    DELETE: "Xoá đơn chuyển nhượng thành công",
+    EDIT: "Chỉnh sửa đơn chuyển nhượng thành công",
   },
   USER: {
     CREATE_NEW: "Thêm mới người dùng thành công",
@@ -564,3 +570,7 @@ export const VI_STATUS_THAM_DINH = {
   pending: "Chờ thẩm định",
   reject: "Từ chối thẩm định",
 };
+export const TYPE_IMAGE_CAP_LAI = {
+  ANH_KHU_DAT: "anh-khu-dat",
+};
+

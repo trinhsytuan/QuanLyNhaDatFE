@@ -99,7 +99,7 @@ function QuanLyGiayToPortal({ isLoading }) {
       align: "center",
       width: 60,
     },
-    { title: "Mã giấy tờ", dataIndex: "magiayto", key: "magiayto" },
+    { title: "Mã khu đất", dataIndex: "magiayto", key: "magiayto" },
     { title: "Tên người sử dụng đất", dataIndex: "tennguoisudung", key: "tennguoisudung" },
     { title: "Địa chỉ thường trú", dataIndex: "diachithuongtru", key: "diachithuongtru" },
     {
@@ -180,6 +180,4 @@ function mapStateToProps(store) {
   return { isLoading };
 }
 export default connect(mapStateToProps)(QuanLyGiayToPortal);
-
-
 

@@ -176,6 +176,19 @@ export function getByIdBase(api, id, loading = true) {
       return null;
     });
 }
+export function getByIdBaseNotToast(api, id, loading = true) {
+  const config = { loading };
+  return axios
+    .get(api.format(id), config)
+    .then((response) => {
+      if (response.status === 200) return convertSnakeCaseToCamelCase(response?.data);
+      return null;
+    })
+    .catch((err) => {
+      
+      return null;
+    });
+}
 export function getAllPaginationBaseByIDParamsString(
   api,
   id,
@@ -332,4 +345,5 @@ export function deleteImage(data) {
   }
   axios.all(arrFile);
 }
+
 

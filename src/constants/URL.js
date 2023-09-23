@@ -11,13 +11,16 @@ export const URL = {
     DU_LIEU_BO_SUNG: "/du-lieu-bo-sung",
     SETTING: "/cai-dat",
     QUAN_LY_TO_CHUC: "/quan-ly-don-vi",
-    QUAN_LY_THEM_MOI: "/quan-ly-them-moi"
+    QUAN_LY_THEM_MOI: "/quan-ly-them-moi",
+    THEM_MOI_CAP_LAI: "/them-moi-cap-lai",
+    QUAN_LY_CAP_LAI: "/quan-ly-cap-lai",
   },
   THEM_MOI_GIAY_TO_ID: "/them-moi-giay-to/{0}",
   THEM_MOI_GIAY_TO: "/them-moi-giay-to",
   THONG_TIN_CA_NHAN: "/thong-tin-ca-nhan",
   RESET_PASSWORD: "/reset-password",
   FORGET_PASSWORD: "/forget-password",
+  THEM_MOI_CAP_LAI_ID: "/them-moi-cap-lai/{0}",
 
   DOCS_VIEWER: `https://docs.google.com/viewer?url=${window.location.origin}{0}&embedded=true`,
 };

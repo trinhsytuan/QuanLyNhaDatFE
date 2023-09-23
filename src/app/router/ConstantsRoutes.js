@@ -28,8 +28,9 @@ const QuanLyDonVi = lazy(() => import("@containers/QuanLyDonVi/QuanLyDonVi"));
 const KhoiPhucTaiKhoan = lazy(() => import("@containers/User/KhoiPhucTaiKhoan"));
 const Role = lazy(() => import("@containers/Role/Role"));
 const QuanLyNguoiDung = lazy(() => import("@containers/QuanLyNguoiDung/QuanLyNguoiDung"));
-const PortalThemMoiGiayTo = lazy(() => import("@containers/QuanLyGiayTo/TrangChu/QuanLyGiayToPortal"));
-const ThemMoiThemMoiGiayTo = lazy(() => import("@containers/QuanLyGiayTo/ThemMoi/ThemMoiThemMoiGiayTo"))
+const PortalThemMoiGiayTo = lazy(() => import("@containers/QuanLyCapMoi/TrangChu/QuanLyGiayToPortal"));
+const ThemMoiThemMoiGiayTo = lazy(() => import("@containers/QuanLyCapMoi/ThemMoi/ThemMoiThemMoiGiayTo"));
+const CapLaiGiayTo = lazy(() => import("@containers/QuanLyCapLai/ThemMoiCapLai/ThemMoiCapLai"));
 function renderIcon(icon) {
   return (
     <span role="img" className="main-menu__icon">
@@ -98,7 +99,7 @@ export const ADMIN_ROUTES = [
       },
       {
         path: URL.MENU.QUAN_LY_THEM_MOI,
-        menuName: "Quản lý giấy tờ cấp mới",
+        menuName: "Quản lý yêu cầu cấp mới",
         component: PortalThemMoiGiayTo,
         permission: ROLE_SYSTEM.RECEIVER,
       },
@@ -135,11 +136,25 @@ export const ADMIN_ROUTES = [
     component: ThemMoiThemMoiGiayTo,
     permission: [ROLE_SYSTEM.RECEIVER],
   },
+  {
+    path: URL.MENU.THEM_MOI_CAP_LAI,
+    breadcrumbName: "Thêm mới đơn cấp lại",
+    component: CapLaiGiayTo,
+    permission: ROLE_SYSTEM.RECEIVER,
+  },
+  {
+    path: URL.THEM_MOI_CAP_LAI_ID.format(":id"),
+    breadcrumbName: "Quản lý đơn cấp lại",
+    component: CapLaiGiayTo,
+    permission: ROLE_SYSTEM.RECEIVER,
+  },
 ];
 
 export function ConstantsRoutes() {
   return ADMIN_ROUTES;
 }
+
+
 
 
 

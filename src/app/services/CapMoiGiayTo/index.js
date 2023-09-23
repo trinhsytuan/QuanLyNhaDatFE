@@ -7,6 +7,7 @@ const {
   getSimple,
   updateBaseFormatID,
   deleteImage,
+  getByIdBaseNotToast,
 } = require("../Base");
 
 export const createNewCapMoi = async (data, anhKhuDat, hopDong, cacLoaiGiayTo, taichinh) => {
@@ -17,6 +18,9 @@ export const createNewCapMoi = async (data, anhKhuDat, hopDong, cacLoaiGiayTo, t
 };
 export const getCapMoi = async (id) => {
   return getByIdBase(API.GET_GIAY_TO_CAP_MOI, id);
+};
+export const getByMaGiayTo = async (code) => {
+  return getByIdBaseNotToast(API.GET_BY_MA_GIAY_TO, code);
 };
 export const removeGiayToCapMoi = async (id) => {
   return deleteByIdBase(API.DELETE_GIAY_TO_CAP_MOI, id);
@@ -43,4 +47,6 @@ export const editGiayToCapMoi = async (
   await deleteImage(removeTotal);
   return response;
 };
+
+
 
