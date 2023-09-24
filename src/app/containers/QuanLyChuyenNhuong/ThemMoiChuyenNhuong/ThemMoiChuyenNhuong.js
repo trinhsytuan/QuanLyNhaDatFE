@@ -6,7 +6,7 @@ import Loading from "@components/Loading";
 import { CloseOutlined, DeleteOutlined, EditOutlined, LeftOutlined, SearchOutlined } from "@ant-design/icons";
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { Button, Col, DatePicker, Form, Input, Row } from "antd";
-import "./ThemMoiCapLai.scss";
+import "./ThemMoiChuyenNhuong.scss";
 import { formatDateForm, toast, validateSpaceNull } from "@app/common/functionCommons";
 import { CONSTANTS, RULES, TOAST_MESSAGE, TYPE_IMAGE_CAP_LAI } from "@constants";
 import TextArea from "antd/lib/input/TextArea";
@@ -14,17 +14,23 @@ import CustomInfo from "@components/CustomInfo/CustomInfo";
 import UploadImage from "@components/UploadImage/UploadImage";
 import { getByMaGiayTo } from "@app/services/CapMoiGiayTo";
 import CloseIcon from "@components/CustomModal/CloseIcon";
-import { createChuyenNhuong, getChuyenNhuongByID } from "@app/services/ChuyenNhuong";
+import {
+  createChuyenNhuong,
+  deleteChuyenNhuongByID,
+  editChuyenNhuong,
+  getChuyenNhuongByID,
+} from "@app/services/ChuyenNhuong";
 import { URL } from "@url";
 import DialogDeleteConfim from "@components/DialogDeleteConfim/DialogDeleteConfim";
-ThemMoiCapLai.propTypes = {};
+ThemMoiChuyenNhuong.propTypes = {};
 
-function ThemMoiCapLai({ isLoading }) {
+function ThemMoiChuyenNhuong({ isLoading }) {
   const { id } = useParams();
   const history = useHistory();
   const [form1] = Form.useForm();
   const [form2] = Form.useForm();
   const formRef = useRef(null);
+  const [makhudatapi, setmakhudatapi] = useState(null);
   const [magiaytoForm, setMagiaytoForm] = useState(null);
   const [disabledForm1, setDisabledForm1] = useState(null);
   const [enableFormXoa, setEnableFormXoa] = useState(false);
@@ -51,16 +57,24 @@ function ThemMoiCapLai({ isLoading }) {
   const [dataGCN, setdataGCN] = useState([]);
   const [removeGCN, setRemoveGCN] = useState([]);
   const onSubmit = async (e) => {
-    const response = await createChuyenNhuong(
-      {
-        ...e,
-        magiayto: magiaytoForm,
-      },
-      dataGCN
-    );
-    if (response) {
-      toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CAP_MOI.THEM_MOI);
-      history.push(URL.THEM_MOI_CAP_LAI_ID.format(response._id));
+    if (id) {
+      const response = await editChuyenNhuong(e, dataGCN, removeGCN, id);
+      if (response) {
+        toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CHUYEN_NHUONG.EDIT);
+        setDisabled(true);
+      }
+    } else {
+      const response = await createChuyenNhuong(
+        {
+          ...e,
+          magiayto: magiaytoForm,
+        },
+        dataGCN
+      );
+      if (response) {
+        toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CAP_MOI.THEM_MOI);
+        history.push(URL.THEM_MOI_CAP_LAI_ID.format(response._id));
+      }
     }
   };
   const getAPI = async () => {
@@ -71,6 +85,7 @@ function ThemMoiCapLai({ isLoading }) {
       ngaycapcccd: formatDateForm(response.ngaycapcccd),
       ngaycapcccdnhan: formatDateForm(response.ngaycapcccdnhan),
     });
+    setmakhudatapi(response.magiayto);
   };
   useEffect(() => {
     if (id) {
@@ -80,22 +95,26 @@ function ThemMoiCapLai({ isLoading }) {
   }, [id]);
   const enableEdit = () => {
     setDisabled(false);
-  }
+  };
   const cancelEdit = () => {
     setDisabled(true);
     getAPI();
-  }
+  };
   const visibleFormXoa = () => {
     setEnableFormXoa(!enableFormXoa);
-  }
-  const handleRemove = () => {
-    
-  }
+  };
+  const handleRemove = async () => {
+    const response = await deleteChuyenNhuongByID(id);
+    if (response) {
+      toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CHUYEN_NHUONG.DELETE);
+      history.push(URL.MENU.QUAN_LY_CAP_LAI);
+    }
+  };
   return (
-    <div className="ThemMoiCapLai-container">
+    <div className="ThemMoiChuyenNhuong-container">
       <BaseContent>
         {!id && (
-          <div className="ThemMoiCapLai-parent">
+          <div className="ThemMoiChuyenNhuong-parent">
             <Form
               form={form1}
               labelCol={{
@@ -168,6 +187,7 @@ function ThemMoiCapLai({ isLoading }) {
           </div>
           <div className="div_hr"></div>
           <div className="content-body-container">
+            {makhudatapi && <span>Mã khu đất: {makhudatapi}</span>}
             <div className="header">
               <span>Hợp đồng chuyển nhượng quyền sử dụng đất</span>
             </div>
@@ -191,7 +211,7 @@ function ThemMoiCapLai({ isLoading }) {
                     <Input placeholder="Vui lòng nhập tên người sử dụng" disabled></Input>
                   </Form.Item>
                   <Form.Item
-                    label="Số CCCD"
+                    label="Số CMND / CCCD"
                     name="cccd"
                     rules={[{ required: true, message: "Không thể để trống" }, RULES.CMND]}
                   >
@@ -245,7 +265,7 @@ function ThemMoiCapLai({ isLoading }) {
                     <Input placeholder="Vui lòng nhập tên người sử dụng"></Input>
                   </Form.Item>
                   <Form.Item
-                    label="Số CCCD"
+                    label="Số CMND / CCCD"
                     name="cccdnhan"
                     rules={[{ required: true, message: "Không thể để trống" }, RULES.CMND]}
                   >
@@ -359,9 +379,8 @@ function ThemMoiCapLai({ isLoading }) {
               </Button>
             </div>
           )}
-          <DialogDeleteConfim visible={enableFormXoa} onCancel={visibleFormXoa} onOK={handleRemove}/>
+          <DialogDeleteConfim visible={enableFormXoa} onCancel={visibleFormXoa} onOK={handleRemove} />
         </Loading>
-
       </BaseContent>
     </div>
   );
@@ -371,9 +390,5 @@ function mapStateToProps(store) {
   return { isLoading };
 }
 
-export default connect(mapStateToProps)(ThemMoiCapLai);
-
-
-
-
+export default connect(mapStateToProps)(ThemMoiChuyenNhuong);
 

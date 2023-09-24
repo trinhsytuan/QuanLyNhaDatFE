@@ -215,7 +215,7 @@ export const RULES = {
     pattern: /^(0[35789]\d{8}|02\d{9}|\+84[35789]\d{8}|(\+842)\d{9})$/,
     message: "Số điện thoại bạn vừa nhập không hợp lệ",
   },
-  CMND: { required: true, pattern: "^[0-9]+$", message: "Số CMND/CCCD không hợp lệ" },
+  CMND: { required: true, pattern: "^(\\d{9}|\\d{12})$", message: "Số CMND/CCCD không hợp lệ" },
   EMAIL: { type: "email", message: "Email không hợp lệ" },
   NUMBER_FLOAT: {
     pattern: new RegExp("^[- +]?[0-9]+[.]?[0-9]*([eE][-+]?[0-9]+)?$"),
@@ -573,4 +573,6 @@ export const VI_STATUS_THAM_DINH = {
 export const TYPE_IMAGE_CAP_LAI = {
   ANH_KHU_DAT: "anh-khu-dat",
 };
+
+
 

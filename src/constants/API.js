@@ -26,6 +26,12 @@ export const API = {
   GET_PAGINATION_GIAY_TO_CAP_MOI: "/api/v1/newcertificate/getAllPagination?page={0}&limit={1}{2}",
   EDIT_CAP_MOI: "/api/v1/newcertificate/editCertificate/{0}",
   CREATE_CHUYEN_NHUONG: "/api/v1/transfer/create",
+  EDIT_CHUYEN_NHUONG_BY_ID: "/api/v1/transfer/editReCertificate/{0}",
+  DELETE_CHUYEN_NHUONG_BY_ID: "/api/v1/transfer/deleteReCeritificate/{0}",
+  GET_PAGINATION_CHUYEN_NHUONG: "/api/v1/transfer/getTableChuyenNhuong?page={0}&limit={1}{2}",
   GET_CHUYEN_NHUONG_BY_ID: "/api/v1/transfer/getById/{0}",
 };
+
+
+
 
