@@ -423,6 +423,18 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                       <Input placeholder="Nhập nguồn gốc sử dụng"></Input>
                     </Form.Item>
                   </Col>
+                  <Col className="gutter-row" span={24}>
+                    <Form.Item
+                      label="Địa chỉ thửa đất"
+                      name="diachithuadat"
+                      rules={[
+                        { required: true, message: "Địa chỉ thửa đất không thể bỏ trống!" },
+                        { validator: validateSpaceNull },
+                      ]}
+                    >
+                      <Input placeholder="Nhập địa chỉ thửa đất"></Input>
+                    </Form.Item>
+                  </Col>
                 </Row>
                 <div className="content-title">
                   Tài sản
@@ -607,5 +619,4 @@ function mapStateToProps(store) {
   return { isLoading };
 }
 export default connect(mapStateToProps)(ThemMoiThemMoiGiayTo);
-
 

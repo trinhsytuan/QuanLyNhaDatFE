@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import BaseContent from "@components/BaseContent";
 import Loading from "@components/Loading";
 import { CloseOutlined, DeleteOutlined, EditOutlined, LeftOutlined, SearchOutlined } from "@ant-design/icons";
-import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { Button, Col, DatePicker, Form, Input, Row } from "antd";
 import "./ThemMoiChuyenNhuong.scss";
 import { formatDateForm, toast, validateSpaceNull } from "@app/common/functionCommons";
@@ -162,7 +162,9 @@ function ThemMoiChuyenNhuong({ isLoading }) {
         <Loading active={isLoading}>
           <div className="title-name">
             <div className="title-left">
-              <LeftOutlined className="icon-left" />
+              <Link to={URL.MENU.QUAN_LY_CHUYEN_NHUONG}>
+                <LeftOutlined className="icon-left" />
+              </Link>
               <span>Thông tin giấy tờ / chuyển nhượng</span>
             </div>
             <div className="title-right">
