@@ -30,7 +30,9 @@ export const API = {
   DELETE_CHUYEN_NHUONG_BY_ID: "/api/v1/transfer/deleteReCeritificate/{0}",
   GET_PAGINATION_CHUYEN_NHUONG: "/api/v1/transfer/getTableChuyenNhuong?page={0}&limit={1}{2}",
   GET_CHUYEN_NHUONG_BY_ID: "/api/v1/transfer/getById/{0}",
+  CREATE_NEW_RECERTIFICATE: "/api/v1/reCertificate/create",
 };
+
 
 
 

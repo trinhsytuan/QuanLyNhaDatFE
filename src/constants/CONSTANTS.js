@@ -180,6 +180,9 @@ export const TOAST_MESSAGE = {
     DELETE: "Xoá đơn chuyển nhượng thành công",
     EDIT: "Chỉnh sửa đơn chuyển nhượng thành công",
   },
+  CAP_LAI: {
+    THEM_MOI: "Thêm mới đơn cấp lại thành công",
+  },
   USER: {
     CREATE_NEW: "Thêm mới người dùng thành công",
     EMAIL_PASSWORD: "Để đảm bảo an toàn, mật khẩu của người dùng được gửi đến email của người dùng",
@@ -573,6 +576,4 @@ export const VI_STATUS_THAM_DINH = {
 export const TYPE_IMAGE_CAP_LAI = {
   ANH_KHU_DAT: "anh-khu-dat",
 };
-
-
 

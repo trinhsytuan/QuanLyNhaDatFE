@@ -14,6 +14,7 @@ export const URL = {
     QUAN_LY_THEM_MOI: "/quan-ly-them-moi",
     THEM_MOI_CHUYEN_NHUONG: "/them-moi-chuyen-nhuong",
     QUAN_LY_CHUYEN_NHUONG: "/quan-ly-chuyen-nhuong",
+    QUAN_LY_CAP_LAI: "/quan-ly-cap-lai",
   },
   THEM_MOI_GIAY_TO_ID: "/them-moi-giay-to/{0}",
   THEM_MOI_GIAY_TO: "/them-moi-giay-to",
@@ -21,8 +22,9 @@ export const URL = {
   RESET_PASSWORD: "/reset-password",
   FORGET_PASSWORD: "/forget-password",
   THEM_MOI_CHUYEN_NHUONG_ID: "/them-moi-chuyen-nhuong/{0}",
+  THEM_MOI_CAP_LAI: "/them-moi-cap-lai",
+  THEM_MOI_CAP_LAI_ID: "/them-moi-cap-lai/{0}",
 
   DOCS_VIEWER: `https://docs.google.com/viewer?url=${window.location.origin}{0}&embedded=true`,
 };
-
 
