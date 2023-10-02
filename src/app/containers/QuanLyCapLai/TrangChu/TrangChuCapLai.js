@@ -44,8 +44,8 @@ function TrangChuCapLai({ isLoading }) {
   const getDataFilter = async () => {
     const search = queryString.parse(location.search);
     let queryStr = "";
-    queryStr += `${search.magiayto ? "&magiayto={0}".format(search.tennguoisudung) : ""}`;
-    queryStr += `${search.tennguoisudung ? "&tennguoisudung[like]={0}".format(search.diachithuongtru) : ""}`;
+    queryStr += `${search.magiayto ? "&magiayto={0}".format(search.magiayto) : ""}`;
+    queryStr += `${search.tennguoisudung ? "&tennguoisudung[like]={0}".format(search.tennguoisudung) : ""}`;
     const apiResponse = await getTableReCertificate(page, limit, queryStr);
     if (apiResponse) {
       const dataRes = apiResponse.docs;
@@ -58,7 +58,7 @@ function TrangChuCapLai({ isLoading }) {
   const dataSearch = [
     {
       name: "magiayto",
-      label: "Mã giấy tờ",
+      label: "Mã khu đất",
       type: "text",
     },
     {
@@ -163,5 +163,4 @@ function mapStateToProps(store) {
   return { isLoading };
 }
 export default connect(mapStateToProps)(TrangChuCapLai);
-
 
