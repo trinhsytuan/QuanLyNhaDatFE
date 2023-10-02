@@ -107,7 +107,7 @@ function ThemMoiChuyenNhuong({ isLoading }) {
     const response = await deleteChuyenNhuongByID(id);
     if (response) {
       toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CHUYEN_NHUONG.DELETE);
-      history.push(URL.MENU.QUAN_LY_CAP_LAI);
+      history.push(URL.MENU.QUAN_LY_CHUYEN_NHUONG);
     }
   };
   return (
