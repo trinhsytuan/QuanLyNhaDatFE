@@ -182,6 +182,8 @@ export const TOAST_MESSAGE = {
   },
   CAP_LAI: {
     THEM_MOI: "Thêm mới đơn cấp lại thành công",
+    XOA: "Xoá đơn cấp lại thành công",
+    CAP_NHAT: "Cập nhật đơn cấp lại thành công",
   },
   USER: {
     CREATE_NEW: "Thêm mới người dùng thành công",

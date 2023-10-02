@@ -31,9 +31,10 @@ export const API = {
   GET_PAGINATION_CHUYEN_NHUONG: "/api/v1/transfer/getTableChuyenNhuong?page={0}&limit={1}{2}",
   GET_CHUYEN_NHUONG_BY_ID: "/api/v1/transfer/getById/{0}",
   CREATE_NEW_RECERTIFICATE: "/api/v1/reCertificate/create",
+  GET_RECERTIFICATE_BY_ID: "/api/v1/reCertificate/getById/{0}",
+  DELETE_RECERTIFICATE_BY_ID: "/api/v1/reCertificate/deleteById/{0}",
+  EDIT_RECERTIFICATE_BY_ID: "/api/v1/reCertificate/edit/{0}",
+  GET_PAGINATION_GIAY_TO_CAP_LAI: "/api/v1/reCertificate/getPagination?page={0}&limit={1}{2}",
 };
-
-
-
 
 
