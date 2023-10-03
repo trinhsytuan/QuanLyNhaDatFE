@@ -131,7 +131,7 @@ function TrangChuCapLai({ isLoading }) {
                 dataSearch={dataSearch}
                 onFilterChange={handleRefresh}
                 buttonHeader={true}
-                labelButtonHeader={"Thêm giấy tờ mới"}
+                labelButtonHeader={"Thêm mới đơn cấp lại"}
                 handleBtnHeader={onClickThemMoi}
               />
             </div>

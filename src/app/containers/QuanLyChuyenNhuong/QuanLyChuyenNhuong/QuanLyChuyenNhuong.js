@@ -151,7 +151,7 @@ function QuanLyChuyenNhuong({ isLoading }) {
               dataSearch={dataSearch}
               onFilterChange={handleRefresh}
               buttonHeader={true}
-              labelButtonHeader={"Thêm giấy tờ mới"}
+              labelButtonHeader={"Thêm mới đơn chuyển nhượng"}
               handleBtnHeader={onClickThemMoi}
             />
           </div>
