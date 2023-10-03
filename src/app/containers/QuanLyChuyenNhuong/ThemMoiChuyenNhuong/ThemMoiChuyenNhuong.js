@@ -76,7 +76,7 @@ function ThemMoiChuyenNhuong({ isLoading }) {
       );
       if (response) {
         toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CAP_MOI.THEM_MOI);
-        history.push(URL.THEM_MOI_CAP_LAI_ID.format(response._id));
+        history.push(URL.THEM_MOI_CHUYEN_NHUONG_ID.format(response._id));
       }
     }
   };
