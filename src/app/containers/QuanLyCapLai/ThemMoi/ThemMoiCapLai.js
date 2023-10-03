@@ -14,6 +14,7 @@ import {
   deleteReCertificateByID,
   editReCertificate,
   getReCertificateById,
+  sendReCertificateToOrg,
 } from "@app/services/CapLaiGiayTo";
 import { URL } from "@url";
 import DialogDeleteConfim from "@components/DialogDeleteConfim/DialogDeleteConfim";
@@ -32,6 +33,7 @@ function ThemMoiCapLai({ isLoading }) {
   const [magiaytoForm, setMagiaytoForm] = useState(null);
   const [disabled, setDisabled] = useState(true);
   const [showDelete, setShowDelete] = useState(false);
+  const [data, setData] = useState(null);
   const formRef = useRef();
   useEffect(() => {
     if (id) {
@@ -40,6 +42,7 @@ function ThemMoiCapLai({ isLoading }) {
   }, [id]);
   const getAPI = async () => {
     const response = await getReCertificateById(id);
+    setData(response);
     if (response) {
       form2.setFieldsValue(response);
       setMagiaytoForm(response.magiayto);
@@ -98,17 +101,24 @@ function ThemMoiCapLai({ isLoading }) {
       history.push(URL.MENU.QUAN_LY_CAP_LAI);
     }
   };
+  const sendToOrg = async () => {
+    const response = await sendReCertificateToOrg(id);
+    if (response) {
+      toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CAP_MOI.SEND_KIEM_DINH);
+    }
+  };
   return (
     <>
-      {id && (
+      {id && data?.status == "pending" && (
         <div className="action-gui-duyet">
           <Button
             type="primary"
             className="button_reverse"
             icon={<ArrowRightThick />}
             style={{ backgroundColor: "#1890FF" }}
+            onClick={sendToOrg}
           >
-            Gửi duyệt
+            Gửi thẩm định
           </Button>
         </div>
       )}
@@ -173,7 +183,7 @@ function ThemMoiCapLai({ isLoading }) {
               <div className="title-right">
                 {id && (
                   <div className="btn-edit-remove">
-                    {disabled && (
+                    {disabled && data?.status == "pending" && (
                       <Button className="button-edit" icon={<EditOutlined />} onClick={handleEdit}>
                         Chỉnh sửa
                       </Button>

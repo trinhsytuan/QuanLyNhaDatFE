@@ -174,16 +174,19 @@ export const TOAST_MESSAGE = {
     DELETE: "Xoá đơn đăng ký thành công",
     EDIT: "Chỉnh sửa thông tin giấy tờ thành công",
     NOT_FOUND: "Không tồn tại mã khu đất",
+    SEND_KIEM_DINH: "Đã gửi thẩm định thành công",
   },
   CHUYEN_NHUONG: {
     THEM_MOI: "Thêm mới đơn chuyển nhượng thành công",
     DELETE: "Xoá đơn chuyển nhượng thành công",
     EDIT: "Chỉnh sửa đơn chuyển nhượng thành công",
+    SEND_KIEM_DINH: "Đã gửi thẩm định thành công",
   },
   CAP_LAI: {
     THEM_MOI: "Thêm mới đơn cấp lại thành công",
     XOA: "Xoá đơn cấp lại thành công",
     CAP_NHAT: "Cập nhật đơn cấp lại thành công",
+    SEND_KIEM_DINH: "Đã gửi thẩm định thành công",
   },
   USER: {
     CREATE_NEW: "Thêm mới người dùng thành công",
@@ -579,4 +582,6 @@ export const VI_STATUS_THAM_DINH = {
 export const TYPE_IMAGE_CAP_LAI = {
   ANH_KHU_DAT: "anh-khu-dat",
 };
+
+
 

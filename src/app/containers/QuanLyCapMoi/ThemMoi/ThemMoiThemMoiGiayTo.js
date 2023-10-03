@@ -11,7 +11,7 @@ import { CONSTANTS, RULES, TOAST_MESSAGE, TYPE_IMAGE_CAP_MOI } from "@constants"
 import { connect } from "react-redux";
 import UploadImage from "@components/UploadImage/UploadImage";
 import CustomInfo from "@components/CustomInfo/CustomInfo";
-import { createNewCapMoi, editGiayToCapMoi, getCapMoi, removeGiayToCapMoi } from "@app/services/CapMoiGiayTo";
+import { createNewCapMoi, editGiayToCapMoi, getCapMoi, removeGiayToCapMoi, sendNewCertificateToOrg } from "@app/services/CapMoiGiayTo";
 import Loading from "@components/Loading";
 import DialogDeleteConfim from "@components/DialogDeleteConfim/DialogDeleteConfim";
 import ArrowRightThick from "@components/Icons/ArrowRightThick";
@@ -34,6 +34,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
   const [disabled, onChangeDisabled] = useState(false);
   const [visibleXoa, setVisibleXoa] = useState(false);
   const [magiayto, setMagiayto] = useState(null);
+  const [data, setData] = useState(null);
   const { id } = useParams();
   useEffect(() => {
     if (id) {
@@ -50,6 +51,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
       thoihansohuu: formatDateForm(response?.thoihansohuu),
       ngaycapcccd: formatDateForm(response?.ngaycapcccd),
     });
+    setData(response);
     setMagiayto(response.magiayto);
     setHopDong(response.hopdong);
     setAnhKhuDat(response.anhkhudat);
@@ -111,18 +113,25 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
       history.push(URL.MENU.QUAN_LY_THEM_MOI);
     }
   };
+  const sendToOrg = async () => {
+    const response = await sendNewCertificateToOrg(id);
+    if (response) {
+      toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CAP_LAI.SEND_KIEM_DINH);
+    }
+  };
 
   return (
     <div>
-      {id && (
+      {id && data?.status == "pending" && (
         <div className="action-gui-duyet">
           <Button
             type="primary"
             className="button_reverse"
             icon={<ArrowRightThick />}
             style={{ backgroundColor: "#1890FF" }}
+            onClick={sendToOrg}
           >
-            Gửi duyệt
+            Gửi thẩm định
           </Button>
         </div>
       )}
@@ -137,7 +146,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
                   </Link>
                   <span>Thông tin giấy tờ / thêm mới</span>
                 </div>
-                {id && (
+                {id && data?.status == "pending" && (
                   <div className="btn-edit-remove">
                     {disabled && (
                       <Button className="button-edit" icon={<EditOutlined />} onClick={changeDisabled}>
@@ -632,5 +641,10 @@ function mapStateToProps(store) {
   return { isLoading };
 }
 export default connect(mapStateToProps)(ThemMoiThemMoiGiayTo);
+
+
+
+
+
 
 

@@ -35,6 +35,8 @@ export const API = {
   DELETE_RECERTIFICATE_BY_ID: "/api/v1/reCertificate/deleteById/{0}",
   EDIT_RECERTIFICATE_BY_ID: "/api/v1/reCertificate/edit/{0}",
   GET_PAGINATION_GIAY_TO_CAP_LAI: "/api/v1/reCertificate/getPagination?page={0}&limit={1}{2}",
+  SEND_NEWCERTIFICATE_TO_ORG: "/api/v1/newcertificate/sendCertificateToOrg/{0}",
+  SEND_TRANSFER_TO_ORG: "/api/v1/transfer/sendCertificateToOrg/{0}",
+  SEND_RECERTIFICATE_TO_ORG: "/api/v1/reCertificate/sendCertificateToOrg/{0}",
 };
-
 

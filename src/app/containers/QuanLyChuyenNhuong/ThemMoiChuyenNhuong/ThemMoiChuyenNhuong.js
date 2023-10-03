@@ -19,6 +19,7 @@ import {
   deleteChuyenNhuongByID,
   editChuyenNhuong,
   getChuyenNhuongByID,
+  sendTransferToOrg,
 } from "@app/services/ChuyenNhuong";
 import { URL } from "@url";
 import DialogDeleteConfim from "@components/DialogDeleteConfim/DialogDeleteConfim";
@@ -57,6 +58,7 @@ function ThemMoiChuyenNhuong({ isLoading }) {
   const [disabled, setDisabled] = useState(false);
   const [dataGCN, setdataGCN] = useState([]);
   const [removeGCN, setRemoveGCN] = useState([]);
+  const [data, setData] = useState(null);
   const onSubmit = async (e) => {
     if (id) {
       const response = await editChuyenNhuong(e, dataGCN, removeGCN, id);
@@ -81,6 +83,7 @@ function ThemMoiChuyenNhuong({ isLoading }) {
   const getAPI = async () => {
     const response = await getChuyenNhuongByID(id);
     setdataGCN(response.anhkhudat);
+    setData(response);
     form2.setFieldsValue({
       ...response,
       ngaycapcccd: formatDateForm(response.ngaycapcccd),
@@ -111,17 +114,24 @@ function ThemMoiChuyenNhuong({ isLoading }) {
       history.push(URL.MENU.QUAN_LY_CHUYEN_NHUONG);
     }
   };
+  const sendToOrg = async () => {
+    const response = await sendTransferToOrg(id);
+    if (response) {
+      toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CHUYEN_NHUONG.SEND_KIEM_DINH);
+    }
+  };
   return (
     <div className="ThemMoiChuyenNhuong-container">
-      {id && (
+      {id && data?.status == "pending" && (
         <div className="action-gui-duyet">
           <Button
             type="primary"
             className="button_reverse"
             icon={<ArrowRightThick />}
             style={{ backgroundColor: "#1890FF" }}
+            onClick={sendToOrg}
           >
-            Gửi duyệt
+            Gửi thẩm định
           </Button>
         </div>
       )}
@@ -181,7 +191,7 @@ function ThemMoiChuyenNhuong({ isLoading }) {
               <span>Thông tin giấy tờ / chuyển nhượng</span>
             </div>
             <div className="title-right">
-              {id && (
+              {id && data?.status == "pending" && (
                 <div className="btn-edit-remove">
                   {disabled && (
                     <Button className="button-edit" icon={<EditOutlined />} onClick={enableEdit}>
@@ -406,5 +416,4 @@ function mapStateToProps(store) {
 }
 
 export default connect(mapStateToProps)(ThemMoiChuyenNhuong);
-
 

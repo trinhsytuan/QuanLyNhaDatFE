@@ -30,4 +30,7 @@ export const deleteChuyenNhuongByID = (id) => {
 export const getTableChuyenNhuong = (page, limit, query) => {
   return getSimple(API.GET_PAGINATION_CHUYEN_NHUONG, page, limit, query);
 };
+export const sendTransferToOrg = (id) => {
+  return updateBaseFormatID(API.SEND_TRANSFER_TO_ORG, id, {});
+};
 
