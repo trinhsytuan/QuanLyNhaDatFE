@@ -22,6 +22,7 @@ import {
 } from "@app/services/ChuyenNhuong";
 import { URL } from "@url";
 import DialogDeleteConfim from "@components/DialogDeleteConfim/DialogDeleteConfim";
+import ArrowRightThick from "@components/Icons/ArrowRightThick";
 ThemMoiChuyenNhuong.propTypes = {};
 
 function ThemMoiChuyenNhuong({ isLoading }) {
@@ -112,6 +113,18 @@ function ThemMoiChuyenNhuong({ isLoading }) {
   };
   return (
     <div className="ThemMoiChuyenNhuong-container">
+      {id && (
+        <div className="action-gui-duyet">
+          <Button
+            type="primary"
+            className="button_reverse"
+            icon={<ArrowRightThick />}
+            style={{ backgroundColor: "#1890FF" }}
+          >
+            Gửi duyệt
+          </Button>
+        </div>
+      )}
       <BaseContent>
         {!id && (
           <div className="ThemMoiChuyenNhuong-parent">
@@ -393,4 +406,5 @@ function mapStateToProps(store) {
 }
 
 export default connect(mapStateToProps)(ThemMoiChuyenNhuong);
+
 

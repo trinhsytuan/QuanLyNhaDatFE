@@ -732,3 +732,34 @@ label.ant-form-item-required {
   background-color: #dfdfdf;
 }
 
+.button_reverse {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  :nth-child(1) {
+    margin-left: 5px;
+  }
+}
+
+.action-gui-duyet {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: absolute;
+  .button_reverse {
+    border: 0 !important;
+  }
+  right: 15px;
+  font-family: "NotoSans-Bold";
+  top: 5px;
+  z-index: 20;
+  margin-bottom: 20px;
+  :first-child {
+    margin-right: 10px;
+  }
+  @media screen and (max-width: 628px) {
+    display: flex;
+    position: unset;
+    margin-left: 15px;
+  }
+}

@@ -19,6 +19,8 @@ import { URL } from "@url";
 import DialogDeleteConfim from "@components/DialogDeleteConfim/DialogDeleteConfim";
 import { connect } from "react-redux";
 import Loading from "@components/Loading";
+import ArrowLeftDown from "@components/Icons/ArrowLeftDown";
+import ArrowRightThick from "@components/Icons/ArrowRightThick";
 ThemMoiCapLai.propTypes = {};
 
 function ThemMoiCapLai({ isLoading }) {
@@ -98,6 +100,18 @@ function ThemMoiCapLai({ isLoading }) {
   };
   return (
     <>
+      {id && (
+        <div className="action-gui-duyet">
+          <Button
+            type="primary"
+            className="button_reverse"
+            icon={<ArrowRightThick />}
+            style={{ backgroundColor: "#1890FF" }}
+          >
+            Gửi duyệt
+          </Button>
+        </div>
+      )}
       <Loading active={isLoading}>
         <BaseContent>
           {!id && (

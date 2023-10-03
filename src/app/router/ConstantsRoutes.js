@@ -171,7 +171,7 @@ export const ADMIN_ROUTES = [
   },
   {
     path: URL.THEM_MOI_CAP_LAI_ID.format(":id"),
-    breadcrumbName: "Thêm mới cấp lại",
+    breadcrumbName: "Chi tiết đơn cấp lại",
     component: ThemMoiCapLai,
     permission: ROLE_SYSTEM.RECEIVER,
   },

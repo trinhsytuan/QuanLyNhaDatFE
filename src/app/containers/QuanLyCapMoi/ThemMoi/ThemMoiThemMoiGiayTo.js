@@ -14,6 +14,7 @@ import CustomInfo from "@components/CustomInfo/CustomInfo";
 import { createNewCapMoi, editGiayToCapMoi, getCapMoi, removeGiayToCapMoi } from "@app/services/CapMoiGiayTo";
 import Loading from "@components/Loading";
 import DialogDeleteConfim from "@components/DialogDeleteConfim/DialogDeleteConfim";
+import ArrowRightThick from "@components/Icons/ArrowRightThick";
 ThemMoiThemMoiGiayTo.propTypes = {};
 
 function ThemMoiThemMoiGiayTo({ isLoading }) {
@@ -113,6 +114,18 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
 
   return (
     <div>
+      {id && (
+        <div className="action-gui-duyet">
+          <Button
+            type="primary"
+            className="button_reverse"
+            icon={<ArrowRightThick />}
+            style={{ backgroundColor: "#1890FF" }}
+          >
+            Gửi duyệt
+          </Button>
+        </div>
+      )}
       <Loading active={isLoading}>
         <BaseContent>
           <div className="ThemMoiGiayToTM-container">
@@ -619,4 +632,5 @@ function mapStateToProps(store) {
   return { isLoading };
 }
 export default connect(mapStateToProps)(ThemMoiThemMoiGiayTo);
+
 

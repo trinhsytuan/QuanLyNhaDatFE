@@ -17,15 +17,15 @@ export const URL = {
     QUAN_LY_CAP_LAI: "/quan-ly-cap-lai",
     TRUY_XUAT_KHU_DAT: "/truy-xuat-khu-dat",
   },
-  THEM_MOI_GIAY_TO_ID: "/them-moi-giay-to/{0}",
+  THEM_MOI_GIAY_TO_ID: "/chi-tiet-giay-to/{0}",
   THEM_MOI_GIAY_TO: "/them-moi-giay-to",
   THONG_TIN_CA_NHAN: "/thong-tin-ca-nhan",
   RESET_PASSWORD: "/reset-password",
   TRUY_XUAT_KHU_DAT_ID: "/truy-xuat-khu-dat/{0}",
   FORGET_PASSWORD: "/forget-password",
-  THEM_MOI_CHUYEN_NHUONG_ID: "/them-moi-chuyen-nhuong/{0}",
+  THEM_MOI_CHUYEN_NHUONG_ID: "/chi-tiet-chuyen-nhuong/{0}",
   THEM_MOI_CAP_LAI: "/them-moi-cap-lai",
-  THEM_MOI_CAP_LAI_ID: "/them-moi-cap-lai/{0}",
+  THEM_MOI_CAP_LAI_ID: "/chi-tiet-cap-lai/{0}",
 
   DOCS_VIEWER: `https://docs.google.com/viewer?url=${window.location.origin}{0}&embedded=true`,
 };

@@ -573,6 +573,7 @@ export const SEARCH_STATUS_THAM_DINH = [
 export const VI_STATUS_THAM_DINH = {
   accepted: "Đã thẩm định",
   pending: "Chờ thẩm định",
+  sending: "Đang gửi thẩm định",
   reject: "Từ chối thẩm định",
 };
 export const TYPE_IMAGE_CAP_LAI = {
