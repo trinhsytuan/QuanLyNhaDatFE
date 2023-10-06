@@ -11,10 +11,17 @@ import { CONSTANTS, RULES, TOAST_MESSAGE, TYPE_IMAGE_CAP_MOI } from "@constants"
 import { connect } from "react-redux";
 import UploadImage from "@components/UploadImage/UploadImage";
 import CustomInfo from "@components/CustomInfo/CustomInfo";
-import { createNewCapMoi, editGiayToCapMoi, getCapMoi, removeGiayToCapMoi, sendNewCertificateToOrg } from "@app/services/CapMoiGiayTo";
+import {
+  createNewCapMoi,
+  editGiayToCapMoi,
+  getCapMoi,
+  removeGiayToCapMoi,
+  sendNewCertificateToOrg,
+} from "@app/services/CapMoiGiayTo";
 import Loading from "@components/Loading";
 import DialogDeleteConfim from "@components/DialogDeleteConfim/DialogDeleteConfim";
 import ArrowRightThick from "@components/Icons/ArrowRightThick";
+import VerifyDigitalSignature from "@components/VerifyDigitalSignature/VerifyDigitalSignature";
 ThemMoiThemMoiGiayTo.propTypes = {};
 
 function ThemMoiThemMoiGiayTo({ isLoading }) {
@@ -35,6 +42,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
   const [visibleXoa, setVisibleXoa] = useState(false);
   const [magiayto, setMagiayto] = useState(null);
   const [data, setData] = useState(null);
+  const [showPK, setShowPK] = useState(false);
   const { id } = useParams();
   useEffect(() => {
     if (id) {
@@ -113,13 +121,16 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
       history.push(URL.MENU.QUAN_LY_THEM_MOI);
     }
   };
-  const sendToOrg = async () => {
-    const response = await sendNewCertificateToOrg(id);
+  const sendToOrg = async (e) => {
+    const response = await sendNewCertificateToOrg(id, e);
     if (response) {
       toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CAP_LAI.SEND_KIEM_DINH);
+      getAPI();
     }
   };
-
+  const showVisibleKey = (e) => {
+    setShowPK(e);
+  };
   return (
     <div>
       {id && data?.status == "pending" && (
@@ -129,7 +140,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
             className="button_reverse"
             icon={<ArrowRightThick />}
             style={{ backgroundColor: "#1890FF" }}
-            onClick={sendToOrg}
+            onClick={showVisibleKey}
           >
             Gửi thẩm định
           </Button>
@@ -633,6 +644,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
         )}
       </Loading>
       <DialogDeleteConfim visible={visibleXoa} onCancel={setChangeVisibleXoa} onOK={deleteGiayTo} />
+      <VerifyDigitalSignature visible={showPK} handleVisible={showVisibleKey} onSubmit={sendToOrg} />
     </div>
   );
 }
@@ -641,10 +653,6 @@ function mapStateToProps(store) {
   return { isLoading };
 }
 export default connect(mapStateToProps)(ThemMoiThemMoiGiayTo);
-
-
-
-
 
 
 

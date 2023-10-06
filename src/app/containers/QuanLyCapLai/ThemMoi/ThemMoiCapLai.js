@@ -22,6 +22,7 @@ import { connect } from "react-redux";
 import Loading from "@components/Loading";
 import ArrowLeftDown from "@components/Icons/ArrowLeftDown";
 import ArrowRightThick from "@components/Icons/ArrowRightThick";
+import VerifyDigitalSignature from "@components/VerifyDigitalSignature/VerifyDigitalSignature";
 ThemMoiCapLai.propTypes = {};
 
 function ThemMoiCapLai({ isLoading }) {
@@ -34,6 +35,7 @@ function ThemMoiCapLai({ isLoading }) {
   const [disabled, setDisabled] = useState(true);
   const [showDelete, setShowDelete] = useState(false);
   const [data, setData] = useState(null);
+  const [showPK, setShowPK] = useState(false);
   const formRef = useRef();
   useEffect(() => {
     if (id) {
@@ -101,10 +103,14 @@ function ThemMoiCapLai({ isLoading }) {
       history.push(URL.MENU.QUAN_LY_CAP_LAI);
     }
   };
-  const sendToOrg = async () => {
-    const response = await sendReCertificateToOrg(id);
+  const showVisibleKey = (e) => {
+    setShowPK(e);
+  };
+  const sendToOrg = async (e) => {
+    const response = await sendReCertificateToOrg(id, e);
     if (response) {
       toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CAP_MOI.SEND_KIEM_DINH);
+      getAPI();
     }
   };
   return (
@@ -116,7 +122,7 @@ function ThemMoiCapLai({ isLoading }) {
             className="button_reverse"
             icon={<ArrowRightThick />}
             style={{ backgroundColor: "#1890FF" }}
-            onClick={sendToOrg}
+            onClick={showVisibleKey}
           >
             Gửi thẩm định
           </Button>
@@ -244,6 +250,7 @@ function ThemMoiCapLai({ isLoading }) {
           )}
         </div>
         <DialogDeleteConfim visible={showDelete} onCancel={showDeleteVisible} onOK={handleDelete} />
+        <VerifyDigitalSignature visible={showPK} handleVisible={showVisibleKey} onSubmit={sendToOrg} />
       </Loading>
     </>
   );
@@ -253,4 +260,7 @@ function mapStateToProps(store) {
   return { isLoading };
 }
 export default connect(mapStateToProps)(ThemMoiCapLai);
+
+
+
 

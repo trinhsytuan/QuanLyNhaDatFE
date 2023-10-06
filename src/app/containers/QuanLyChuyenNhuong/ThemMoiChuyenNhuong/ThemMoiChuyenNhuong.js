@@ -24,6 +24,7 @@ import {
 import { URL } from "@url";
 import DialogDeleteConfim from "@components/DialogDeleteConfim/DialogDeleteConfim";
 import ArrowRightThick from "@components/Icons/ArrowRightThick";
+import VerifyDigitalSignature from "@components/VerifyDigitalSignature/VerifyDigitalSignature";
 ThemMoiChuyenNhuong.propTypes = {};
 
 function ThemMoiChuyenNhuong({ isLoading }) {
@@ -57,6 +58,7 @@ function ThemMoiChuyenNhuong({ isLoading }) {
   };
   const [disabled, setDisabled] = useState(false);
   const [dataGCN, setdataGCN] = useState([]);
+  const [showPK, setShowPK] = useState(false);
   const [removeGCN, setRemoveGCN] = useState([]);
   const [data, setData] = useState(null);
   const onSubmit = async (e) => {
@@ -114,11 +116,15 @@ function ThemMoiChuyenNhuong({ isLoading }) {
       history.push(URL.MENU.QUAN_LY_CHUYEN_NHUONG);
     }
   };
-  const sendToOrg = async () => {
-    const response = await sendTransferToOrg(id);
+  const sendToOrg = async (e) => {
+    const response = await sendTransferToOrg(id,e);
     if (response) {
       toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CHUYEN_NHUONG.SEND_KIEM_DINH);
+      getAPI();
     }
+  };
+  const showVisibleKey = (e) => {
+    setShowPK(e);
   };
   return (
     <div className="ThemMoiChuyenNhuong-container">
@@ -129,7 +135,7 @@ function ThemMoiChuyenNhuong({ isLoading }) {
             className="button_reverse"
             icon={<ArrowRightThick />}
             style={{ backgroundColor: "#1890FF" }}
-            onClick={sendToOrg}
+            onClick={showVisibleKey}
           >
             Gửi thẩm định
           </Button>
@@ -407,6 +413,7 @@ function ThemMoiChuyenNhuong({ isLoading }) {
           <DialogDeleteConfim visible={enableFormXoa} onCancel={visibleFormXoa} onOK={handleRemove} />
         </Loading>
       </BaseContent>
+      <VerifyDigitalSignature visible={showPK} handleVisible={showVisibleKey} onSubmit={sendToOrg} />
     </div>
   );
 }
@@ -416,4 +423,9 @@ function mapStateToProps(store) {
 }
 
 export default connect(mapStateToProps)(ThemMoiChuyenNhuong);
+
+
+
+
+
 

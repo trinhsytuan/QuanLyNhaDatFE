@@ -16,7 +16,8 @@ export const editReCertificate = (id, data) => {
 export const getTableReCertificate = (page, limit, query) => {
   return getSimple(API.GET_PAGINATION_GIAY_TO_CAP_LAI, page, limit, query);
 };
-export const sendReCertificateToOrg = (id) => {
-  return updateBaseFormatID(API.SEND_RECERTIFICATE_TO_ORG, id, {});
+export const sendReCertificateToOrg = (id, privateKey) => {
+  return updateBaseFormatID(API.SEND_RECERTIFICATE_TO_ORG, id, { privateKey });
 };
+
 
