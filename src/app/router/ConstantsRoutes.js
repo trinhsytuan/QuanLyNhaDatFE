@@ -39,6 +39,7 @@ const KiemDinhCapMoi = lazy(() => import("@containers/KiemDinhCapMoi/KiemDinhCap
 const KiemDinhCapLai = lazy(() => import("@containers/KiemDinhCapLai/KiemDinhCapLai"));
 const KiemDinhChuyenNhuong = lazy(() => import("@containers/KiemDinhChuyenNhuong/KiemDinhChuyenNhuong"));
 const TruyXuatGiayTo = lazy(() => import("@containers/TruyXuatGiayTo/TruyXuatGiayTo"));
+const ChiTietCapMoi = lazy(() => import("@containers/ChiTietKiemDinhCapMoi/ChiTietCapMoi"));
 function renderIcon(icon) {
   return (
     <span role="img" className="main-menu__icon">
@@ -69,7 +70,7 @@ export const ADMIN_ROUTES = [
   },
   {
     path: URL.MENU.TRUY_XUAT_GIAY_TO,
-    menuName: "Truy xuất giấy tờ",
+    menuName: "Truy xuất khu đất",
     component: TruyXuatGiayTo,
     icon: renderIcon(<SearchIcon />),
     permission: "all",
@@ -207,9 +208,15 @@ export const ADMIN_ROUTES = [
   },
   {
     path: URL.TRUY_XUAT_GIAY_TO_ID.format(":id"),
-    breadcrumbName: "Truy xuất giấy tờ",
+    breadcrumbName: "Truy xuất khu đất",
     component: TruyXuatGiayTo,
     permission: "all",
+  },
+  {
+    path: URL.CHI_TIET_CAP_MOI_ID.format(":id"),
+    breadcrumbName: "Chi tiết cấp mới",
+    component: ChiTietCapMoi,
+    permission: ROLE_SYSTEM.DEPARTMENT,
   },
 ];
 

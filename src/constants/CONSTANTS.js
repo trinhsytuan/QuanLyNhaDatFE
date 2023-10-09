@@ -587,6 +587,10 @@ export const VI_STATUS_THAM_DINH_DEPARTMENT = {
   sending: "Đang chờ thẩm định",
   reject: "Từ chối thẩm định",
 };
+export const STATUS_TD = {
+  reject: "reject",
+  accepted: "accepted",
+}
 
 
 

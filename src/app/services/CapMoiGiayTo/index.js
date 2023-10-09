@@ -28,9 +28,9 @@ export const removeGiayToCapMoi = async (id) => {
 export const getAllGiayToCapMoi = (page, limit, query = "") => {
   return getSimple(API.GET_PAGINATION_GIAY_TO_CAP_MOI, page, limit, query);
 };
-export const getAllGiayToThamDinh = (page,limit,query = "") => {
-  return getSimple(API.GET_PAGINATION_THAM_DINH_CAP_MOI, page, limit, query)
-}
+export const getAllGiayToThamDinh = (page, limit, query = "") => {
+  return getSimple(API.GET_PAGINATION_THAM_DINH_CAP_MOI, page, limit, query);
+};
 export const editGiayToCapMoi = async (
   id,
   data,
@@ -54,4 +54,7 @@ export const sendNewCertificateToOrg = (id, privateKey) => {
   return updateBaseFormatID(API.SEND_NEWCERTIFICATE_TO_ORG, id, { privateKey });
 };
 
+export const sendResultNewCertificateToOrg = (id, data) => {
+  return updateBaseFormatID(API.SEND_RESULT_THAM_DINH_NEW_CERTIFICATE_TO_ORG, id, data);
+};
 
