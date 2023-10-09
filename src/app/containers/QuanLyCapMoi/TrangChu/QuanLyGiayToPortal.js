@@ -12,6 +12,7 @@ import { SEARCH_STATUS_THAM_DINH, PAGINATION_CONFIG, VI_STATUS_THAM_DINH } from 
 import { Button, Table } from "antd";
 import { connect } from "react-redux";
 import VisibleIcon from "@components/Icons/VisibleIcon";
+import Loading from "@components/Loading";
 QuanLyGiayToPortal.propTypes = {};
 
 function QuanLyGiayToPortal({ isLoading }) {
@@ -137,41 +138,43 @@ function QuanLyGiayToPortal({ isLoading }) {
   ];
   return (
     <div>
-      <BaseContent>
-        <div className="QuanLyGiayToPortal-container">
-          <div className="header">
-            <div className="header-title">
-              <span>Quản lý giấy tờ cấp mới</span>
-            </div>
-            <SearchBar
-              dataSearch={dataSearch}
-              onFilterChange={handleRefresh}
-              buttonHeader={true}
-              labelButtonHeader={"Thêm giấy tờ mới"}
-              handleBtnHeader={onClickThemMoi}
-            />
-          </div>
-          <div className="content">
-            {!isLoading && (
-              <Table
-                bordered
-                className="table"
-                showHeader={true}
-                columns={ColumnDonVi}
-                dataSource={data}
-                scroll={{ x: 900 }}
-                pagination={{
-                  ...PAGINATION_CONFIG,
-                  current: page,
-                  pageSize: limit,
-                  total: totalDocs,
-                }}
-                onChange={onChangeTable}
+      <Loading active={isLoading}>
+        <BaseContent>
+          <div className="QuanLyGiayToPortal-container">
+            <div className="header">
+              <div className="header-title">
+                <span>Quản lý giấy tờ cấp mới</span>
+              </div>
+              <SearchBar
+                dataSearch={dataSearch}
+                onFilterChange={handleRefresh}
+                buttonHeader={true}
+                labelButtonHeader={"Thêm giấy tờ mới"}
+                handleBtnHeader={onClickThemMoi}
               />
-            )}
+            </div>
+            <div className="content">
+              {!isLoading && (
+                <Table
+                  bordered
+                  className="table"
+                  showHeader={true}
+                  columns={ColumnDonVi}
+                  dataSource={data}
+                  scroll={{ x: 900 }}
+                  pagination={{
+                    ...PAGINATION_CONFIG,
+                    current: page,
+                    pageSize: limit,
+                    total: totalDocs,
+                  }}
+                  onChange={onChangeTable}
+                />
+              )}
+            </div>
           </div>
-        </div>
-      </BaseContent>
+        </BaseContent>
+      </Loading>
     </div>
   );
 }

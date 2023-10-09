@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from 'prop-types';
-import './KiemDinhChuyenNhuong.scss';
+import PropTypes from "prop-types";
+import "./KiemDinhChuyenNhuong.scss";
 import BaseContent from "@components/BaseContent";
 import queryString, { stringify } from "query-string";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import SearchBar from "@containers/SearchBar";
 import { URL } from "@url";
 import { formatSTT, getChangeFormSearch } from "@app/common/functionCommons";
-import { SEARCH_STATUS_THAM_DINH, PAGINATION_CONFIG,  VI_STATUS_THAM_DINH_DEPARTMENT } from "@constants";
+import { SEARCH_STATUS_THAM_DINH, PAGINATION_CONFIG, VI_STATUS_THAM_DINH_DEPARTMENT } from "@constants";
 import { Button, Table } from "antd";
 import { connect } from "react-redux";
 import VisibleIcon from "@components/Icons/VisibleIcon";
-import {  getTableChuyenNhuongDepartment } from "@app/services/ChuyenNhuong";
-KiemDinhChuyenNhuong.propTypes = {
-    
-};
+import { getTableChuyenNhuongDepartment } from "@app/services/ChuyenNhuong";
+import Loading from "@components/Loading";
+KiemDinhChuyenNhuong.propTypes = {};
 
-function KiemDinhChuyenNhuong({isLoading}) {
-    const history = useHistory();
+function KiemDinhChuyenNhuong({ isLoading }) {
+  const history = useHistory();
   const [data, setData] = useState(null);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -38,9 +37,7 @@ function KiemDinhChuyenNhuong({isLoading}) {
     // queryStr += `${search.active ? "&active={0}".format(search.active) : ""}`;
     const apiResponse = await getTableChuyenNhuongDepartment(page, limit, queryStr);
     if (apiResponse) {
-
       const dataRes = apiResponse.docs;
-      console.log(dataRes);
       setData(dataRes);
       setLimit(apiResponse.limit);
       setPage(apiResponse.page);
@@ -138,40 +135,37 @@ function KiemDinhChuyenNhuong({isLoading}) {
   ];
   return (
     <div>
-      
-      <BaseContent>
-        <div className="QuanLyChuyenNhuong-container">
-          <div className="header">
-            <div className="header-title">
-              <span>Thẩm định đơn chuyển nhượng</span>
+      <Loading active={isLoading}>
+        <BaseContent>
+          <div className="QuanLyChuyenNhuong-container">
+            <div className="header">
+              <div className="header-title">
+                <span>Thẩm định đơn chuyển nhượng</span>
+              </div>
+              <SearchBar dataSearch={dataSearch} onFilterChange={handleRefresh} />
             </div>
-            <SearchBar
-              dataSearch={dataSearch}
-              onFilterChange={handleRefresh}
-             
-            />
+            <div className="content">
+              {!isLoading && (
+                <Table
+                  bordered
+                  className="table"
+                  showHeader={true}
+                  columns={ColumnDonVi}
+                  dataSource={data}
+                  scroll={{ x: 900 }}
+                  pagination={{
+                    ...PAGINATION_CONFIG,
+                    current: page,
+                    pageSize: limit,
+                    total: totalDocs,
+                  }}
+                  onChange={onChangeTable}
+                />
+              )}
+            </div>
           </div>
-          <div className="content">
-            {!isLoading && (
-              <Table
-                bordered
-                className="table"
-                showHeader={true}
-                columns={ColumnDonVi}
-                dataSource={data}
-                scroll={{ x: 900 }}
-                pagination={{
-                  ...PAGINATION_CONFIG,
-                  current: page,
-                  pageSize: limit,
-                  total: totalDocs,
-                }}
-                onChange={onChangeTable}
-              />
-            )}
-          </div>
-        </div>
-      </BaseContent>
+        </BaseContent>
+      </Loading>
     </div>
   );
 }

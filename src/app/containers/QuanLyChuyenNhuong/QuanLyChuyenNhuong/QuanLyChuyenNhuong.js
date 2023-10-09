@@ -12,6 +12,7 @@ import { Button, Table } from "antd";
 import { connect } from "react-redux";
 import VisibleIcon from "@components/Icons/VisibleIcon";
 import { getTableChuyenNhuong } from "@app/services/ChuyenNhuong";
+import Loading from "@components/Loading";
 QuanLyChuyenNhuong.propTypes = {};
 
 function QuanLyChuyenNhuong({ isLoading }) {
@@ -36,9 +37,7 @@ function QuanLyChuyenNhuong({ isLoading }) {
     // queryStr += `${search.active ? "&active={0}".format(search.active) : ""}`;
     const apiResponse = await getTableChuyenNhuong(page, limit, queryStr);
     if (apiResponse) {
-
       const dataRes = apiResponse.docs;
-      console.log(dataRes);
       setData(dataRes);
       setLimit(apiResponse.limit);
       setPage(apiResponse.page);
@@ -139,42 +138,43 @@ function QuanLyChuyenNhuong({ isLoading }) {
   ];
   return (
     <div>
-      
-      <BaseContent>
-        <div className="QuanLyChuyenNhuong-container">
-          <div className="header">
-            <div className="header-title">
-              <span>Quản lý yêu cầu chuyển nhượng</span>
-            </div>
-            <SearchBar
-              dataSearch={dataSearch}
-              onFilterChange={handleRefresh}
-              buttonHeader={true}
-              labelButtonHeader={"Thêm mới đơn chuyển nhượng"}
-              handleBtnHeader={onClickThemMoi}
-            />
-          </div>
-          <div className="content">
-            {!isLoading && (
-              <Table
-                bordered
-                className="table"
-                showHeader={true}
-                columns={ColumnDonVi}
-                dataSource={data}
-                scroll={{ x: 900 }}
-                pagination={{
-                  ...PAGINATION_CONFIG,
-                  current: page,
-                  pageSize: limit,
-                  total: totalDocs,
-                }}
-                onChange={onChangeTable}
+      <Loading active={isLoading}>
+        <BaseContent>
+          <div className="QuanLyChuyenNhuong-container">
+            <div className="header">
+              <div className="header-title">
+                <span>Quản lý yêu cầu chuyển nhượng</span>
+              </div>
+              <SearchBar
+                dataSearch={dataSearch}
+                onFilterChange={handleRefresh}
+                buttonHeader={true}
+                labelButtonHeader={"Thêm mới đơn chuyển nhượng"}
+                handleBtnHeader={onClickThemMoi}
               />
-            )}
+            </div>
+            <div className="content">
+              {!isLoading && (
+                <Table
+                  bordered
+                  className="table"
+                  showHeader={true}
+                  columns={ColumnDonVi}
+                  dataSource={data}
+                  scroll={{ x: 900 }}
+                  pagination={{
+                    ...PAGINATION_CONFIG,
+                    current: page,
+                    pageSize: limit,
+                    total: totalDocs,
+                  }}
+                  onChange={onChangeTable}
+                />
+              )}
+            </div>
           </div>
-        </div>
-      </BaseContent>
+        </BaseContent>
+      </Loading>
     </div>
   );
 }
@@ -183,13 +183,4 @@ function mapStateToProps(store) {
   return { isLoading };
 }
 export default connect(mapStateToProps)(QuanLyChuyenNhuong);
-
-
-
-
-
-
-
-
-
 

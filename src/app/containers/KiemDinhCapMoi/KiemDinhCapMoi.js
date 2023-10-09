@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from 'prop-types';
-import './KiemDinhCapMoi.scss';
+import PropTypes from "prop-types";
+import "./KiemDinhCapMoi.scss";
 import BaseContent from "@components/BaseContent";
 import queryString, { stringify } from "query-string";
-import {  getAllGiayToThamDinh } from "@app/services/CapMoiGiayTo";
+import { getAllGiayToThamDinh } from "@app/services/CapMoiGiayTo";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import SearchBar from "@containers/SearchBar";
 import { URL } from "@url";
@@ -12,12 +12,11 @@ import { SEARCH_STATUS_THAM_DINH, PAGINATION_CONFIG, VI_STATUS_THAM_DINH_DEPARTM
 import { Button, Table } from "antd";
 import { connect } from "react-redux";
 import VisibleIcon from "@components/Icons/VisibleIcon";
-KiemDinhCapMoi.propTypes = {
-    
-};
+import Loading from "@components/Loading";
+KiemDinhCapMoi.propTypes = {};
 
-function KiemDinhCapMoi({isLoading}) {
-   const history = useHistory();
+function KiemDinhCapMoi({ isLoading }) {
+  const history = useHistory();
   const [data, setData] = useState(null);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -136,38 +135,37 @@ function KiemDinhCapMoi({isLoading}) {
   ];
   return (
     <div>
-      <BaseContent>
-        <div className="QuanLyGiayToPortal-container">
-          <div className="header">
-            <div className="header-title">
-              <span>Thẩm định đơn cấp mới</span>
+      <Loading active={isLoading}>
+        <BaseContent>
+          <div className="QuanLyGiayToPortal-container">
+            <div className="header">
+              <div className="header-title">
+                <span>Thẩm định đơn cấp mới</span>
+              </div>
+              <SearchBar dataSearch={dataSearch} onFilterChange={handleRefresh} />
             </div>
-            <SearchBar
-              dataSearch={dataSearch}
-              onFilterChange={handleRefresh}
-            />
+            <div className="content">
+              {!isLoading && (
+                <Table
+                  bordered
+                  className="table"
+                  showHeader={true}
+                  columns={ColumnDonVi}
+                  dataSource={data}
+                  scroll={{ x: 900 }}
+                  pagination={{
+                    ...PAGINATION_CONFIG,
+                    current: page,
+                    pageSize: limit,
+                    total: totalDocs,
+                  }}
+                  onChange={onChangeTable}
+                />
+              )}
+            </div>
           </div>
-          <div className="content">
-            {!isLoading && (
-              <Table
-                bordered
-                className="table"
-                showHeader={true}
-                columns={ColumnDonVi}
-                dataSource={data}
-                scroll={{ x: 900 }}
-                pagination={{
-                  ...PAGINATION_CONFIG,
-                  current: page,
-                  pageSize: limit,
-                  total: totalDocs,
-                }}
-                onChange={onChangeTable}
-              />
-            )}
-          </div>
-        </div>
-      </BaseContent>
+        </BaseContent>
+      </Loading>
     </div>
   );
 }
