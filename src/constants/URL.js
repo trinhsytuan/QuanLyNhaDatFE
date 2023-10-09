@@ -35,7 +35,7 @@ export const URL = {
   TRUY_XUAT_GIAY_TO_ID: "/truy-xuat-khu-dat/{0}",
 
   THEM_MOI_CAP_LAI_ID: "/chi-tiet-cap-lai/{0}",
-
+  TRANSACTION_ID: "http://94.237.68.63:8080/?tab=transactions&transId={0}",
   DOCS_VIEWER: `https://docs.google.com/viewer?url=${window.location.origin}{0}&embedded=true`,
 };
 

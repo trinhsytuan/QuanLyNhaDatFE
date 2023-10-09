@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import "./TruyXuatGiayTo.scss";
 import { connect } from "react-redux";
-import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import BaseContent from "@components/BaseContent";
 import NOT_FOUND_PRODUCT from "@assets/icons/not-found-product.svg";
 import Loading from "@components/Loading";
@@ -85,7 +85,14 @@ function TruyXuatGiayTo({ isLoading }) {
             </div>
           </div>
         )}
-        {isSubmit == true && data != null && <div>Khu đất ok, code ở đây</div>}
+        {isSubmit == true && data != null && (
+          <div>
+            Khu đất ok, code ở đây{" "}
+            <a href={URL.TRANSACTION_ID.format(data.txtId)} target="_blank" className="aBlod">
+              Link blockchain
+            </a>
+          </div>
+        )}
       </BaseContent>
     </Loading>
   );
