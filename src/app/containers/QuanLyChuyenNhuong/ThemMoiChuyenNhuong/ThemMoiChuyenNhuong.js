@@ -25,6 +25,7 @@ import { URL } from "@url";
 import DialogDeleteConfim from "@components/DialogDeleteConfim/DialogDeleteConfim";
 import ArrowRightThick from "@components/Icons/ArrowRightThick";
 import VerifyDigitalSignature from "@components/VerifyDigitalSignature/VerifyDigitalSignature";
+import { getLand } from "@app/services/TruyXuat";
 ThemMoiChuyenNhuong.propTypes = {};
 
 function ThemMoiChuyenNhuong({ isLoading }) {
@@ -83,7 +84,7 @@ function ThemMoiChuyenNhuong({ isLoading }) {
     }
   };
   const getAPI = async () => {
-    const response = await getChuyenNhuongByID(id);
+    const response = await getLand(id);
     setdataGCN(response.anhkhudat);
     setData(response);
     form2.setFieldsValue({
@@ -123,8 +124,8 @@ function ThemMoiChuyenNhuong({ isLoading }) {
       getAPI();
     }
   };
-  const showVisibleKey = (e) => {
-    setShowPK(e);
+  const showVisibleKey = () => {
+    setShowPK(!showPK);
   };
   return (
     <div className="ThemMoiChuyenNhuong-container">

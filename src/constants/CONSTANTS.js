@@ -175,6 +175,7 @@ export const TOAST_MESSAGE = {
     EDIT: "Chỉnh sửa thông tin giấy tờ thành công",
     NOT_FOUND: "Không tồn tại mã khu đất",
     SEND_KIEM_DINH: "Đã gửi thẩm định thành công",
+    RESPONSE_KIEM_DINH: "Phản hồi kết quả thành công",
   },
   CHUYEN_NHUONG: {
     THEM_MOI: "Thêm mới đơn chuyển nhượng thành công",
@@ -187,6 +188,7 @@ export const TOAST_MESSAGE = {
     XOA: "Xoá đơn cấp lại thành công",
     CAP_NHAT: "Cập nhật đơn cấp lại thành công",
     SEND_KIEM_DINH: "Đã gửi thẩm định thành công",
+    RESPONSE_KIEM_DINH: "Phản hồi kết quả thành công",
   },
   USER: {
     CREATE_NEW: "Thêm mới người dùng thành công",
@@ -590,7 +592,8 @@ export const VI_STATUS_THAM_DINH_DEPARTMENT = {
 export const STATUS_TD = {
   reject: "reject",
   accepted: "accepted",
-}
-
+  pending: "pending",
+  sending: "sending",
+};
 
 

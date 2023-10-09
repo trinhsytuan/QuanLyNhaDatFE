@@ -23,6 +23,7 @@ import Loading from "@components/Loading";
 import ArrowLeftDown from "@components/Icons/ArrowLeftDown";
 import ArrowRightThick from "@components/Icons/ArrowRightThick";
 import VerifyDigitalSignature from "@components/VerifyDigitalSignature/VerifyDigitalSignature";
+import { getLand } from "@app/services/TruyXuat";
 ThemMoiCapLai.propTypes = {};
 
 function ThemMoiCapLai({ isLoading }) {
@@ -60,7 +61,7 @@ function ThemMoiCapLai({ isLoading }) {
       form2.resetFields();
       setMagiaytoForm(null);
     } else {
-      const response = await getByMaGiayTo(e.code);
+      const response = await getLand(e.code);
       if (response) {
         form2.setFieldsValue({
           ...response,
@@ -103,8 +104,8 @@ function ThemMoiCapLai({ isLoading }) {
       history.push(URL.MENU.QUAN_LY_CAP_LAI);
     }
   };
-  const showVisibleKey = (e) => {
-    setShowPK(e);
+  const showVisibleKey = () => {
+    setShowPK(!showPK);
   };
   const sendToOrg = async (e) => {
     const response = await sendReCertificateToOrg(id, e);
@@ -260,6 +261,7 @@ function mapStateToProps(store) {
   return { isLoading };
 }
 export default connect(mapStateToProps)(ThemMoiCapLai);
+
 
 
 

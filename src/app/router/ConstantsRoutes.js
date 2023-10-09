@@ -40,6 +40,7 @@ const KiemDinhCapLai = lazy(() => import("@containers/KiemDinhCapLai/KiemDinhCap
 const KiemDinhChuyenNhuong = lazy(() => import("@containers/KiemDinhChuyenNhuong/KiemDinhChuyenNhuong"));
 const TruyXuatGiayTo = lazy(() => import("@containers/TruyXuatGiayTo/TruyXuatGiayTo"));
 const ChiTietCapMoi = lazy(() => import("@containers/ChiTietKiemDinhCapMoi/ChiTietCapMoi"));
+const ChiTietCapLai = lazy(() => import("@containers/ChiTietKiemDinhCapLai/ChiTietCapLai"));
 function renderIcon(icon) {
   return (
     <span role="img" className="main-menu__icon">
@@ -216,6 +217,12 @@ export const ADMIN_ROUTES = [
     path: URL.CHI_TIET_CAP_MOI_ID.format(":id"),
     breadcrumbName: "Chi tiết cấp mới",
     component: ChiTietCapMoi,
+    permission: ROLE_SYSTEM.DEPARTMENT,
+  },
+  {
+    path: URL.CHI_TIET_CAP_LAI_ID.format(":id"),
+    breadcrumbName: "Chi tiết cấp lại",
+    component: ChiTietCapLai,
     permission: ROLE_SYSTEM.DEPARTMENT,
   },
 ];

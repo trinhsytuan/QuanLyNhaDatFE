@@ -42,6 +42,7 @@ export const API = {
   SEND_TRANSFER_TO_ORG: "/api/v1/transfer/sendCertificateToOrg/{0}",
   SEND_RECERTIFICATE_TO_ORG: "/api/v1/reCertificate/sendCertificateToOrg/{0}",
   SEND_RESULT_THAM_DINH_NEW_CERTIFICATE_TO_ORG: "/api/v1/newcertificate/sendResultThamDinh/{0}",
+  SEND_RESULT_THAM_DINH_RECERTIFICATE_TO_ORG: "/api/v1/reCertificate/sendResultToUser/{0}",
   GET_LAND: "/api/v1/land/getLand/{0}",
 };
 

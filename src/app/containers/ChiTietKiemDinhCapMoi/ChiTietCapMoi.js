@@ -13,7 +13,14 @@ import ArrowRightThick from "@components/Icons/ArrowRightThick";
 import Loading from "@components/Loading";
 import UploadImage from "@components/UploadImage/UploadImage";
 import VerifyDigitalSignature from "@components/VerifyDigitalSignature/VerifyDigitalSignature";
-import { CONSTANTS, RULES, TOAST_MESSAGE, TYPE_IMAGE_CAP_MOI, VI_STATUS_THAM_DINH_DEPARTMENT } from "@constants";
+import {
+  CONSTANTS,
+  RULES,
+  STATUS_TD,
+  TOAST_MESSAGE,
+  TYPE_IMAGE_CAP_MOI,
+  VI_STATUS_THAM_DINH_DEPARTMENT,
+} from "@constants";
 import { URL } from "@url";
 import { Button, Checkbox, Col, DatePicker, Form, Input, Row, Tooltip } from "antd";
 import React, { useEffect, useRef, useState } from "react";
@@ -108,7 +115,7 @@ function ChiTietCapMoi({ isLoading }) {
       private_key: e,
     });
     if (response) {
-      toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CAP_LAI.SEND_KIEM_DINH);
+      toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CAP_MOI.RESPONSE_KIEM_DINH);
       getAPI();
     }
   };
@@ -125,7 +132,7 @@ function ChiTietCapMoi({ isLoading }) {
   };
   return (
     <div>
-      {id && data?.status == "sending" && (
+      {id && data?.status == STATUS_TD.sending && (
         <div className="action-gui-duyet">
           <Button
             type="primary"

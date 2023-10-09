@@ -27,7 +27,7 @@ function SendResultToUser({ visible, onCancel, onFinish }) {
         width={700}
         form={form}
         className="modal-gui-kq"
-        onCancel={onSubmit}
+        onCancel={onCancel}
       >
         <Form
           name="basic"
@@ -43,7 +43,7 @@ function SendResultToUser({ visible, onCancel, onFinish }) {
           initialValues={{
             remember: true,
           }}
-          onFinish={onFinish}
+          onFinish={onSubmit}
         >
           <Form.Item
             name="status"
@@ -89,4 +89,6 @@ function SendResultToUser({ visible, onCancel, onFinish }) {
 }
 
 export default SendResultToUser;
+
+
 

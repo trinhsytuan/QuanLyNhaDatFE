@@ -23,3 +23,7 @@ export const getTableReCertificateDepartment = (page, limit, query) => {
   return getSimple(API.GET_PAGINATION_THAM_DINH_CAP_LAI, page, limit, query);
 };
 
+export const sendResultReCertificateToOrg = (id, data) => {
+  return updateBaseFormatID(API.SEND_RESULT_THAM_DINH_RECERTIFICATE_TO_ORG, id, data);
+};
+

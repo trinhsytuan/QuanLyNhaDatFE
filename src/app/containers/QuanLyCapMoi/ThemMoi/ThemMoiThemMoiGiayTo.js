@@ -128,8 +128,8 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
       getAPI();
     }
   };
-  const showVisibleKey = (e) => {
-    setShowPK(e);
+  const showVisibleKey = () => {
+    setShowPK(!showPK);
   };
   return (
     <div>
