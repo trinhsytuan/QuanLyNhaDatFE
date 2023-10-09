@@ -19,6 +19,7 @@ export const URL = {
     KIEM_DINH_CAP_LAI: "/kiem-dinh-cap-lai",
     KIEM_DINH_CHUYEN_NHUONG: "/kiem-dinh-chuyen-nhuong",
     TRUY_XUAT_KHU_DAT: "/truy-xuat-khu-dat",
+    TRUY_XUAT_GIAY_TO: "/truy-xuat-giay-to",
   },
   THEM_MOI_GIAY_TO_ID: "/chi-tiet-giay-to/{0}",
   THEM_MOI_GIAY_TO: "/them-moi-giay-to",
@@ -31,6 +32,7 @@ export const URL = {
   CHI_TIET_CAP_MOI_ID: "/chi-tiet-cap-moi/{0}",
   CHI_TIET_CAP_LAI_ID: "/chi-tiet-cap-lai/{0}",
   CHI_TIET_CHUYEN_NHUONG_ID: "/chi-tiet-chuyen-nhuong/{0}",
+  TRUY_XUAT_GIAY_TO_ID: "/truy-xuat-giay-to/{0}",
 
   THEM_MOI_CAP_LAI_ID: "/chi-tiet-cap-lai/{0}",
 

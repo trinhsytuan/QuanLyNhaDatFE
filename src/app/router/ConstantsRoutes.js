@@ -18,6 +18,7 @@ import resources from "@app/rbac/resources";
 import actions from "@app/rbac/actions";
 import { ROLE_SYSTEM } from "@constants";
 import { ROLE } from "@components/Notification/NotificationPayLoadType";
+import SearchIcon from "@components/Icons/SearchIcon";
 
 const MyInfo = lazy(() => import("@containers/MyInfo/MyInfo"));
 const TrangChu = lazy(() => import("@containers/TrangChu/TrangChu"));
@@ -37,6 +38,7 @@ const ThemMoiCapLai = lazy(() => import("@containers/QuanLyCapLai/ThemMoi/ThemMo
 const KiemDinhCapMoi = lazy(() => import("@containers/KiemDinhCapMoi/KiemDinhCapMoi"));
 const KiemDinhCapLai = lazy(() => import("@containers/KiemDinhCapLai/KiemDinhCapLai"));
 const KiemDinhChuyenNhuong = lazy(() => import("@containers/KiemDinhChuyenNhuong/KiemDinhChuyenNhuong"));
+const TruyXuatGiayTo = lazy(() => import("@containers/TruyXuatGiayTo/TruyXuatGiayTo"));
 function renderIcon(icon) {
   return (
     <span role="img" className="main-menu__icon">
@@ -63,6 +65,13 @@ export const ADMIN_ROUTES = [
     menuName: "Trang chủ",
     component: TrangChu,
     icon: renderIcon(<HomeIcon />),
+    permission: "all",
+  },
+  {
+    path: URL.MENU.TRUY_XUAT_GIAY_TO,
+    menuName: "Truy xuất giấy tờ",
+    component: TruyXuatGiayTo,
+    icon: renderIcon(<SearchIcon />),
     permission: "all",
   },
   {
@@ -195,6 +204,12 @@ export const ADMIN_ROUTES = [
     breadcrumbName: "Chi tiết đơn cấp lại",
     component: ThemMoiCapLai,
     permission: ROLE_SYSTEM.RECEIVER,
+  },
+  {
+    path: URL.TRUY_XUAT_GIAY_TO_ID.format(":id"),
+    breadcrumbName: "Truy xuất giấy tờ",
+    component: TruyXuatGiayTo,
+    permission: "all",
   },
 ];
 
