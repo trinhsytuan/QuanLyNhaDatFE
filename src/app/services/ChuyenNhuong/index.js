@@ -33,5 +33,8 @@ export const getTableChuyenNhuong = (page, limit, query) => {
 export const sendTransferToOrg = (id, privateKey) => {
   return updateBaseFormatID(API.SEND_TRANSFER_TO_ORG, id, { privateKey });
 };
+export const getTableChuyenNhuongDepartment = (page, limit, query) => {
+  return getSimple(API.GET_PAGINATION_THAM_DINH_CHUYEN_NHUONG, page, limit, query);
+};
 
 

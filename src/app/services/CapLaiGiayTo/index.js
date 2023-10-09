@@ -19,5 +19,7 @@ export const getTableReCertificate = (page, limit, query) => {
 export const sendReCertificateToOrg = (id, privateKey) => {
   return updateBaseFormatID(API.SEND_RECERTIFICATE_TO_ORG, id, { privateKey });
 };
-
+export const getTableReCertificateDepartment = (page, limit, query) => {
+  return getSimple(API.GET_PAGINATION_THAM_DINH_CAP_LAI, page, limit, query);
+};
 

@@ -15,6 +15,9 @@ export const URL = {
     THEM_MOI_CHUYEN_NHUONG: "/them-moi-chuyen-nhuong",
     QUAN_LY_CHUYEN_NHUONG: "/quan-ly-chuyen-nhuong",
     QUAN_LY_CAP_LAI: "/quan-ly-cap-lai",
+    KIEM_DINH_CAP_MOI: "/kiem-dinh-cap-moi",
+    KIEM_DINH_CAP_LAI: "/kiem-dinh-cap-lai",
+    KIEM_DINH_CHUYEN_NHUONG: "/kiem-dinh-chuyen-nhuong",
     TRUY_XUAT_KHU_DAT: "/truy-xuat-khu-dat",
   },
   THEM_MOI_GIAY_TO_ID: "/chi-tiet-giay-to/{0}",
@@ -25,6 +28,10 @@ export const URL = {
   FORGET_PASSWORD: "/forget-password",
   THEM_MOI_CHUYEN_NHUONG_ID: "/chi-tiet-chuyen-nhuong/{0}",
   THEM_MOI_CAP_LAI: "/them-moi-cap-lai",
+  CHI_TIET_CAP_MOI_ID: "/chi-tiet-cap-moi/{0}",
+  CHI_TIET_CAP_LAI_ID: "/chi-tiet-cap-lai/{0}",
+  CHI_TIET_CHUYEN_NHUONG_ID: "/chi-tiet-chuyen-nhuong/{0}",
+
   THEM_MOI_CAP_LAI_ID: "/chi-tiet-cap-lai/{0}",
 
   DOCS_VIEWER: `https://docs.google.com/viewer?url=${window.location.origin}{0}&embedded=true`,

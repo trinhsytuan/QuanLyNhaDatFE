@@ -152,7 +152,7 @@ function QuanLyGiayToPortal({ isLoading }) {
             />
           </div>
           <div className="content">
-            {data && !isLoading && (
+            {!isLoading && (
               <Table
                 bordered
                 className="table"

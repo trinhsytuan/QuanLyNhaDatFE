@@ -34,6 +34,9 @@ const CapLaiGiayTo = lazy(() => import("@containers/QuanLyChuyenNhuong/ThemMoiCh
 const PortalCapLai = lazy(() => import("@containers/QuanLyChuyenNhuong/QuanLyChuyenNhuong/QuanLyChuyenNhuong"));
 const QLCapLai = lazy(() => import("@containers/QuanLyCapLai/TrangChu/TrangChuCapLai"));
 const ThemMoiCapLai = lazy(() => import("@containers/QuanLyCapLai/ThemMoi/ThemMoiCapLai"));
+const KiemDinhCapMoi = lazy(() => import("@containers/KiemDinhCapMoi/KiemDinhCapMoi"));
+const KiemDinhCapLai = lazy(() => import("@containers/KiemDinhCapLai/KiemDinhCapLai"));
+const KiemDinhChuyenNhuong = lazy(() => import("@containers/KiemDinhChuyenNhuong/KiemDinhChuyenNhuong"));
 function renderIcon(icon) {
   return (
     <span role="img" className="main-menu__icon">
@@ -92,7 +95,7 @@ export const ADMIN_ROUTES = [
     key: URL.MENU.DANH_MUC,
     menuName: "Danh mục",
     icon: renderIcon(<ListIcon />),
-    permission: [ROLE_SYSTEM.SYSTEM, ROLE_SYSTEM.RECEIVER],
+    permission: [ROLE_SYSTEM.SYSTEM, ROLE_SYSTEM.RECEIVER, ROLE_SYSTEM.DEPARTMENT],
     children: [
       {
         path: URL.MENU.QUAN_LY_TO_CHUC,
@@ -117,6 +120,24 @@ export const ADMIN_ROUTES = [
         menuName: "Quản lý cấp lại",
         component: QLCapLai,
         permission: ROLE_SYSTEM.RECEIVER,
+      },
+      {
+        path: URL.MENU.KIEM_DINH_CAP_MOI,
+        menuName: "Thẩm định cấp mới",
+        component: KiemDinhCapMoi,
+        permission: ROLE_SYSTEM.DEPARTMENT,
+      },
+      {
+        path: URL.MENU.KIEM_DINH_CAP_LAI,
+        menuName: "Thẩm định cấp lại",
+        component: KiemDinhCapLai,
+        permission: ROLE_SYSTEM.DEPARTMENT,
+      },
+      {
+        path: URL.MENU.KIEM_DINH_CHUYEN_NHUONG,
+        menuName: "Thẩm định chuyển nhượng",
+        component: KiemDinhChuyenNhuong,
+        permission: ROLE_SYSTEM.DEPARTMENT,
       },
     ],
   },

@@ -12,7 +12,6 @@ import { Button, Table } from "antd";
 import { connect } from "react-redux";
 import VisibleIcon from "@components/Icons/VisibleIcon";
 import { getTableChuyenNhuong } from "@app/services/ChuyenNhuong";
-import ArrowRightThick from "@components/Icons/ArrowRightThick";
 QuanLyChuyenNhuong.propTypes = {};
 
 function QuanLyChuyenNhuong({ isLoading }) {
@@ -156,7 +155,7 @@ function QuanLyChuyenNhuong({ isLoading }) {
             />
           </div>
           <div className="content">
-            {data && !isLoading && (
+            {!isLoading && (
               <Table
                 bordered
                 className="table"

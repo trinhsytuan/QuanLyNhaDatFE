@@ -582,6 +582,11 @@ export const VI_STATUS_THAM_DINH = {
 export const TYPE_IMAGE_CAP_LAI = {
   ANH_KHU_DAT: "anh-khu-dat",
 };
+export const VI_STATUS_THAM_DINH_DEPARTMENT = {
+  accepted: "Đã thẩm định",
+  sending: "Đang chờ thẩm định",
+  reject: "Từ chối thẩm định",
+};
 
 
 

@@ -135,7 +135,7 @@ function TrangChuCapLai({ isLoading }) {
                 handleBtnHeader={onClickThemMoi}
               />
             </div>
-            {data && !isLoading && (
+            {!isLoading && (
               <Table
                 bordered
                 className="table"
