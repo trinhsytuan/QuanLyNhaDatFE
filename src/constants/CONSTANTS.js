@@ -183,6 +183,10 @@ export const TOAST_MESSAGE = {
     EDIT: "Chỉnh sửa đơn chuyển nhượng thành công",
     SEND_KIEM_DINH: "Đã gửi thẩm định thành công",
   },
+  FILE: {
+    NOT_ACCEPT_EXTENSION: "Định dạng file không hợp lệ, chỉ chấp nhận file có đuôi (.pem,.cer,.txt)",
+    NOT_FOUND_KEY: "Bạn cần nhập khoá hoặc chọn file khoá của mình",
+  },
   CAP_LAI: {
     THEM_MOI: "Thêm mới đơn cấp lại thành công",
     XOA: "Xoá đơn cấp lại thành công",
@@ -595,5 +599,4 @@ export const STATUS_TD = {
   pending: "pending",
   sending: "sending",
 };
-
 
