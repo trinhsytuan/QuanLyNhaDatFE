@@ -106,7 +106,7 @@ function ChiTietCapMoi({ isLoading }) {
             <div className="header">
               <div className="header-left">
                 <div className="info-left-header">
-                  <Link to={URL.MENU.QUAN_LY_THEM_MOI}>
+                  <Link to={URL.MENU.KIEM_DINH_CAP_MOI}>
                     <LeftOutlined className="left-out"></LeftOutlined>
                   </Link>
                   <span>Thông tin giấy tờ / thêm mới</span>

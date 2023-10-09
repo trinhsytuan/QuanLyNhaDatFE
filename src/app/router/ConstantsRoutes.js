@@ -41,6 +41,7 @@ const KiemDinhChuyenNhuong = lazy(() => import("@containers/KiemDinhChuyenNhuong
 const TruyXuatGiayTo = lazy(() => import("@containers/TruyXuatGiayTo/TruyXuatGiayTo"));
 const ChiTietCapMoi = lazy(() => import("@containers/ChiTietKiemDinhCapMoi/ChiTietCapMoi"));
 const ChiTietCapLai = lazy(() => import("@containers/ChiTietKiemDinhCapLai/ChiTietCapLai"));
+const ChiTietChuyenNhuongKiemDinh = lazy(() => import("@containers/ChiTietKiemDinhChuyenNhuong/KiemDinhChuyenNhuong"));
 function renderIcon(icon) {
   return (
     <span role="img" className="main-menu__icon">
@@ -223,6 +224,12 @@ export const ADMIN_ROUTES = [
     path: URL.CHI_TIET_CAP_LAI_ID.format(":id"),
     breadcrumbName: "Chi tiết cấp lại",
     component: ChiTietCapLai,
+    permission: ROLE_SYSTEM.DEPARTMENT,
+  },
+  {
+    path: URL.CHI_TIET_CHUYEN_NHUONG_ID.format(":id"),
+    breadcrumbName: "Chi tiết đơn chuyển nhượng",
+    component: ChiTietChuyenNhuongKiemDinh,
     permission: ROLE_SYSTEM.DEPARTMENT,
   },
 ];

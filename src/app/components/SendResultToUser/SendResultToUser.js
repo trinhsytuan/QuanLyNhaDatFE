@@ -15,9 +15,13 @@ function SendResultToUser({ visible, onCancel, onFinish }) {
     else setShowReject(false);
   };
   const onSubmit = (e) => {
-    form.resetFields();
     onFinish(e);
+    form.resetFields();
   };
+  const handleCancel = () => {
+    form.resetFields();
+    onCancel()
+  }
   return (
     <div>
       <Modal
@@ -25,12 +29,12 @@ function SendResultToUser({ visible, onCancel, onFinish }) {
         title={"Gửi kết quả"}
         footer={null}
         width={700}
-        form={form}
         className="modal-gui-kq"
-        onCancel={onCancel}
+        onCancel={handleCancel}
       >
         <Form
           name="basic"
+          form={form}
           labelCol={{
             span: 8,
           }}
@@ -75,7 +79,7 @@ function SendResultToUser({ visible, onCancel, onFinish }) {
             </Form.Item>
           )}
           <div className="footer-form">
-            <Button className="btn-cancel-custom btn-cl" onClick={onCancel}>
+            <Button className="btn-cancel-custom btn-cl" onClick={handleCancel}>
               Huỷ
             </Button>
             <Button type="primary" htmlType="submit" className="btn-send-result">

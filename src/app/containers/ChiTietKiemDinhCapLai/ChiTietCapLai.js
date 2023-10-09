@@ -81,7 +81,9 @@ function ChiTietCapLai({ isLoading }) {
           <div className="ThemMoiCapLaiTD-Container">
             <div className="title">
               <div className="title-left">
-                <LeftOutlined style={{ marginRight: "10px" }}></LeftOutlined>
+                <Link to={URL.MENU.KIEM_DINH_CAP_LAI}>
+                  <LeftOutlined style={{ marginRight: "10px" }}></LeftOutlined>
+                </Link>
                 <span>Thông tin cấp lại</span>
                 <div className={`action-dv color-status-${data?.status}`}>
                   <span>{VI_STATUS_THAM_DINH_DEPARTMENT[data?.status]}</span>
@@ -127,5 +129,6 @@ function mapStateToProps(store) {
   return { isLoading };
 }
 export default connect(mapStateToProps)(ChiTietCapLai);
+
 
 

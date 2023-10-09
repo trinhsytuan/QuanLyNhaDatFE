@@ -44,7 +44,7 @@ function ThemMoiChuyenNhuong({ isLoading }) {
       form2.resetFields();
       setMagiaytoForm(null);
     } else {
-      const response = await getByMaGiayTo(e.code);
+      const response = await getLand(e.code);
       if (response) {
         form2.setFieldsValue({
           ...response,
@@ -84,7 +84,7 @@ function ThemMoiChuyenNhuong({ isLoading }) {
     }
   };
   const getAPI = async () => {
-    const response = await getLand(id);
+    const response = await getChuyenNhuongByID(id);
     setdataGCN(response.anhkhudat);
     setData(response);
     form2.setFieldsValue({
@@ -118,7 +118,7 @@ function ThemMoiChuyenNhuong({ isLoading }) {
     }
   };
   const sendToOrg = async (e) => {
-    const response = await sendTransferToOrg(id,e);
+    const response = await sendTransferToOrg(id, e);
     if (response) {
       toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CHUYEN_NHUONG.SEND_KIEM_DINH);
       getAPI();
@@ -138,7 +138,7 @@ function ThemMoiChuyenNhuong({ isLoading }) {
             style={{ backgroundColor: "#1890FF" }}
             onClick={showVisibleKey}
           >
-            Gửi thẩm định
+            Gửi kết quả
           </Button>
         </div>
       )}
@@ -424,9 +424,4 @@ function mapStateToProps(store) {
 }
 
 export default connect(mapStateToProps)(ThemMoiChuyenNhuong);
-
-
-
-
-
 
