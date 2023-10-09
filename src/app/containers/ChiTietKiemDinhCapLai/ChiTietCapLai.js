@@ -78,7 +78,7 @@ function ChiTietCapLai({ isLoading }) {
       )}
       <Loading active={isLoading}>
         <BaseContent>
-          <div className="ThemMoiCapLai-Container">
+          <div className="ThemMoiCapLaiTD-Container">
             <div className="title">
               <div className="title-left">
                 <LeftOutlined style={{ marginRight: "10px" }}></LeftOutlined>

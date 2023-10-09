@@ -1,16 +1,11 @@
 import { InfoCircleOutlined, LeftOutlined } from "@ant-design/icons";
 import { formatDateForm, toast, validateSpaceNull } from "@app/common/functionCommons";
-import {
-  createNewCapMoi,
-  editGiayToCapMoi,
-  getCapMoi,
-  sendNewCertificateToOrg,
-  sendResultNewCertificateToOrg,
-} from "@app/services/CapMoiGiayTo";
+import { getCapMoi, sendResultNewCertificateToOrg } from "@app/services/CapMoiGiayTo";
 import BaseContent from "@components/BaseContent";
 import CustomInfo from "@components/CustomInfo/CustomInfo";
 import ArrowRightThick from "@components/Icons/ArrowRightThick";
 import Loading from "@components/Loading";
+import SendResultToUser from "@components/SendResultToUser/SendResultToUser";
 import UploadImage from "@components/UploadImage/UploadImage";
 import VerifyDigitalSignature from "@components/VerifyDigitalSignature/VerifyDigitalSignature";
 import {
@@ -27,7 +22,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import "./ChiTietCapMoi.scss";
-import SendResultToUser from "@components/SendResultToUser/SendResultToUser";
 ChiTietCapMoi.propTypes = {};
 
 function ChiTietCapMoi({ isLoading }) {
@@ -42,8 +36,6 @@ function ChiTietCapMoi({ isLoading }) {
   const [removeHopDong, setRemoveHopDong] = useState([]);
   const [nghiaVuTaiChinh, setNghiaVuTaiChinh] = useState([]);
   const [removeNghiaVuTaiChinh, setRemoveNghiaVuTaiChinh] = useState([]);
-  const [messageCheckBox, setMessageCheckBox] = useState(null);
-  const [messageKhuDat, setMessageKhuDat] = useState(null);
   const [showModalResult, setShowModalResult] = useState(false);
   const [disabled, onChangeDisabled] = useState(true);
   const [magiayto, setMagiayto] = useState(null);
@@ -72,43 +64,6 @@ function ChiTietCapMoi({ isLoading }) {
     setNghiaVuTaiChinh(response.taichinh);
     setCacLoaiGiayTo(response.other);
   };
-  const onSubmit = async (e) => {
-    let error = false;
-    if (anhKhuDat.length == 0) {
-      setMessageKhuDat("Cần có ít nhất 1 ảnh");
-      error = true;
-    }
-    if (!e.dangkyquyensdd && !e.capgcndoivoidat && !e.dangkyquyenqldat && !e.capgcnvoitaisan) {
-      setMessageCheckBox("Vui lòng chọn 1 đề nghị");
-      error = true;
-    }
-    if (error) return;
-    if (!disabled && id) {
-      const response = await editGiayToCapMoi(
-        id,
-        e,
-        anhKhuDat,
-        cacLoaiGiayTo,
-        hopDong,
-        nghiaVuTaiChinh,
-        removeAnhKhuDat,
-        removeHopDong,
-        removeCacLoaiGiayTo,
-        removeNghiaVuTaiChinh
-      );
-      if (response) {
-        toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CAP_MOI.EDIT);
-        getAPI();
-        onChangeDisabled(true);
-      }
-    } else {
-      const response = await createNewCapMoi(e, anhKhuDat, cacLoaiGiayTo, hopDong, nghiaVuTaiChinh);
-      if (response) {
-        history.push(URL.THEM_MOI_GIAY_TO_ID.format(response._id));
-        toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CAP_MOI.THEM_MOI);
-      }
-    }
-  };
   const sendToOrg = async (e) => {
     const response = await sendResultNewCertificateToOrg(id, {
       ...formResult,
@@ -119,7 +74,7 @@ function ChiTietCapMoi({ isLoading }) {
       getAPI();
     }
   };
-  const showVisibleKey = (e) => {
+  const showVisibleKey = () => {
     setShowPK(!showPK);
   };
   const finishFormKQ = (kq) => {
@@ -166,15 +121,7 @@ function ChiTietCapMoi({ isLoading }) {
             <div className="div_hr"></div>
 
             <div className="content">
-              <Form
-                layout={"vertical"}
-                form={form}
-                labelCol={4}
-                wrapperCol={14}
-                ref={formRef}
-                onFinish={onSubmit}
-                disabled={true}
-              >
+              <Form layout={"vertical"} form={form} labelCol={4} wrapperCol={14} ref={formRef} disabled={true}>
                 {magiayto && <span style={{ marginTop: 30 }}>Mã khu đất: {magiayto}</span>}
                 <div className="content-title">
                   Phần kê khai của người đăng ký
@@ -294,7 +241,6 @@ function ChiTietCapMoi({ isLoading }) {
                       <Checkbox disabled={disabled}>Cấp GCN với tài sản có trên đất</Checkbox>
                     </Form.Item>
                   </Col>
-                  {messageCheckBox && <span className="require">{messageCheckBox}</span>}
                 </Row>
                 <div className="content-title">
                   Thửa đất
@@ -562,7 +508,6 @@ function ChiTietCapMoi({ isLoading }) {
                     onRemove={setRemoveAnhKhuDat}
                     type={TYPE_IMAGE_CAP_MOI.ANH_KHU_DAT}
                   />
-                  {messageKhuDat && <span className="require">{messageKhuDat}</span>}
                 </div>
 
                 <div className="image-kd">
