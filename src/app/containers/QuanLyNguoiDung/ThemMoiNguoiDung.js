@@ -1,20 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import "./ThemMoiNguoiDung.scss";
 import { Button, Form, Input, Modal, Select } from "antd";
 import { connect } from "react-redux";
 import Loading from "@components/Loading";
 import { isUsernameValid, toast, validateSpaceNull } from "@app/common/functionCommons";
-import { CONSTANTS, RULES, TOAST_MESSAGE } from "@constants";
-import { createUser, updateUser } from "@app/services/NguoiDung";
+import { CONSTANTS, ROLE_SYSTEM, RULES, TOAST_MESSAGE } from "@constants";
+import { createUser, getAllUser, updateUser } from "@app/services/NguoiDung";
+import { getAllDonVi } from "@app/services/DonVi";
 ThemMoiNguoiDung.propTypes = {};
 
 function ThemMoiNguoiDung({ visible, onCancel, reloadAPI, data, isLoading, orgType }) {
   const [form] = Form.useForm();
+  const [orgSub, setOrgSub] = useState([]);
+  const [enableOrg, setEnableOrg] = useState(false);
   const cancelForm = () => {
     form.resetFields();
     onCancel();
   };
+  useEffect(() => {
+    getOrgSub();
+  }, []);
   const submitForm = async (e) => {
     if (!e.id) {
       delete e.id;
@@ -40,8 +46,21 @@ function ThemMoiNguoiDung({ visible, onCancel, reloadAPI, data, isLoading, orgTy
   useEffect(() => {
     if (data) {
       form.setFieldsValue({ ...data, id: data._id });
+      if(data?.orgTop) setEnableOrg(true);
+      else setEnableOrg(false);
     }
   }, [data]);
+  const getOrgSub = async () => {
+    const response = await getAllDonVi(1, 0, "&type={0}".format(ROLE_SYSTEM.DEPARTMENT));
+    setOrgSub(response.docs);
+  };
+  const onChangeOrg = async (value) => {
+    const foundObject = orgType.find((item) => item.id === value);
+    console.log(foundObject);
+    if (foundObject?.type != ROLE_SYSTEM.RECEIVER) {
+      setEnableOrg(false);
+    } else setEnableOrg(true);
+  };
   return (
     <div>
       <Modal
@@ -107,6 +126,7 @@ function ThemMoiNguoiDung({ visible, onCancel, reloadAPI, data, isLoading, orgTy
             >
               <Input placeholder="Vui lòng nhập email" />
             </Form.Item>
+
             <Form.Item
               label="Nhập số điện thoại"
               name="phone"
@@ -130,7 +150,7 @@ function ThemMoiNguoiDung({ visible, onCancel, reloadAPI, data, isLoading, orgTy
                 },
               ]}
             >
-              <Select placeholder="Vui lòng chọn tổ chức">
+              <Select placeholder="Vui lòng chọn tổ chức" onChange={onChangeOrg}>
                 {orgType.map((res, index) => {
                   return (
                     <Select.Option key={index} value={res.value}>
@@ -140,6 +160,30 @@ function ThemMoiNguoiDung({ visible, onCancel, reloadAPI, data, isLoading, orgTy
                 })}
               </Select>
             </Form.Item>
+            {enableOrg && (
+              <>
+                <Form.Item
+                  label="UBND / Sở quản lý"
+                  name="orgTop"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Tổ chức cấp cao phải chọn",
+                    },
+                  ]}
+                >
+                  <Select placeholder="Vui lòng chọn tổ chức">
+                    {orgSub.map((res) => {
+                      return (
+                        <Select.Option key={res._id} value={res._id}>
+                          {res.name}
+                        </Select.Option>
+                      );
+                    })}
+                  </Select>
+                </Form.Item>
+              </>
+            )}
             <div className="btn-handle">
               <Button className="btn-cancel-custom btn-cl" onClick={cancelForm}>
                 Huỷ thao tác
@@ -159,4 +203,5 @@ function mapStatetoProps(store) {
   return { isLoading };
 }
 export default connect(mapStatetoProps)(ThemMoiNguoiDung);
+
 

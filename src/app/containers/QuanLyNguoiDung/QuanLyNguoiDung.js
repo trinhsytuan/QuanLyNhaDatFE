@@ -48,6 +48,8 @@ function QuanLyNguoiDung({ isLoading, ...props }) {
         return {
           value: value._id,
           label: value.name,
+          type: value.type,
+          id: value._id,
         };
       });
       setDataOrg(options);
@@ -81,7 +83,7 @@ function QuanLyNguoiDung({ isLoading, ...props }) {
   const closeDialog = () => {
     setDataDialog(null);
     setVisibleDialog(false);
-  }
+  };
   const dataSearch = [
     {
       name: "username",
@@ -244,20 +246,4 @@ function mapStatetoProps(store) {
   return { isLoading };
 }
 export default connect(mapStatetoProps)(QuanLyNguoiDung);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

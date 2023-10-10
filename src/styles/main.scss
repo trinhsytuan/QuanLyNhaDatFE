@@ -841,3 +841,30 @@ $radioColorsHover: (
   }
 }
 
+.button-edit {
+  background-color: #ffe9d8 !important;
+  color: #ff811e !important;
+  border: 0 !important;
+}
+.button-remove {
+  background-color: #ffefef !important;
+  color: #ff0000 !important;
+  border: 0 !important;
+}
+.color-status-accepted {
+  background-color: #f0fcf8;
+  color: #179a6b;
+}
+.color-status-pending {
+  background-color: #fff3d3;
+  color: #ffbd13;
+}
+.color-status-reject {
+  background-color: #f3f3f3;
+  color: #a7a7a7;
+}
+.color-status-sending {
+  background-color: #ffe9d8;
+  color: #ff811e;
+}
+

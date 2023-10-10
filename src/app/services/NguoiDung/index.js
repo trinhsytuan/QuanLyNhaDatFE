@@ -12,5 +12,4 @@ export function updateUser(data) {
 }
 export function deleteUser(id) {
   return deleteByIdBase(API.DELETE_USER, id);
-
 }

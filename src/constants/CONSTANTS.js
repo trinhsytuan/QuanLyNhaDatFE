@@ -169,6 +169,31 @@ export const TOAST_MESSAGE = {
   KEY: {
     TITLE: "Cập nhật tiêu đề chữ ký thành công",
   },
+  CAP_MOI: {
+    THEM_MOI: "Thêm mới đơn đăng ký thành công",
+    DELETE: "Xoá đơn đăng ký thành công",
+    EDIT: "Chỉnh sửa thông tin giấy tờ thành công",
+    NOT_FOUND: "Không tồn tại mã khu đất",
+    SEND_KIEM_DINH: "Đã gửi thẩm định thành công",
+    RESPONSE_KIEM_DINH: "Phản hồi kết quả thành công",
+  },
+  CHUYEN_NHUONG: {
+    THEM_MOI: "Thêm mới đơn chuyển nhượng thành công",
+    DELETE: "Xoá đơn chuyển nhượng thành công",
+    EDIT: "Chỉnh sửa đơn chuyển nhượng thành công",
+    SEND_KIEM_DINH: "Đã gửi thẩm định thành công",
+  },
+  FILE: {
+    NOT_ACCEPT_EXTENSION: "Định dạng file không hợp lệ, chỉ chấp nhận file có đuôi (.pem,.cer,.txt)",
+    NOT_FOUND_KEY: "Bạn cần nhập khoá hoặc chọn file khoá của mình",
+  },
+  CAP_LAI: {
+    THEM_MOI: "Thêm mới đơn cấp lại thành công",
+    XOA: "Xoá đơn cấp lại thành công",
+    CAP_NHAT: "Cập nhật đơn cấp lại thành công",
+    SEND_KIEM_DINH: "Đã gửi thẩm định thành công",
+    RESPONSE_KIEM_DINH: "Phản hồi kết quả thành công",
+  },
   USER: {
     CREATE_NEW: "Thêm mới người dùng thành công",
     EMAIL_PASSWORD: "Để đảm bảo an toàn, mật khẩu của người dùng được gửi đến email của người dùng",
@@ -204,7 +229,7 @@ export const RULES = {
     pattern: /^(0[35789]\d{8}|02\d{9}|\+84[35789]\d{8}|(\+842)\d{9})$/,
     message: "Số điện thoại bạn vừa nhập không hợp lệ",
   },
-  CMND: { required: true, pattern: "^[0-9]+$", message: "Số CMND/CCCD không hợp lệ" },
+  CMND: { required: true, pattern: "^(\\d{9}|\\d{12})$", message: "Số CMND/CCCD không hợp lệ" },
   EMAIL: { type: "email", message: "Email không hợp lệ" },
   NUMBER_FLOAT: {
     pattern: new RegExp("^[- +]?[0-9]+[.]?[0-9]*([eE][-+]?[0-9]+)?$"),
@@ -541,4 +566,37 @@ export const SEARCH_ROLE_SYSTEM = [
   { name: "Đơn vị tiếp nhận", value: "receiver" },
   { name: "Sở nông nghiệp / UBND", value: "department" },
 ];
+export const TYPE_IMAGE_CAP_MOI = {
+  ANH_KHU_DAT: "anh-khu-dat",
+  DON_DANG_KY: "don-dang-ky",
+  CHUNG_TU_NGHIA_VU_TAI_CHINH: "chung-tu-nghia-vu-tai-chinh",
+  HOP_DONG: "hop-dong",
+  OTHER: "other",
+};
+
+export const SEARCH_STATUS_THAM_DINH = [
+  { name: "Đã được thẩm định", value: "accepted" },
+  { name: "Chờ thẩm định", value: "pending" },
+  { name: "Từ chối thẩm định", value: "reject" },
+];
+export const VI_STATUS_THAM_DINH = {
+  accepted: "Đã thẩm định",
+  pending: "Chờ thẩm định",
+  sending: "Đang gửi thẩm định",
+  reject: "Từ chối thẩm định",
+};
+export const TYPE_IMAGE_CAP_LAI = {
+  ANH_KHU_DAT: "anh-khu-dat",
+};
+export const VI_STATUS_THAM_DINH_DEPARTMENT = {
+  accepted: "Đã thẩm định",
+  sending: "Đang chờ thẩm định",
+  reject: "Từ chối thẩm định",
+};
+export const STATUS_TD = {
+  reject: "reject",
+  accepted: "accepted",
+  pending: "pending",
+  sending: "sending",
+};
 
