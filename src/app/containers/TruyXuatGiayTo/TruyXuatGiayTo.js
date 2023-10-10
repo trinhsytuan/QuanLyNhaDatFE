@@ -10,6 +10,7 @@ import { getLand } from "@app/services/TruyXuat";
 import { Button, Row, Col, Form, Input, Divider } from "antd";
 import { URL } from "@url";
 import { CloseOutlined, SearchOutlined } from "@ant-design/icons";
+import { formatDate } from "@app/common/functionCommons";
 TruyXuatGiayTo.propTypes = {};
 
 function TruyXuatGiayTo({ isLoading }) {
@@ -91,7 +92,9 @@ function TruyXuatGiayTo({ isLoading }) {
             <Divider></Divider>
 
             {/* Thông tin người sử dụng đất */}
-            <p className="titleInfo"><i class='bx bx-user-circle'></i> Thông tin người sử dụng đất</p>
+            <p className="titleInfo">
+              <i class="bx bx-user-circle"></i> Thông tin người sử dụng đất
+            </p>
             <Row gutter={[10, 10]}>
               <Col xs={24} sm={12} md={12}>
                 <b>Tên người sử dụng đất: </b> {data?.tennguoisudung}
@@ -100,7 +103,8 @@ function TruyXuatGiayTo({ isLoading }) {
                 <b>Số căn cước công dân: </b> {data?.cccd}
               </Col>
               <Col xs={24} sm={12} md={12}>
-                <b>Ngày cấp căn cước công dân: </b>{data?.ngaycapcccd}
+                <b>Ngày cấp căn cước công dân: </b>
+                {data?.ngaycapcccd}
               </Col>
               <Col xs={24} sm={12} md={12}>
                 <b>Nghề nghiệp: </b> {data?.nghenghiep}
@@ -109,7 +113,9 @@ function TruyXuatGiayTo({ isLoading }) {
 
             <Divider></Divider>
             {/* Thông tin giấy tờ đất */}
-            <p className="titleInfoSecond"><i class='bx bx-receipt'></i> Thông tin khu đất</p>
+            <p className="titleInfoSecond">
+              <i class="bx bx-receipt"></i> Thông tin khu đất
+            </p>
             <Row gutter={[10, 10]}>
               <Col xs={24} sm={12} md={12}>
                 <b>Mã giấy tờ: </b> {data?.magiayto}
@@ -142,30 +148,35 @@ function TruyXuatGiayTo({ isLoading }) {
 
             <Divider></Divider>
             {/* Ảnh khu đất */}
-            <p className="titleInfoSecond"><i class='bx bx-image-alt'></i> Ảnh khu đất</p>
-            <Row gutter={[10, 10]}>
-            <p>Coming soon ...</p>
-            </Row>
-
-            <Divider></Divider>
-            {/* Thông tin thêm */}
-            <p className="titleInfoSecond"><i class='bx bx-info-circle' ></i> Thông tin thêm</p>
-            <Row gutter={[10, 10]}>
-              <Col xs={24} sm={12} md={12}>
-                <b>Ngày tạo: </b> {data?.createdAt}
-              </Col>
-              <Col xs={24} sm={12} md={12}>
-                <b>Ngày cập nhật : </b> {data?.updatedAt}
-              </Col>
-            </Row>
-
-            <Divider></Divider>
-            {/* Thông tin thêm */}
-            <p className="titleInfoSecond"><i class='bx bx-outline'></i> Quy trình kiểm định</p>
+            <p className="titleInfoSecond">
+              <i class="bx bx-image-alt"></i> Ảnh khu đất
+            </p>
             <Row gutter={[10, 10]}>
               <p>Coming soon ...</p>
             </Row>
 
+            <Divider></Divider>
+            {/* Thông tin thêm */}
+            <p className="titleInfoSecond">
+              <i class="bx bx-info-circle"></i> Thông tin thêm
+            </p>
+            <Row gutter={[10, 10]}>
+              <Col xs={24} sm={12} md={12}>
+                <b>Ngày tạo: </b> {formatDate(data?.createdAt)}
+              </Col>
+              <Col xs={24} sm={12} md={12}>
+                <b>Ngày cập nhật : </b> {formatDate(data?.updatedAt)}
+              </Col>
+            </Row>
+
+            <Divider></Divider>
+            {/* Thông tin thêm */}
+            <p className="titleInfoSecond">
+              <i class="bx bx-outline"></i> Quy trình kiểm định
+            </p>
+            <Row gutter={[10, 10]}>
+              <p>Coming soon ...</p>
+            </Row>
 
             <Button>
               <a href={URL.TRANSACTION_ID.format(data?.txtId)} target="_blank" className="aBlod">
