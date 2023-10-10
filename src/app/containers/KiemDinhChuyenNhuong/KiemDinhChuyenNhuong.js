@@ -125,7 +125,7 @@ function KiemDinhChuyenNhuong({ isLoading }) {
               icon={<VisibleIcon />}
               style={{ border: 0 }}
               onClick={() => {
-                history.push(URL.CHI_TIET_CHUYEN_NHUONG_ID.format(value._id));
+                history.push(URL.THAM_DINH_CHUYEN_NHUONG_ID.format(value._id));
               }}
             ></Button>
           </div>

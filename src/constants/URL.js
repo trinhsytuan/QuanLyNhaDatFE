@@ -32,6 +32,7 @@ export const URL = {
   CHI_TIET_CAP_MOI_ID: "/chi-tiet-cap-moi/{0}",
   CHI_TIET_CAP_LAI_ID: "/chi-tiet-cap-lai/{0}",
   CHI_TIET_CHUYEN_NHUONG_ID: "/chi-tiet-chuyen-nhuong/{0}",
+  THAM_DINH_CHUYEN_NHUONG_ID: "/tham-dinh-chuyen-nhuong/{0}",
   TRUY_XUAT_GIAY_TO_ID: "/truy-xuat-khu-dat/{0}",
 
   THEM_MOI_CAP_LAI_ID: "/chi-tiet-cap-lai/{0}",

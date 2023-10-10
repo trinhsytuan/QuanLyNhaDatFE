@@ -227,7 +227,7 @@ export const ADMIN_ROUTES = [
     permission: ROLE_SYSTEM.DEPARTMENT,
   },
   {
-    path: URL.CHI_TIET_CHUYEN_NHUONG_ID.format(":id"),
+    path: URL.THAM_DINH_CHUYEN_NHUONG_ID.format(":id"),
     breadcrumbName: "Chi tiết đơn chuyển nhượng",
     component: ChiTietChuyenNhuongKiemDinh,
     permission: ROLE_SYSTEM.DEPARTMENT,
@@ -237,4 +237,5 @@ export const ADMIN_ROUTES = [
 export function ConstantsRoutes() {
   return ADMIN_ROUTES;
 }
+
 

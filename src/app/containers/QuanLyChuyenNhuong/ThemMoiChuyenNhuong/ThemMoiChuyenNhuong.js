@@ -138,7 +138,7 @@ function ThemMoiChuyenNhuong({ isLoading }) {
             style={{ backgroundColor: "#1890FF" }}
             onClick={showVisibleKey}
           >
-            Gửi kết quả
+            Gửi thẩm định
           </Button>
         </div>
       )}

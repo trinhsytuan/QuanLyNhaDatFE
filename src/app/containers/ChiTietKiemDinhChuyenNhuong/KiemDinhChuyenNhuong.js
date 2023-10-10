@@ -1,11 +1,11 @@
 import { LeftOutlined } from "@ant-design/icons";
 import { formatDateForm, toast, validateSpaceNull } from "@app/common/functionCommons";
-import { deleteChuyenNhuongByID, getChuyenNhuongByID, sendTransferToOrg } from "@app/services/ChuyenNhuong";
+import { getChuyenNhuongByID, sendResultTransferToOrg } from "@app/services/ChuyenNhuong";
 import BaseContent from "@components/BaseContent";
 import CustomInfo from "@components/CustomInfo/CustomInfo";
-import DialogDeleteConfim from "@components/DialogDeleteConfim/DialogDeleteConfim";
 import ArrowRightThick from "@components/Icons/ArrowRightThick";
 import Loading from "@components/Loading";
+import SendResultToUser from "@components/SendResultToUser/SendResultToUser";
 import UploadImage from "@components/UploadImage/UploadImage";
 import VerifyDigitalSignature from "@components/VerifyDigitalSignature/VerifyDigitalSignature";
 import {
@@ -23,7 +23,6 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import "./KiemDinhChuyenNhuong.scss";
-import SendResultToUser from "@components/SendResultToUser/SendResultToUser";
 KiemDinhChuyenNhuong.propTypes = {};
 
 function KiemDinhChuyenNhuong({ isLoading }) {
@@ -31,7 +30,6 @@ function KiemDinhChuyenNhuong({ isLoading }) {
   const history = useHistory();
   const [form2] = Form.useForm();
   const [makhudatapi, setmakhudatapi] = useState(null);
-  const [enableFormXoa, setEnableFormXoa] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [showModalResult, setShowModalResult] = useState(false);
   const [dataGCN, setdataGCN] = useState([]);
@@ -56,18 +54,12 @@ function KiemDinhChuyenNhuong({ isLoading }) {
       getAPI();
     }
   }, [id]);
-  const visibleFormXoa = () => {
-    setEnableFormXoa(!enableFormXoa);
-  };
-  const handleRemove = async () => {
-    const response = await deleteChuyenNhuongByID(id);
-    if (response) {
-      toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CHUYEN_NHUONG.DELETE);
-      history.push(URL.MENU.QUAN_LY_CHUYEN_NHUONG);
-    }
-  };
   const sendToOrg = async (e) => {
-    const response = await sendTransferToOrg(id, e);
+    const response = await sendResultTransferToOrg(id, {
+      ...formResult,
+      magiayto: makhudatapi,
+      private_key: e,
+    });
     if (response) {
       toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CHUYEN_NHUONG.SEND_KIEM_DINH);
       getAPI();
@@ -310,7 +302,4 @@ function mapStateToProps(store) {
   return { isLoading };
 }
 export default connect(mapStateToProps)(KiemDinhChuyenNhuong);
-
-
-
 
