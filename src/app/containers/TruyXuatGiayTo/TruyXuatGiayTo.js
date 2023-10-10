@@ -7,16 +7,24 @@ import BaseContent from "@components/BaseContent";
 import NOT_FOUND_PRODUCT from "@assets/icons/not-found-product.svg";
 import Loading from "@components/Loading";
 import { getLand } from "@app/services/TruyXuat";
-import { Button, Row, Col, Form, Input, Divider } from "antd";
+import { Button, Row, Col, Form, Input, Divider, Tooltip } from "antd";
 import { URL } from "@url";
 import { CloseOutlined, SearchOutlined } from "@ant-design/icons";
 import { formatDate } from "@app/common/functionCommons";
+import RefreshIcon from "@components/Icons/RefreshIcon";
+import ModalShowVerifyBlockchain from "@components/ModalShowVerifyBlockchain/ModalShowVerifyBlockchain";
 TruyXuatGiayTo.propTypes = {};
 
 function TruyXuatGiayTo({ isLoading }) {
   const history = useHistory();
   const [data, setData] = useState(undefined);
   const [form] = Form.useForm();
+  const [showModal, setShowModal] = useState(false);
+  const [linkToBlock, setLinkToBlock] = useState("");
+  const handleClickBlock = (link) => {
+    setShowModal(true);
+    setLinkToBlock(URL.TRANSACTION_ID.format(link));
+  };
   const [isSubmit, setIsSubmit] = useState(false);
   const { id } = useParams();
   useEffect(() => {
@@ -25,6 +33,10 @@ function TruyXuatGiayTo({ isLoading }) {
       form.setFieldsValue({ makhudat: id });
     } else setData(null);
   }, [id]);
+  const cancelModal = () => {
+    setShowModal(false);
+    setLinkToBlock("");
+  };
   const getAPI = async () => {
     setIsSubmit(true);
     getLand(id)
@@ -178,14 +190,22 @@ function TruyXuatGiayTo({ isLoading }) {
               <p>Coming soon ...</p>
             </Row>
 
-            <Button>
-              <a href={URL.TRANSACTION_ID.format(data?.txtId)} target="_blank" className="aBlod">
-                Link blockchain
-              </a>
-            </Button>
+            {data?.txtId && (
+              <div className="verify_checked" onClick={() => handleClickBlock(data?.txtId)}>
+                <Tooltip placement="top" title={"Xác thực lại"}>
+                  <a>Thông tin đã được xác thực trên hệ thống Blockchain</a>
+                  <RefreshIcon />
+                </Tooltip>
+              </div>
+            )}
           </div>
         )}
       </BaseContent>
+      <ModalShowVerifyBlockchain
+        isVisible={showModal}
+        handleCancel={cancelModal}
+        linkToUrl={linkToBlock}
+      ></ModalShowVerifyBlockchain>
     </Loading>
   );
 }
