@@ -7,7 +7,7 @@ import BaseContent from "@components/BaseContent";
 import NOT_FOUND_PRODUCT from "@assets/icons/not-found-product.svg";
 import Loading from "@components/Loading";
 import { getLand } from "@app/services/TruyXuat";
-import { Button, Col, Form, Input } from "antd";
+import { Button, Row, Col, Form, Input, Divider } from "antd";
 import { URL } from "@url";
 import { CloseOutlined, SearchOutlined } from "@ant-design/icons";
 TruyXuatGiayTo.propTypes = {};
@@ -86,11 +86,92 @@ function TruyXuatGiayTo({ isLoading }) {
           </div>
         )}
         {isSubmit == true && data != null && (
-          <div>
-            Khu đất ok, code ở đây{" "}
-            <a href={URL.TRANSACTION_ID.format(data.txtId)} target="_blank" className="aBlod">
-              Link blockchain
-            </a>
+          <div className="seekPage">
+            <h2>THÔNG TIN GIẤY TỜ MÃ: {data?.magiayto}</h2>
+            <Divider></Divider>
+
+            {/* Thông tin người sử dụng đất */}
+            <p className="titleInfo"><i class='bx bx-user-circle'></i> Thông tin người sử dụng đất</p>
+            <Row gutter={[10, 10]}>
+              <Col xs={24} sm={12} md={12}>
+                <b>Tên người sử dụng đất: </b> {data?.tennguoisudung}
+              </Col>
+              <Col xs={24} sm={12} md={12}>
+                <b>Số căn cước công dân: </b> {data?.cccd}
+              </Col>
+              <Col xs={24} sm={12} md={12}>
+                <b>Ngày cấp căn cước công dân: </b>{data?.ngaycapcccd}
+              </Col>
+              <Col xs={24} sm={12} md={12}>
+                <b>Nghề nghiệp: </b> {data?.nghenghiep}
+              </Col>
+            </Row>
+
+            <Divider></Divider>
+            {/* Thông tin giấy tờ đất */}
+            <p className="titleInfoSecond"><i class='bx bx-receipt'></i> Thông tin khu đất</p>
+            <Row gutter={[10, 10]}>
+              <Col xs={24} sm={12} md={12}>
+                <b>Mã giấy tờ: </b> {data?.magiayto}
+              </Col>
+              <Col xs={24} sm={12} md={12}>
+                <b>Số thửa đất: </b> {data?.sothuadat}
+              </Col>
+              <Col xs={24} sm={12} md={12}>
+                <b>Tờ bản đồ số: </b> {data?.tobandoso}
+              </Col>
+              <Col xs={24} sm={12} md={12}>
+                <b>Thửa đất đăng ký: </b> {data?.thuadatdangky}
+              </Col>
+              <Col xs={24} sm={12} md={12}>
+                <b>Thời hạn sử dụng: </b> {data?.thoihansudung}
+              </Col>
+              <Col xs={24} sm={12} md={12}>
+                <b>Diện tích (m2): </b>Sử dụng chung {data?.sudungchung} | sử dụng riêng {data.sudungrieng}
+              </Col>
+              <Col xs={24} sm={12} md={12}>
+                <b>Nguồn gốc: </b> {data?.thoihansudung}
+              </Col>
+              <Col xs={24} sm={12} md={12}>
+                <b>Mục đích sử dụng: </b> {data?.mucdichsd}
+              </Col>
+              <Col xs={24} sm={12} md={12}>
+                <b>Nơi cấp </b> {data?.noicap}
+              </Col>
+            </Row>
+
+            <Divider></Divider>
+            {/* Ảnh khu đất */}
+            <p className="titleInfoSecond"><i class='bx bx-image-alt'></i> Ảnh khu đất</p>
+            <Row gutter={[10, 10]}>
+            <p>Coming soon ...</p>
+            </Row>
+
+            <Divider></Divider>
+            {/* Thông tin thêm */}
+            <p className="titleInfoSecond"><i class='bx bx-info-circle' ></i> Thông tin thêm</p>
+            <Row gutter={[10, 10]}>
+              <Col xs={24} sm={12} md={12}>
+                <b>Ngày tạo: </b> {data?.createdAt}
+              </Col>
+              <Col xs={24} sm={12} md={12}>
+                <b>Ngày cập nhật : </b> {data?.updatedAt}
+              </Col>
+            </Row>
+
+            <Divider></Divider>
+            {/* Thông tin thêm */}
+            <p className="titleInfoSecond"><i class='bx bx-outline'></i> Quy trình kiểm định</p>
+            <Row gutter={[10, 10]}>
+              <p>Coming soon ...</p>
+            </Row>
+
+
+            <Button>
+              <a href={URL.TRANSACTION_ID.format(data?.txtId)} target="_blank" className="aBlod">
+                Link blockchain
+              </a>
+            </Button>
           </div>
         )}
       </BaseContent>
