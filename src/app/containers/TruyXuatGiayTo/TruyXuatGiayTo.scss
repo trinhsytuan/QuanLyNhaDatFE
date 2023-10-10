@@ -75,3 +75,35 @@ $content-height: calc((100vh / 100) * 64);
 .rowForm {
   padding-bottom: 20px;
 }
+
+// ..
+.seekPage h2{
+  color: #5673d6;
+  text-align: center;
+}
+
+.titleInfo{
+  font-weight: bold;
+  color: #5673d6;
+}
+
+.titleInfoSecond{
+  margin-top: 20px;
+  font-weight: bold;
+  color: #5673d6;
+}
+
+.seekPage i{
+  color: #5673d6;
+  font-size: 20px;
+  vertical-align: middle;
+  margin-bottom: 7px;
+}
+
+.seekPage button{
+  background: #5673d6;
+  border-radius: 99px;
+  color: white;
+  font-weight: bold;
+  margin-top: 20px;
+}
