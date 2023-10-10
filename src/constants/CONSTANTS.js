@@ -182,6 +182,7 @@ export const TOAST_MESSAGE = {
     DELETE: "Xoá đơn chuyển nhượng thành công",
     EDIT: "Chỉnh sửa đơn chuyển nhượng thành công",
     SEND_KIEM_DINH: "Đã gửi thẩm định thành công",
+    RESPONSE_KIEM_DINH: "Phản hồi kết quả thành công",
   },
   FILE: {
     NOT_ACCEPT_EXTENSION: "Định dạng file không hợp lệ, chỉ chấp nhận file có đuôi (.pem,.cer,.txt)",
@@ -599,4 +600,5 @@ export const STATUS_TD = {
   pending: "pending",
   sending: "sending",
 };
+
 

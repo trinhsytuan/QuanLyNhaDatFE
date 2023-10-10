@@ -61,7 +61,7 @@ function KiemDinhChuyenNhuong({ isLoading }) {
       private_key: e,
     });
     if (response) {
-      toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CHUYEN_NHUONG.SEND_KIEM_DINH);
+      toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CHUYEN_NHUONG.RESPONSE_KIEM_DINH);
       getAPI();
     }
   };
@@ -302,4 +302,5 @@ function mapStateToProps(store) {
   return { isLoading };
 }
 export default connect(mapStateToProps)(KiemDinhChuyenNhuong);
+
 
