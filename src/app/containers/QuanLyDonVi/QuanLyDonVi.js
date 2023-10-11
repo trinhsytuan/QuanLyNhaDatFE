@@ -68,7 +68,7 @@ function QuanLyDonVi({ isLoading, myInfo, ...props }) {
   const closeDialog = () => {
     setDataDialog(null);
     setVisibleDialog(false);
-  }
+  };
   const dataSearch = [
     {
       name: "name",
@@ -109,7 +109,7 @@ function QuanLyDonVi({ isLoading, myInfo, ...props }) {
         let type = "";
         if (value.type == ROLE_SYSTEM.SYSTEM) type = "Quản trị hệ thống";
         if (value.type == ROLE_SYSTEM.RECEIVER) type = "Đơn vị tiếp nhận";
-        if (value.type == ROLE_SYSTEM.DEPARTMENT) type = "Sở nông nghiệp / UBND";
+        if (value.type == ROLE_SYSTEM.DEPARTMENT) type = "Sở tài nguyên và môi trưởng / UBND";
         return <span>{type}</span>;
       },
     },
@@ -222,5 +222,4 @@ function mapStatetoProps(store) {
   return { isLoading, myInfo };
 }
 export default connect(mapStatetoProps)(QuanLyDonVi);
-
 

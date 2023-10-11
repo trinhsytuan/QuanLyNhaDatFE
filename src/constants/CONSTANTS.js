@@ -565,7 +565,7 @@ export const ROLE_SYSTEM = {
 export const SEARCH_ROLE_SYSTEM = [
   { name: "Quản trị hệ thống", value: "system" },
   { name: "Đơn vị tiếp nhận", value: "receiver" },
-  { name: "Sở nông nghiệp / UBND", value: "department" },
+  { name: "Sở tài nguyên và môi trưởng / UBND", value: "department" },
 ];
 export const TYPE_IMAGE_CAP_MOI = {
   ANH_KHU_DAT: "anh-khu-dat",
@@ -600,5 +600,4 @@ export const STATUS_TD = {
   pending: "pending",
   sending: "sending",
 };
-
 

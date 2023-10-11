@@ -29,7 +29,7 @@ function MyInfo({ myInfo, isLoading, roleList, ...props }) {
       dataField.org = myInfo.org.name;
       if (myInfo.org.type == ROLE_SYSTEM.SYSTEM) dataField.type = "Quản trị hệ thống";
       else if (myInfo.org.type == ROLE_SYSTEM.RECEIVER) dataField.type = "Đơn vị tiếp nhận";
-      else if (myInfo.org.type == ROLE_SYSTEM.DEPARTMENT) dataField.type = "Sở nông nghiệp / UBND";
+      else if (myInfo.org.type == ROLE_SYSTEM.DEPARTMENT) dataField.type = "Sở tài nguyên và môi trưởng / UBND";
       else dataField.type = myInfo.org.type;
       formInfo.setFieldsValue(dataField);
       if (avatarTemp) setAvatarTemp(null);
@@ -255,11 +255,4 @@ function mapStateToProps(store) {
 }
 
 export default connect(mapStateToProps, { ...app.actions, ...user.actions })(MyInfo);
-
-
-
-
-
-
-
 
