@@ -159,15 +159,6 @@ function TruyXuatGiayTo({ isLoading }) {
             </Row>
 
             <Divider></Divider>
-            {/* Ảnh khu đất */}
-            <p className="titleInfoSecond">
-              <i class="bx bx-image-alt"></i> Ảnh khu đất
-            </p>
-            <Row gutter={[10, 10]}>
-              <p>Coming soon ...</p>
-            </Row>
-
-            <Divider></Divider>
             {/* Thông tin thêm */}
             <p className="titleInfoSecond">
               <i class="bx bx-info-circle"></i> Thông tin thêm
@@ -180,16 +171,7 @@ function TruyXuatGiayTo({ isLoading }) {
                 <b>Ngày cập nhật : </b> {formatDate(data?.updatedAt)}
               </Col>
             </Row>
-
-            <Divider></Divider>
-            {/* Thông tin thêm */}
-            <p className="titleInfoSecond">
-              <i class="bx bx-outline"></i> Quy trình kiểm định
-            </p>
-            <Row gutter={[10, 10]}>
-              <p>Coming soon ...</p>
-            </Row>
-
+            <br></br>
             {data?.txtId && (
               <div className="verify_checked" onClick={() => handleClickBlock(data?.txtId)}>
                 <Tooltip placement="top" title={"Xác thực lại"}>
