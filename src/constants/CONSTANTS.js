@@ -564,12 +564,23 @@ export const ROLE_SYSTEM = {
   LANDOFFICER: "landofficer", //Cán bộ địa chính
   VICEPRESIDENTCITY: "vicepresidentcity", //Phó chủ tịch thành phố
   PRESIDENTWARD: "presidentward", // Phó chủ tịch phường
-  LANDREGISTRATION: "landregistration" // Văn phòng đăng ký đất đại
+  LANDREGISTRATION: "landregistration", // Văn phòng đăng ký đất đại
 };
 export const SEARCH_ROLE_SYSTEM = [
   { name: "Quản trị hệ thống", value: "system" },
   { name: "Người dùng", value: "user" },
-  { name: "Sở tài nguyên và môi trưởng / UBND", value: "department" },
+  { name: "Cán bộ địa chính", value: "landofficer" },
+  { name: "Phó chủ tịch thành phố", value: "vicepresidentcity" },
+  { name: "Chủ tịch phường", value: "presidentward" },
+  { name: "Văn phòng đăng ký đất đai", value: "landregistration" },
+  { name: "Trưởng phòng STN/MT", value: "department" },
+];
+export const CREATE_ORG_ROLE_SYSTEM = [
+  { name: "Quản trị hệ thống", value: "system" },
+  { name: "Người dùng", value: "user" },
+  { name: "Phường", value: "phuong" },
+  { name: "Sở", value: "Sở" },
+  { name: "Thành phố", value: "city" },
 ];
 export const TYPE_IMAGE_CAP_MOI = {
   ANH_KHU_DAT: "anh-khu-dat",
@@ -604,5 +615,4 @@ export const STATUS_TD = {
   pending: "pending",
   sending: "sending",
 };
-
 

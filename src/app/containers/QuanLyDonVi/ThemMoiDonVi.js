@@ -5,7 +5,7 @@ import { Button, Form, Input, Modal, Select } from "antd";
 import { connect } from "react-redux";
 import Loading from "@components/Loading";
 import { toast, validateSpaceNull } from "@app/common/functionCommons";
-import { CONSTANTS, RULES, SEARCH_ROLE_SYSTEM, TOAST_MESSAGE } from "@constants";
+import { CONSTANTS, CREATE_ORG_ROLE_SYSTEM, RULES, SEARCH_ROLE_SYSTEM, TOAST_MESSAGE } from "@constants";
 import { createOrg, editOrg } from "@app/services/DonVi";
 ThemMoiDonVi.propTypes = {};
 
@@ -129,7 +129,7 @@ function ThemMoiDonVi({ visible, onCancel, reloadAPI, data, isLoading }) {
               ]}
             >
               <Select placeholder="Vui lòng chọn vai trò">
-                {SEARCH_ROLE_SYSTEM.map((res, index) => {
+                {CREATE_ORG_ROLE_SYSTEM.map((res, index) => {
                   return (
                     <Select.Option value={res.value} key={index}>
                       {res.name}
@@ -157,6 +157,7 @@ function mapStatetoProps(store) {
   return { isLoading };
 }
 export default connect(mapStatetoProps)(ThemMoiDonVi);
+
 
 
 
