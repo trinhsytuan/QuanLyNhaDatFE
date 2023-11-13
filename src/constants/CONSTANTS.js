@@ -561,6 +561,10 @@ export const ROLE_SYSTEM = {
   SYSTEM: "system",
   DEPARTMENT: "department",
   USER: "user",
+  LANDOFFICER: "landofficer", //Cán bộ địa chính
+  VICEPRESIDENTCITY: "vicepresidentcity", //Phó chủ tịch thành phố
+  PRESIDENTWARD: "presidentward", // Phó chủ tịch phường
+  LANDREGISTRATION: "landregistration" // Văn phòng đăng ký đất đại
 };
 export const SEARCH_ROLE_SYSTEM = [
   { name: "Quản trị hệ thống", value: "system" },
@@ -600,4 +604,5 @@ export const STATUS_TD = {
   pending: "pending",
   sending: "sending",
 };
+
 
