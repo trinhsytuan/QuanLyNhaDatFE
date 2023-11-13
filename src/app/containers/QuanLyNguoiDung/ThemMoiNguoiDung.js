@@ -46,7 +46,7 @@ function ThemMoiNguoiDung({ visible, onCancel, reloadAPI, data, isLoading, orgTy
   useEffect(() => {
     if (data) {
       form.setFieldsValue({ ...data, id: data._id });
-      if(data?.orgTop) setEnableOrg(true);
+      if (data?.orgTop) setEnableOrg(true);
       else setEnableOrg(false);
     }
   }, [data]);
@@ -57,7 +57,7 @@ function ThemMoiNguoiDung({ visible, onCancel, reloadAPI, data, isLoading, orgTy
   const onChangeOrg = async (value) => {
     const foundObject = orgType.find((item) => item.id === value);
     console.log(foundObject);
-    if (foundObject?.type != ROLE_SYSTEM.RECEIVER) {
+    if (foundObject?.type != ROLE_SYSTEM.USER) {
       setEnableOrg(false);
     } else setEnableOrg(true);
   };
@@ -203,5 +203,4 @@ function mapStatetoProps(store) {
   return { isLoading };
 }
 export default connect(mapStatetoProps)(ThemMoiNguoiDung);
-
 

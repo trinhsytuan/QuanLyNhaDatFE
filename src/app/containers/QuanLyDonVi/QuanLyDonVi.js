@@ -108,7 +108,7 @@ function QuanLyDonVi({ isLoading, myInfo, ...props }) {
       render: (_, value) => {
         let type = "";
         if (value.type == ROLE_SYSTEM.SYSTEM) type = "Quản trị hệ thống";
-        if (value.type == ROLE_SYSTEM.RECEIVER) type = "Đơn vị tiếp nhận";
+        if (value.type == ROLE_SYSTEM.USER) type = "Người dùng";
         if (value.type == ROLE_SYSTEM.DEPARTMENT) type = "Sở tài nguyên và môi trưởng / UBND";
         return <span>{type}</span>;
       },

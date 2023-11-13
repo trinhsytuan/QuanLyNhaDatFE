@@ -107,7 +107,7 @@ export const ADMIN_ROUTES = [
     key: URL.MENU.DANH_MUC,
     menuName: "Danh mục",
     icon: renderIcon(<ListIcon />),
-    permission: [ROLE_SYSTEM.SYSTEM, ROLE_SYSTEM.RECEIVER, ROLE_SYSTEM.DEPARTMENT],
+    permission: [ROLE_SYSTEM.SYSTEM, ROLE_SYSTEM.USER, ROLE_SYSTEM.DEPARTMENT],
     children: [
       {
         path: URL.MENU.QUAN_LY_TO_CHUC,
@@ -119,19 +119,19 @@ export const ADMIN_ROUTES = [
         path: URL.MENU.QUAN_LY_THEM_MOI,
         menuName: "Quản lý yêu cầu cấp mới",
         component: PortalThemMoiGiayTo,
-        permission: ROLE_SYSTEM.RECEIVER,
+        permission: ROLE_SYSTEM.USER,
       },
       {
         path: URL.MENU.QUAN_LY_CHUYEN_NHUONG,
         menuName: "Quản lý đơn chuyển nhượng",
         component: PortalCapLai,
-        permission: ROLE_SYSTEM.RECEIVER,
+        permission: ROLE_SYSTEM.USER,
       },
       {
         path: URL.MENU.QUAN_LY_CAP_LAI,
         menuName: "Quản lý cấp lại",
         component: QLCapLai,
-        permission: ROLE_SYSTEM.RECEIVER,
+        permission: ROLE_SYSTEM.USER,
       },
       {
         path: URL.MENU.KIEM_DINH_CAP_MOI,
@@ -176,37 +176,37 @@ export const ADMIN_ROUTES = [
     path: URL.THEM_MOI_GIAY_TO,
     breadcrumbName: "Thêm mới giấy tờ",
     component: ThemMoiThemMoiGiayTo,
-    permission: [ROLE_SYSTEM.RECEIVER],
+    permission: [ROLE_SYSTEM.USER],
   },
   {
     path: URL.THEM_MOI_GIAY_TO_ID.format(":id"),
     breadcrumbName: "Chi tiết giấy tờ",
     component: ThemMoiThemMoiGiayTo,
-    permission: [ROLE_SYSTEM.RECEIVER],
+    permission: [ROLE_SYSTEM.USER],
   },
   {
     path: URL.MENU.THEM_MOI_CHUYEN_NHUONG,
     breadcrumbName: "Thêm mới đơn chuyển nhượng",
     component: CapLaiGiayTo,
-    permission: ROLE_SYSTEM.RECEIVER,
+    permission: ROLE_SYSTEM.USER,
   },
   {
     path: URL.THEM_MOI_CHUYEN_NHUONG_ID.format(":id"),
     breadcrumbName: "Chi tiết đơn chuyển nhượng",
     component: CapLaiGiayTo,
-    permission: ROLE_SYSTEM.RECEIVER,
+    permission: ROLE_SYSTEM.USER,
   },
   {
     path: URL.THEM_MOI_CAP_LAI,
     breadcrumbName: "Thêm mới cấp lại",
     component: ThemMoiCapLai,
-    permission: ROLE_SYSTEM.RECEIVER,
+    permission: ROLE_SYSTEM.USER,
   },
   {
     path: URL.THEM_MOI_CAP_LAI_ID.format(":id"),
     breadcrumbName: "Chi tiết đơn cấp lại",
     component: ThemMoiCapLai,
-    permission: ROLE_SYSTEM.RECEIVER,
+    permission: ROLE_SYSTEM.USER,
   },
   {
     path: URL.TRUY_XUAT_GIAY_TO_ID.format(":id"),
@@ -237,5 +237,4 @@ export const ADMIN_ROUTES = [
 export function ConstantsRoutes() {
   return ADMIN_ROUTES;
 }
-
 

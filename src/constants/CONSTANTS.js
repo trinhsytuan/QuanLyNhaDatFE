@@ -560,11 +560,11 @@ export const IMAGE_FILE_EXTENSION = ["jpg", "jpeg", "png", "svg"];
 export const ROLE_SYSTEM = {
   SYSTEM: "system",
   DEPARTMENT: "department",
-  RECEIVER: "receiver",
+  USER: "user",
 };
 export const SEARCH_ROLE_SYSTEM = [
   { name: "Quản trị hệ thống", value: "system" },
-  { name: "Đơn vị tiếp nhận", value: "receiver" },
+  { name: "Người dùng", value: "user" },
   { name: "Sở tài nguyên và môi trưởng / UBND", value: "department" },
 ];
 export const TYPE_IMAGE_CAP_MOI = {
