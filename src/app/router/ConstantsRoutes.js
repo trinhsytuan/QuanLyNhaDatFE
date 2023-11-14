@@ -114,16 +114,15 @@ export const ADMIN_ROUTES = [
       ROLE_SYSTEM.LANDREGISTRATION,
       ROLE_SYSTEM.PRESIDENTWARD,
       ROLE_SYSTEM.VICEPRESIDENTCITY,
-      ROLE_SYSTEM.SYSTEM,
-      
+
     ],
     children: [
-      {
-        path: URL.MENU.QUAN_LY_TO_CHUC,
-        menuName: "Quản lý đơn vị",
-        component: QuanLyDonVi,
-        permission: ROLE_SYSTEM.SYSTEM,
-      },
+      // {
+      //   path: URL.MENU.QUAN_LY_TO_CHUC,
+      //   menuName: "Quản lý đơn vị",
+      //   component: QuanLyDonVi,
+      //   permission: ROLE_SYSTEM.SYSTEM,
+      // },
       {
         path: URL.MENU.QUAN_LY_THEM_MOI,
         menuName: "Quản lý yêu cầu cấp mới",
