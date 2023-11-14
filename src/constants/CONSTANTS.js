@@ -579,7 +579,10 @@ export const CREATE_ORG_ROLE_SYSTEM = [
   { name: "Quản trị hệ thống", value: "system" },
   { name: "Người dùng", value: "user" },
   { name: "Phường", value: "phuong" },
-  { name: "Sở", value: "Sở" },
+  { name: "Sở", value: "so" },
+  { name: "Cán bộ địa chính", value: "landofficer" },
+  { name: "Văn phòng đăng ký đất đai", value: "landregistration" },
+  { name: "Phó chủ tịch thành phố", value: "vicepresidentcity" },
   { name: "Thành phố", value: "city" },
 ];
 export const TYPE_IMAGE_CAP_MOI = {

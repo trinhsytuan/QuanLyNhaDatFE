@@ -107,14 +107,22 @@ export const ADMIN_ROUTES = [
     key: URL.MENU.DANH_MUC,
     menuName: "Danh mục",
     icon: renderIcon(<ListIcon />),
-    permission: [ ROLE_SYSTEM.USER, ROLE_SYSTEM.DEPARTMENT],
+    permission: [
+      ROLE_SYSTEM.USER,
+      ROLE_SYSTEM.DEPARTMENT,
+      ROLE_SYSTEM.LANDOFFICER,
+      ROLE_SYSTEM.LANDREGISTRATION,
+      ROLE_SYSTEM.PRESIDENTWARD,
+      ROLE_SYSTEM.VICEPRESIDENTCITY,
+      ROLE_SYSTEM.SYSTEM,
+    ],
     children: [
-      // {
-      //   path: URL.MENU.QUAN_LY_TO_CHUC,
-      //   menuName: "Quản lý đơn vị",
-      //   component: QuanLyDonVi,
-      //   permission: ROLE_SYSTEM.SYSTEM,
-      // },
+      {
+        path: URL.MENU.QUAN_LY_TO_CHUC,
+        menuName: "Quản lý đơn vị",
+        component: QuanLyDonVi,
+        permission: ROLE_SYSTEM.SYSTEM,
+      },
       {
         path: URL.MENU.QUAN_LY_THEM_MOI,
         menuName: "Quản lý yêu cầu cấp mới",
@@ -137,19 +145,37 @@ export const ADMIN_ROUTES = [
         path: URL.MENU.KIEM_DINH_CAP_MOI,
         menuName: "Thẩm định cấp mới",
         component: KiemDinhCapMoi,
-        permission: ROLE_SYSTEM.DEPARTMENT,
+        permission: [
+          ROLE_SYSTEM.DEPARTMENT,
+          ROLE_SYSTEM.LANDOFFICER,
+          ROLE_SYSTEM.LANDREGISTRATION,
+          ROLE_SYSTEM.PRESIDENTWARD,
+          ROLE_SYSTEM.VICEPRESIDENTCITY,
+        ],
       },
       {
         path: URL.MENU.KIEM_DINH_CAP_LAI,
         menuName: "Thẩm định cấp lại",
         component: KiemDinhCapLai,
-        permission: ROLE_SYSTEM.DEPARTMENT,
+        permission: [
+          ROLE_SYSTEM.DEPARTMENT,
+          ROLE_SYSTEM.LANDOFFICER,
+          ROLE_SYSTEM.LANDREGISTRATION,
+          ROLE_SYSTEM.PRESIDENTWARD,
+          ROLE_SYSTEM.VICEPRESIDENTCITY,
+        ],
       },
       {
         path: URL.MENU.KIEM_DINH_CHUYEN_NHUONG,
         menuName: "Thẩm định chuyển nhượng",
         component: KiemDinhChuyenNhuong,
-        permission: ROLE_SYSTEM.DEPARTMENT,
+        permission: [
+          ROLE_SYSTEM.DEPARTMENT,
+          ROLE_SYSTEM.LANDOFFICER,
+          ROLE_SYSTEM.LANDREGISTRATION,
+          ROLE_SYSTEM.PRESIDENTWARD,
+          ROLE_SYSTEM.VICEPRESIDENTCITY,
+        ],
       },
     ],
   },
@@ -237,4 +263,7 @@ export const ADMIN_ROUTES = [
 export function ConstantsRoutes() {
   return ADMIN_ROUTES;
 }
+
+
+
 

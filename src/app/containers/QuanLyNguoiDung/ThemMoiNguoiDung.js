@@ -13,7 +13,6 @@ ThemMoiNguoiDung.propTypes = {};
 function ThemMoiNguoiDung({ visible, onCancel, reloadAPI, data, isLoading, orgType }) {
   const [form] = Form.useForm();
   const [orgSub, setOrgSub] = useState([]);
-  const [enableOrg, setEnableOrg] = useState(false);
   const cancelForm = () => {
     form.resetFields();
     onCancel();
@@ -53,13 +52,6 @@ function ThemMoiNguoiDung({ visible, onCancel, reloadAPI, data, isLoading, orgTy
   const getOrgSub = async () => {
     const response = await getAllDonVi(1, 0, "&type={0}".format(ROLE_SYSTEM.DEPARTMENT));
     setOrgSub(response.docs);
-  };
-  const onChangeOrg = async (value) => {
-    const foundObject = orgType.find((item) => item.id === value);
-    console.log(foundObject);
-    if (foundObject?.type != ROLE_SYSTEM.USER) {
-      setEnableOrg(false);
-    } else setEnableOrg(true);
   };
   return (
     <div>
@@ -150,7 +142,7 @@ function ThemMoiNguoiDung({ visible, onCancel, reloadAPI, data, isLoading, orgTy
                 },
               ]}
             >
-              <Select placeholder="Vui lòng chọn tổ chức" onChange={onChangeOrg}>
+              <Select placeholder="Vui lòng chọn tổ chức">
                 {orgType.map((res, index) => {
                   return (
                     <Select.Option key={index} value={res.value}>
@@ -160,30 +152,7 @@ function ThemMoiNguoiDung({ visible, onCancel, reloadAPI, data, isLoading, orgTy
                 })}
               </Select>
             </Form.Item>
-            {enableOrg && (
-              <>
-                <Form.Item
-                  label="UBND / Sở quản lý"
-                  name="orgTop"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Tổ chức cấp cao phải chọn",
-                    },
-                  ]}
-                >
-                  <Select placeholder="Vui lòng chọn tổ chức">
-                    {orgSub.map((res) => {
-                      return (
-                        <Select.Option key={res._id} value={res._id}>
-                          {res.name}
-                        </Select.Option>
-                      );
-                    })}
-                  </Select>
-                </Form.Item>
-              </>
-            )}
+            
             <div className="btn-handle">
               <Button className="btn-cancel-custom btn-cl" onClick={cancelForm}>
                 Huỷ thao tác
