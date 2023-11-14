@@ -26,7 +26,7 @@ import VerifyDigitalSignature from "@components/VerifyDigitalSignature/VerifyDig
 import { getLand } from "@app/services/TruyXuat";
 ThemMoiCapLai.propTypes = {};
 
-function ThemMoiCapLai({ isLoading }) {
+function ThemMoiCapLai({ isLoading, myInfo }) {
   const history = useHistory();
   const { id } = useParams();
   const [form1] = Form.useForm();
@@ -108,7 +108,7 @@ function ThemMoiCapLai({ isLoading }) {
     setShowPK(!showPK);
   };
   const sendToOrg = async (e) => {
-    const response = await sendReCertificateToOrg(id, e);
+    const response = await sendReCertificateToOrg(id, e, myInfo.org._id);
     if (response) {
       toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CAP_MOI.SEND_KIEM_DINH);
       getAPI();
@@ -116,7 +116,7 @@ function ThemMoiCapLai({ isLoading }) {
   };
   return (
     <>
-      {id && data?.status == "pending" && (
+      {id && (data?.status == "pending" || data?.status == "sending") && data?.orgResponse == myInfo.org._id && (
         <div className="action-gui-duyet">
           <Button
             type="primary"
@@ -258,11 +258,8 @@ function ThemMoiCapLai({ isLoading }) {
 }
 function mapStateToProps(store) {
   const { isLoading } = store.app;
-  return { isLoading };
+  const { myInfo } = store.user;
+  return { isLoading, myInfo };
 }
 export default connect(mapStateToProps)(ThemMoiCapLai);
-
-
-
-
 

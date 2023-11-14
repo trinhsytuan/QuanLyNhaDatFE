@@ -15,7 +15,7 @@ import { getTableChuyenNhuong } from "@app/services/ChuyenNhuong";
 import Loading from "@components/Loading";
 QuanLyChuyenNhuong.propTypes = {};
 
-function QuanLyChuyenNhuong({ isLoading }) {
+function QuanLyChuyenNhuong({ isLoading, myInfo }) {
   const history = useHistory();
   const [data, setData] = useState(null);
   const [page, setPage] = useState(1);
@@ -145,13 +145,15 @@ function QuanLyChuyenNhuong({ isLoading }) {
               <div className="header-title">
                 <span>Quản lý yêu cầu chuyển nhượng</span>
               </div>
-              <SearchBar
-                dataSearch={dataSearch}
-                onFilterChange={handleRefresh}
-                buttonHeader={true}
-                labelButtonHeader={"Thêm mới đơn chuyển nhượng"}
-                handleBtnHeader={onClickThemMoi}
-              />
+              {myInfo.org._id == "6551e4629b8b2de5f827fc09" && (
+                <SearchBar
+                  dataSearch={dataSearch}
+                  onFilterChange={handleRefresh}
+                  buttonHeader={true}
+                  labelButtonHeader={"Thêm mới đơn chuyển nhượng"}
+                  handleBtnHeader={onClickThemMoi}
+                />
+              )}
             </div>
             <div className="content">
               {!isLoading && (
@@ -180,7 +182,8 @@ function QuanLyChuyenNhuong({ isLoading }) {
 }
 function mapStateToProps(store) {
   const { isLoading } = store.app;
-  return { isLoading };
+  const { myInfo } = store.user;
+  return { isLoading, myInfo };
 }
 export default connect(mapStateToProps)(QuanLyChuyenNhuong);
 

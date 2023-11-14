@@ -28,7 +28,7 @@ import VerifyDigitalSignature from "@components/VerifyDigitalSignature/VerifyDig
 import { getLand } from "@app/services/TruyXuat";
 ThemMoiChuyenNhuong.propTypes = {};
 
-function ThemMoiChuyenNhuong({ isLoading }) {
+function ThemMoiChuyenNhuong({ isLoading, myInfo }) {
   const { id } = useParams();
   const history = useHistory();
   const [form1] = Form.useForm();
@@ -118,7 +118,7 @@ function ThemMoiChuyenNhuong({ isLoading }) {
     }
   };
   const sendToOrg = async (e) => {
-    const response = await sendTransferToOrg(id, e);
+    const response = await sendTransferToOrg(id, e, myInfo.org._id);
     if (response) {
       toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CHUYEN_NHUONG.SEND_KIEM_DINH);
       getAPI();
@@ -129,7 +129,7 @@ function ThemMoiChuyenNhuong({ isLoading }) {
   };
   return (
     <div className="ThemMoiChuyenNhuong-container">
-      {id && data?.status == "pending" && (
+      {id && (data?.status == "pending" || data?.status == "sending")  && (
         <div className="action-gui-duyet">
           <Button
             type="primary"
@@ -420,7 +420,8 @@ function ThemMoiChuyenNhuong({ isLoading }) {
 }
 function mapStateToProps(store) {
   const { isLoading } = store.app;
-  return { isLoading };
+  const { myInfo } = store.user;
+  return { isLoading, myInfo };
 }
 
 export default connect(mapStateToProps)(ThemMoiChuyenNhuong);

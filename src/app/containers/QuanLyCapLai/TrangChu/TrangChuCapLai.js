@@ -15,7 +15,7 @@ import { Button, Table } from "antd";
 import VisibleIcon from "@components/Icons/VisibleIcon";
 TrangChuCapLai.propTypes = {};
 
-function TrangChuCapLai({ isLoading }) {
+function TrangChuCapLai({ isLoading, myInfo }) {
   const history = useHistory();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -127,13 +127,15 @@ function TrangChuCapLai({ isLoading }) {
               <span>Quản lý đơn cấp lại</span>
             </div>
             <div className="searchBar">
-              <SearchBar
-                dataSearch={dataSearch}
-                onFilterChange={handleRefresh}
-                buttonHeader={true}
-                labelButtonHeader={"Thêm mới đơn cấp lại"}
-                handleBtnHeader={onClickThemMoi}
-              />
+              {myInfo.org._id == "6551e4629b8b2de5f827fc09" && (
+                <SearchBar
+                  dataSearch={dataSearch}
+                  onFilterChange={handleRefresh}
+                  buttonHeader={true}
+                  labelButtonHeader={"Thêm mới đơn cấp lại"}
+                  handleBtnHeader={onClickThemMoi}
+                />
+              )}
             </div>
             {!isLoading && (
               <Table
@@ -160,7 +162,8 @@ function TrangChuCapLai({ isLoading }) {
 }
 function mapStateToProps(store) {
   const { isLoading } = store.app;
-  return { isLoading };
+  const { myInfo } = store.user;
+  return { isLoading, myInfo };
 }
 export default connect(mapStateToProps)(TrangChuCapLai);
 

@@ -30,8 +30,8 @@ export const deleteChuyenNhuongByID = (id) => {
 export const getTableChuyenNhuong = (page, limit, query) => {
   return getSimple(API.GET_PAGINATION_CHUYEN_NHUONG, page, limit, query);
 };
-export const sendTransferToOrg = (id, privateKey) => {
-  return updateBaseFormatID(API.SEND_TRANSFER_TO_ORG, id, { privateKey });
+export const sendTransferToOrg = (id, privateKey, orgCurrent) => {
+  return updateBaseFormatID(API.SEND_TRANSFER_TO_ORG, id, { privateKey, orgCurrent });
 };
 export const getTableChuyenNhuongDepartment = (page, limit, query) => {
   return getSimple(API.GET_PAGINATION_THAM_DINH_CHUYEN_NHUONG, page, limit, query);
@@ -39,4 +39,5 @@ export const getTableChuyenNhuongDepartment = (page, limit, query) => {
 export const sendResultTransferToOrg = (id, data) => {
   return updateBaseFormatID(API.SEND_RESULT_CAP_LAI_TO_ORG, id, data);
 };
+
 

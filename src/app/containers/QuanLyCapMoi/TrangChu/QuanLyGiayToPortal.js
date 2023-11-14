@@ -15,7 +15,7 @@ import VisibleIcon from "@components/Icons/VisibleIcon";
 import Loading from "@components/Loading";
 QuanLyGiayToPortal.propTypes = {};
 
-function QuanLyGiayToPortal({ isLoading }) {
+function QuanLyGiayToPortal({ isLoading, myInfo }) {
   const history = useHistory();
   const [data, setData] = useState(null);
   const [page, setPage] = useState(1);
@@ -145,13 +145,15 @@ function QuanLyGiayToPortal({ isLoading }) {
               <div className="header-title">
                 <span>Quản lý giấy tờ cấp mới</span>
               </div>
-              <SearchBar
-                dataSearch={dataSearch}
-                onFilterChange={handleRefresh}
-                buttonHeader={true}
-                labelButtonHeader={"Thêm giấy tờ mới"}
-                handleBtnHeader={onClickThemMoi}
-              />
+              {myInfo.org._id == "6551e4629b8b2de5f827fc09" && (
+                <SearchBar
+                  dataSearch={dataSearch}
+                  onFilterChange={handleRefresh}
+                  buttonHeader={true}
+                  labelButtonHeader={"Thêm giấy tờ mới"}
+                  handleBtnHeader={onClickThemMoi}
+                />
+              )}
             </div>
             <div className="content">
               {!isLoading && (
@@ -180,7 +182,8 @@ function QuanLyGiayToPortal({ isLoading }) {
 }
 function mapStateToProps(store) {
   const { isLoading } = store.app;
-  return { isLoading };
+  const { myInfo } = store.user;
+  return { isLoading, myInfo };
 }
 export default connect(mapStateToProps)(QuanLyGiayToPortal);
 

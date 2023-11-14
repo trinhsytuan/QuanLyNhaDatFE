@@ -25,7 +25,7 @@ import { Link, useHistory, useParams } from "react-router-dom/cjs/react-router-d
 import "./KiemDinhChuyenNhuong.scss";
 KiemDinhChuyenNhuong.propTypes = {};
 
-function KiemDinhChuyenNhuong({ isLoading }) {
+function KiemDinhChuyenNhuong({ isLoading, myInfo }) {
   const { id } = useParams();
   const history = useHistory();
   const [form2] = Form.useForm();
@@ -59,6 +59,7 @@ function KiemDinhChuyenNhuong({ isLoading }) {
       ...formResult,
       magiayto: makhudatapi,
       private_key: e,
+      orgCurrent: myInfo.org._id,
     });
     if (response) {
       toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CHUYEN_NHUONG.RESPONSE_KIEM_DINH);
@@ -299,8 +300,8 @@ function KiemDinhChuyenNhuong({ isLoading }) {
 }
 function mapStateToProps(store) {
   const { isLoading } = store.app;
+  const { myInfo } = store.user;
   return { isLoading };
 }
 export default connect(mapStateToProps)(KiemDinhChuyenNhuong);
-
 

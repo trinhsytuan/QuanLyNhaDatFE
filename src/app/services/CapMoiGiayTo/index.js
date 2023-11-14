@@ -50,11 +50,12 @@ export const editGiayToCapMoi = async (
   await deleteImage(removeTotal);
   return response;
 };
-export const sendNewCertificateToOrg = (id, privateKey) => {
-  return updateBaseFormatID(API.SEND_NEWCERTIFICATE_TO_ORG, id, { privateKey });
+export const sendNewCertificateToOrg = (id, privateKey, orgCurrent) => {
+  return updateBaseFormatID(API.SEND_NEWCERTIFICATE_TO_ORG, id, { privateKey, orgCurrent });
 };
 
 export const sendResultNewCertificateToOrg = (id, data) => {
   return updateBaseFormatID(API.SEND_RESULT_THAM_DINH_NEW_CERTIFICATE_TO_ORG, id, data);
 };
+
 

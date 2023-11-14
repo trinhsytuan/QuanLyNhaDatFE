@@ -24,7 +24,7 @@ import ArrowRightThick from "@components/Icons/ArrowRightThick";
 import VerifyDigitalSignature from "@components/VerifyDigitalSignature/VerifyDigitalSignature";
 ThemMoiThemMoiGiayTo.propTypes = {};
 
-function ThemMoiThemMoiGiayTo({ isLoading }) {
+function ThemMoiThemMoiGiayTo({ isLoading, myInfo }) {
   const [form] = Form.useForm();
   const history = useHistory();
   const formRef = useRef(null);
@@ -122,7 +122,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
     }
   };
   const sendToOrg = async (e) => {
-    const response = await sendNewCertificateToOrg(id, e);
+    const response = await sendNewCertificateToOrg(id, e, myInfo.org._id);
     if (response) {
       toast(CONSTANTS.SUCCESS, TOAST_MESSAGE.CAP_LAI.SEND_KIEM_DINH);
       getAPI();
@@ -133,7 +133,7 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
   };
   return (
     <div>
-      {id && data?.status == "pending" && (
+      {id && (data?.status == "pending" || data?.status == "sending") && data?.orgResponse == myInfo.org._id && (
         <div className="action-gui-duyet">
           <Button
             type="primary"
@@ -650,9 +650,8 @@ function ThemMoiThemMoiGiayTo({ isLoading }) {
 }
 function mapStateToProps(store) {
   const { isLoading } = store.app;
-  return { isLoading };
+  const { myInfo } = store.user;
+  return { isLoading, myInfo };
 }
 export default connect(mapStateToProps)(ThemMoiThemMoiGiayTo);
-
-
 
