@@ -563,7 +563,7 @@ export const ROLE_SYSTEM = {
   USER: "user",
   LANDOFFICER: "landofficer", //Cán bộ địa chính
   VICEPRESIDENTCITY: "vicepresidentcity", //Phó chủ tịch thành phố
-  PRESIDENTWARD: "presidentward", // Phó chủ tịch phường
+  PRESIDENTWARD: "phuong", // Phó chủ tịch phường
   LANDREGISTRATION: "landregistration", // Văn phòng đăng ký đất đại
 };
 export const SEARCH_ROLE_SYSTEM = [
@@ -571,7 +571,7 @@ export const SEARCH_ROLE_SYSTEM = [
   { name: "Người dùng", value: "user" },
   { name: "Cán bộ địa chính", value: "landofficer" },
   { name: "Phó chủ tịch thành phố", value: "vicepresidentcity" },
-  { name: "Chủ tịch phường", value: "presidentward" },
+  { name: "Chủ tịch phường", value: "phuong" },
   { name: "Văn phòng đăng ký đất đai", value: "landregistration" },
   { name: "Trưởng phòng STN/MT", value: "department" },
 ];
@@ -611,6 +611,7 @@ export const VI_STATUS_THAM_DINH_DEPARTMENT = {
   accepted: "Đã thẩm định",
   sending: "Đang chờ thẩm định",
   reject: "Từ chối thẩm định",
+  pending: "Chờ thẩm định",
 };
 export const STATUS_TD = {
   reject: "reject",

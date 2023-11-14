@@ -63,7 +63,7 @@ function ChiTietCapLai({ isLoading }) {
   };
   return (
     <>
-      {id && data?.status == STATUS_TD.sending && (
+      {id && data?.status == STATUS_TD.pending && (
         <div className="action-gui-duyet">
           <Button
             type="primary"
